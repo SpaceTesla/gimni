@@ -26,9 +26,9 @@ export default function FoodOrdering() {
   return (
     <div className="min-h-screen">
       <div className="container mx-auto p-4 pt-12">
-        <div className="flex gap-8">
+        <div className="flex flex-col gap-8 lg:flex-row">
           {/* Menu Section */}
-          <div className="grid w-[70%] grid-cols-1 gap-8 md:grid-cols-2 lg:col-span-3 lg:gap-x-8">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:col-span-3 lg:w-[70%] lg:gap-x-8">
             {combos.map((combo) => (
               <Card
                 key={combo.name}

@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { Menu } from 'lucide-react';
 import Image from 'next/image';
+import Design from '@/components/design';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -13,18 +14,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="z-100 relative flex h-20 items-center justify-between bg-red-nav px-4">
-      {/* Top-left SVG (Desktop only) */}
-      <div className="hidden lg:block">
-        <Image
-          src="/assets/tl.svg"
-          alt=""
-          className="absolute -left-8 -top-20 w-[220px]"
-          width={220}
-          height={220}
-        />
-      </div>
-
+    <nav className="z-100 relative flex h-20 items-center justify-between bg-red-nav px-4 lg:ml-16">
       {/* Hamburger menu for small screens */}
       <button
         className="w-12 p-0 sm:hidden"
@@ -33,7 +23,6 @@ const Navbar = () => {
       >
         <Menu height={32} width={32} />
       </button>
-
       {/* Navigation Menu */}
       <ul
         className={`${
@@ -54,9 +43,6 @@ const Navbar = () => {
           width={240}
           height={240}
         />
-      </div>
-      <div className="absolute -top-8 right-0.5 hidden w-[80px] lg:block">
-        <Image src="/assets/dots_t.svg" alt="Dots" width={80} height={80} />
       </div>
     </nav>
   );

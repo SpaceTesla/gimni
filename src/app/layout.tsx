@@ -2,6 +2,10 @@ import type { Metadata } from 'next';
 import { Poppins } from 'next/font/google';
 import './globals.css';
 import Navbar from '@/components/nav-bar';
+import Image from 'next/image';
+import React from 'react';
+
+import Design from '@/components/design';
 
 const poppins = Poppins({
   variable: '--font-poppins',
@@ -46,6 +50,7 @@ export default function RootLayout({
           <Navbar />
         </header>
         <main>{children}</main>
+        <Design />
       </body>
     </html>
   );

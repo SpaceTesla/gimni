@@ -62,7 +62,7 @@ const combos: Combo[] = [
     ],
   },
   {
-    name: 'Combo 1',
+    name: 'Combo 2',
     price: 250,
     image: '/food.png',
     options: [
@@ -122,7 +122,7 @@ const combos: Combo[] = [
     ],
   },
   {
-    name: 'Combo 1',
+    name: 'Combo 3',
     price: 250,
     image: '/food.png',
     options: [
@@ -182,7 +182,7 @@ const combos: Combo[] = [
     ],
   },
   {
-    name: 'Combo 1',
+    name: 'Combo 4',
     price: 250,
     image: '/food.png',
     options: [
