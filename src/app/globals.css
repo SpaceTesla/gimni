@@ -36,9 +36,10 @@ body {
 
     /* Custom styles */
     --red-nav: 0, 100%, 58%;
-    --red-hightlight: 10, 78%, 52%;
-    --yellow-hightlight: 48, 100%, 46%;
-    --peach-hightlight: 23, 35%, 76%;
+    --red-highlight: 10, 78%, 52%;
+    --yellow-highlight: 48, 100%, 46%;
+    --peach-highlight: 23, 35%, 76%;
+    --green-highlight: 116, 100%, 32%;
   }
   .dark {
     --background: 240 10% 3.9%;

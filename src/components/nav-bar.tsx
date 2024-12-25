@@ -13,7 +13,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="relative flex h-20 items-center justify-between bg-red-nav px-4">
+    <nav className="z-100 relative flex h-20 items-center justify-between bg-red-nav px-4">
       {/* Top-left SVG (Desktop only) */}
       <div className="hidden lg:block">
         <Image
@@ -40,7 +40,7 @@ const Navbar = () => {
           isMenuOpen
             ? 'absolute left-0 top-20 w-full flex-col bg-red-nav p-4'
             : 'hidden'
-        } flex flex-1 gap-4 sm:static sm:flex sm:flex-row lg:ml-48`}
+        } z-10 flex flex-1 gap-4 sm:static sm:flex sm:flex-row lg:ml-48`}
       >
         <NavLinks />
       </ul>
@@ -63,7 +63,7 @@ const Navbar = () => {
 };
 
 const NavLinks = () => (
-  <li className="flex flex-col gap-4 font-extrabold sm:flex-row sm:gap-6 sm:font-black md:gap-8 md:text-lg">
+  <li className="z-10 flex flex-col gap-4 font-extrabold sm:flex-row sm:gap-6 sm:font-black md:gap-8 md:text-lg">
     <Link href="/" className="text-center hover:text-white">
       HOME
     </Link>
