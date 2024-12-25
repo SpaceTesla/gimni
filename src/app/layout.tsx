@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import { Poppins } from 'next/font/google';
 import './globals.css';
 import Navbar from '@/components/nav-bar';
-import Image from 'next/image';
 import React from 'react';
 
 import Design from '@/components/design';
@@ -42,7 +41,7 @@ export default function RootLayout({
           content="Treating taste buds at Gimni's Kitchen"
         />
         <meta property="og:image" content="/assets/logo.svg" />
-        <meta property="og:url" content="https://www.gimniskitchen.com" />
+        <meta property="og:url" content="https://www.gimnis.com" />
         <title>Gimni's Kitchen</title>
       </head>
       <body className={`${poppins.variable} antialiased`}>

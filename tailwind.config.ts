@@ -57,6 +57,7 @@ export default {
         'yellow-highlight': 'hsl(var(--yellow-highlight))',
         'peach-highlight': 'hsl(var(--peach-highlight))',
         'green-highlight': 'hsl(var(--green-highlight))',
+        'brown-leaf': 'hsl(var(--brown-leaf))',
       },
       borderRadius: {
         lg: 'var(--radius)',

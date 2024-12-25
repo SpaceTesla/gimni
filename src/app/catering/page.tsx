@@ -1,6 +1,3 @@
-'use client';
-
-import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import {
@@ -12,17 +9,11 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Checkbox } from '@/components/ui/checkbox';
-import { Circle } from 'lucide-react';
 
 import combos from '@/data/combos';
 import RadioDemo from '@/components/options';
 
 export default function FoodOrdering() {
-  const [isExpanded, setIsExpanded] = useState(false);
-
   return (
     <div className="min-h-screen">
       <div className="container mx-auto p-4 pt-12">

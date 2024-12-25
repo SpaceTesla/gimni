@@ -2,8 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --font-poppins: 'Poppins', sans-serif;
+  --font-caveat: 'Caveat', cursive;
+}
+
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-poppins);
 }
 
 @layer base {
@@ -34,12 +39,16 @@ body {
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
 
+    --font-poppins: 'Poppins', sans-serif;
+    --font-caveat: 'Caveat', cursive;
+
     /* Custom styles */
     --red-nav: 0, 100%, 58%;
     --red-highlight: 10, 78%, 52%;
     --yellow-highlight: 48, 100%, 46%;
     --peach-highlight: 23, 35%, 76%;
     --green-highlight: 116, 100%, 32%;
+    --brown-leaf: 26, 12%, 22%;
   }
   .dark {
     --background: 240 10% 3.9%;
@@ -75,5 +84,11 @@ body {
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  .clip-trapezium {
+    clip-path: polygon(2% 0, 98% 0, 100% 100%, 0% 100%);
   }
 }
