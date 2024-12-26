@@ -6,7 +6,7 @@ export default function MenuPage() {
     <div className="mx-auto min-h-screen px-4 py-8 text-white">
       {/* Restaurant Logo/Header */}
       <div className="mb-8 flex justify-center">
-        <div className="inline-flex -skew-x-12 transform bg-red-600 px-8 py-3">
+        <div className="inline-flex -skew-x-12 transform bg-red-highlight px-8 py-3">
           <h1 className="skew-x-12 text-3xl font-bold text-white">
             À La Carte
           </h1>
