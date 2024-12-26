@@ -4,8 +4,6 @@ import './globals.css';
 import Navbar from '@/components/nav-bar';
 import React from 'react';
 
-import Design from '@/components/design';
-
 const poppins = Poppins({
   variable: '--font-poppins',
   subsets: ['latin'],

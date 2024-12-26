@@ -10,7 +10,7 @@ import BrandIcon from '@/components/brand-icon';
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen w-full">
+    <div className="min-h-screen w-full px-4 lg:px-0">
       {/* Hero Section */}
       <div className="relative px-4 py-8 md:px-6 lg:px-8">
         <div className="relative mx-auto max-w-7xl text-center">
@@ -74,7 +74,7 @@ export default function AboutPage() {
           <h2 className="mb-8 text-center text-3xl font-bold md:text-4xl">
             Our Signature Dishes
           </h2>
-          <InfiniteScroll direction="left" speed={30}>
+          <InfiniteScroll direction="left" speed={10}>
             <div className="flex gap-6">
               <DishCard
                 name="Crispy Fresh Cutlets"
@@ -105,7 +105,7 @@ export default function AboutPage() {
           <h2 className="mb-8 text-center text-3xl font-bold md:text-4xl">
             Trusted By Leading Companies
           </h2>
-          <InfiniteScroll direction="right" speed={25}>
+          <InfiniteScroll direction="right" speed={10}>
             <div className="flex gap-6">
               <BrandIcon name="Accenture" />
               <BrandIcon name="Tesco" />
@@ -126,7 +126,7 @@ export default function AboutPage() {
               <CardContent className="space-y-4 p-6">
                 <div className="relative mx-auto h-24 w-24 overflow-hidden rounded-full">
                   <Image
-                    src="/placeholder.svg?height=96&width=96"
+                    src="/person.jpg"
                     alt="Arko Banerjee"
                     fill
                     className="object-cover"
@@ -145,7 +145,7 @@ export default function AboutPage() {
               <CardContent className="space-y-4 p-6">
                 <div className="relative mx-auto h-24 w-24 overflow-hidden rounded-full">
                   <Image
-                    src="/placeholder.svg?height=96&width=96"
+                    src="/person.jpg"
                     alt="Lipi Banerjee"
                     fill
                     className="object-cover"

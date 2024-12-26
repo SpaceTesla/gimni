@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { Menu } from 'lucide-react';
 import Image from 'next/image';
-import Design from '@/components/design';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
