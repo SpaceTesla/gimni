@@ -1,5 +1,29 @@
 import type { Config } from 'tailwindcss';
 
+// Custom colors with opacity variants
+const customColors = {
+  'red-nav': 'hsl(var(--red-nav))',
+  'red-highlight': 'hsl(var(--red-highlight))',
+  'yellow-highlight': 'hsl(var(--yellow-highlight))',
+  'peach-highlight': 'hsl(var(--peach-highlight))',
+  'green-highlight': 'hsl(var(--green-highlight))',
+  'brown-leaf': 'hsl(var(--brown-leaf))',
+  'yellow-background': 'hsl(var(--yellow-background))',
+};
+
+const opacityVariants = [10, 20, 30, 40, 50, 60, 70, 80, 90];
+
+const generateOpacityVariants = (colors: Record<string, string>) => {
+  const variants: Record<string, string> = {};
+  Object.keys(colors).forEach((color) => {
+    opacityVariants.forEach((opacity) => {
+      variants[`${color}/${opacity}`] =
+        `hsla(var(--${color}), ${opacity / 100})`;
+    });
+  });
+  return variants;
+};
+
 export default {
   darkMode: ['class'],
   content: [
@@ -10,6 +34,9 @@ export default {
   theme: {
     extend: {
       colors: {
+        ...customColors,
+        ...generateOpacityVariants(customColors),
+
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         card: {
@@ -51,13 +78,28 @@ export default {
           '5': 'hsl(var(--chart-5))',
         },
 
-        // Custom colors
-        'red-nav': 'hsl(var(--red-nav))',
-        'red-highlight': 'hsl(var(--red-highlight))',
-        'yellow-highlight': 'hsl(var(--yellow-highlight))',
-        'peach-highlight': 'hsl(var(--peach-highlight))',
-        'green-highlight': 'hsl(var(--green-highlight))',
-        'brown-leaf': 'hsl(var(--brown-leaf))',
+        // // Custom colors
+        // 'red-nav': 'hsl(var(--red-nav))',
+        // 'red-highlight': 'hsl(var(--red-highlight))',
+        // 'yellow-highlight': 'hsl(var(--yellow-highlight))',
+        // 'peach-highlight': 'hsl(var(--peach-highlight))',
+        // 'green-highlight': 'hsl(var(--green-highlight))',
+        // 'brown-leaf': 'hsl(var(--brown-leaf))',
+        // 'yellow-background': 'hsl(var(--yellow-background))',
+      },
+      keyframes: {
+        'scroll-left': {
+          from: { transform: 'translateX(0)' },
+          to: { transform: 'translateX(calc(-50% - 1rem))' },
+        },
+        'scroll-right': {
+          from: { transform: 'translateX(calc(-50% - 1rem))' },
+          to: { transform: 'translateX(0)' },
+        },
+      },
+      animation: {
+        'scroll-left': 'scroll-left var(--duration, 20s) linear infinite',
+        'scroll-right': 'scroll-right var(--duration, 20s) linear infinite',
       },
       borderRadius: {
         lg: 'var(--radius)',

@@ -4,16 +4,6 @@ import Image from 'next/image';
 const Design = () => {
   return (
     <>
-      {/* Top-left SVG (Desktop only) */}
-      <div className="absolute -left-6 -top-[84px] hidden w-[220px] lg:block">
-        <Image src="/assets/tl.svg" alt="Yellow" width={220} height={220} />
-      </div>
-
-      {/* Top-right SVG (Desktop only) */}
-      <div className="absolute -top-8 right-0.5 hidden w-[80px] lg:block">
-        <Image src="/assets/dots_t.svg" alt="Dots" width={80} height={80} />
-      </div>
-
       {/* Top-left leaf */}
       <div className="fixed -left-[36px] top-[110px] -z-10 hidden w-[120px] lg:block">
         <Image src="/assets/leaf_tl.svg" alt="Dots" width={200} height={200} />

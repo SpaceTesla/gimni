@@ -9,6 +9,7 @@
 
 body {
   font-family: var(--font-poppins);
+  scroll-snap-type: y mandatory; /* Enables snap scrolling */
 }
 
 @layer base {
@@ -49,6 +50,7 @@ body {
     --peach-highlight: 23, 35%, 76%;
     --green-highlight: 116, 100%, 32%;
     --brown-leaf: 26, 12%, 22%;
+    --yellow-background: 41, 50%, 94%;
   }
   .dark {
     --background: 240 10% 3.9%;
