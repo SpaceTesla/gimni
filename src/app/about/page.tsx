@@ -3,8 +3,9 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { InfiniteScroll } from '@/components/infinite-scroll';
+import { InfiniteMovingCards } from '@/components/ui/infinite-moving-cards';
 
+import dishes from '@/data/dishes';
 import DishCard from '@/components/dish-card';
 import BrandIcon from '@/components/brand-icon';
 
@@ -70,52 +71,37 @@ export default function AboutPage() {
         </section>
 
         {/* Signature Dishes Scroll */}
-        <section className="from-yellow-background to-yellow-background bg-gradient-to-r via-white/50 py-12">
+        <section className="bg-gradient-to-r from-yellow-background via-white/50 to-yellow-background py-12">
           <h2 className="mb-8 text-center text-3xl font-bold md:text-4xl">
             Our Signature Dishes
           </h2>
-          <InfiniteScroll direction="left" speed={10}>
-            <div className="flex gap-6">
-              <DishCard
-                name="Crispy Fresh Cutlets"
-                description="Handmade with love and tradition"
-              />
-              <DishCard
-                name="Special Biryanis"
-                description="Aromatic rice with perfect spices"
-              />
-              <DishCard
-                name="Chicken & Mutton Kosha"
-                description="Slow-cooked to perfection"
-              />
-              <DishCard
-                name="Prawns Malai Curry"
-                description="Creamy coconut based curry"
-              />
-              <DishCard
-                name="Ilish Fish"
-                description="In traditional mustard sauce"
-              />
-            </div>
-          </InfiniteScroll>
+          <InfiniteMovingCards
+            cards={dishes.map((dish) => (
+              <DishCard key={dish.name} {...dish} />
+            ))}
+            direction="left"
+            speed={'fast'}
+          />
         </section>
 
         {/* Trusted Clients Scroll */}
-        <section className="from-yellow-background to-yellow-background bg-gradient-to-r via-white/50 py-12">
+        <section className="bg-gradient-to-r from-yellow-background via-white/50 to-yellow-background py-12">
           <h2 className="mb-8 text-center text-3xl font-bold md:text-4xl">
             Trusted By Leading Companies
           </h2>
-          <InfiniteScroll direction="right" speed={10}>
-            <div className="flex gap-6">
-              <BrandIcon name="Accenture" />
-              <BrandIcon name="Tesco" />
-              <BrandIcon name="BNP" />
-              <BrandIcon name="Wipro" />
-              <BrandIcon name="RMZ" />
-              <BrandIcon name="Target" />
-              <BrandIcon name="TCS" />
-            </div>
-          </InfiniteScroll>
+          <InfiniteMovingCards
+            cards={[
+              <BrandIcon name="Accenture" />,
+              <BrandIcon name="Tesco" />,
+              <BrandIcon name="BNP" />,
+              <BrandIcon name="Wipro" />,
+              <BrandIcon name="RMZ" />,
+              <BrandIcon name="Target" />,
+              <BrandIcon name="TCS" />,
+            ]}
+            direction="right"
+            speed="fast"
+          />
         </section>
 
         {/* Founders */}

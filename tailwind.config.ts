@@ -1,5 +1,5 @@
 import type { Config } from 'tailwindcss';
-
+// import colors from 'tailwindcss/colors';
 // Custom colors with opacity variants
 const customColors = {
   'red-nav': 'hsl(var(--red-nav))',
@@ -23,6 +23,10 @@ const generateOpacityVariants = (colors: Record<string, string>) => {
   });
   return variants;
 };
+
+// const {
+//   default: flattenColorPalette,
+// } = require('tailwindcss/lib/util/flattenColorPalette');
 
 export default {
   darkMode: ['class'],
@@ -87,19 +91,16 @@ export default {
         // 'brown-leaf': 'hsl(var(--brown-leaf))',
         // 'yellow-background': 'hsl(var(--yellow-background))',
       },
-      keyframes: {
-        'scroll-left': {
-          from: { transform: 'translateX(0)' },
-          to: { transform: 'translateX(calc(-50% - 1rem))' },
-        },
-        'scroll-right': {
-          from: { transform: 'translateX(calc(-50% - 1rem))' },
-          to: { transform: 'translateX(0)' },
-        },
-      },
       animation: {
-        'scroll-left': 'scroll-left var(--duration, 20s) linear infinite',
-        'scroll-right': 'scroll-right var(--duration, 20s) linear infinite',
+        scroll:
+          'scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite',
+      },
+      keyframes: {
+        scroll: {
+          to: {
+            transform: 'translate(calc(-50% - 0.5rem))',
+          },
+        },
       },
       borderRadius: {
         lg: 'var(--radius)',
@@ -110,3 +111,14 @@ export default {
   },
   plugins: [require('tailwindcss-animate')],
 } satisfies Config;
+
+// function addVariablesForColors({ addBase, theme }: any) {
+//   let allColors = flattenColorPalette(theme('colors'));
+//   let newVars = Object.fromEntries(
+//     Object.entries(allColors).map(([key, val]) => [`--${key}`, val]),
+//   );
+
+//   addBase({
+//     ':root': newVars,
+//   });
+// }

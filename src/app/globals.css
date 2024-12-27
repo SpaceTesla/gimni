@@ -12,6 +12,22 @@ body {
   scroll-snap-type: y mandatory; /* Enables snap scrolling */
 }
 
+:root {
+  --scroll-duration: 10s;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --scroll-duration: 15s;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --scroll-duration: 20s;
+  }
+}
+
 @layer base {
   :root {
     --background: 41, 50%, 94%;
