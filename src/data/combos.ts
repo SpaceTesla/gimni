@@ -4,7 +4,7 @@ const combos: Combo[] = [
   {
     name: 'Combo 1',
     price: 150,
-    image: '/images/combos/combo1.jpg',
+    image: '/food.png',
     veg: [
       { name: 'White Rice/Jeera Rice', quantity: 1 },
       { name: 'Mix Veg', quantity: 1 },
@@ -12,12 +12,17 @@ const combos: Combo[] = [
       { name: 'Papad', quantity: 1 },
       { name: 'Salad', quantity: 1 },
     ],
-    nonVeg: [{ name: 'Chicken Curry', quantity: 1 }],
+    nonVeg: [
+      { name: 'White Rice/Jeera Rice', quantity: 1 },
+      { name: 'Chicken Masala', quantity: 1 },
+      { name: 'Papad', quantity: 1 },
+      { name: 'Salad', quantity: 1 },
+    ],
   },
   {
     name: 'Combo 2',
     price: 250,
-    image: '/images/combos/combo2.jpg',
+    image: '/food.png',
     veg: [
       { name: 'Rice', quantity: 2 },
       { name: 'Veg Starter', quantity: 1 },
@@ -36,7 +41,7 @@ const combos: Combo[] = [
   {
     name: 'Combo 3',
     price: 350,
-    image: '/images/combos/combo3.jpg',
+    image: '/food.png',
     veg: [
       { name: 'Rice', quantity: 2 },
       { name: 'Roti', quantity: 1 },
@@ -62,7 +67,7 @@ const combos: Combo[] = [
   {
     name: 'Combo 4',
     price: 450,
-    image: '/images/combos/combo4.jpg',
+    image: '/food.png',
     veg: [
       { name: 'Rice', quantity: 2 },
       { name: 'Roti', quantity: 1 },
@@ -90,7 +95,7 @@ const combos: Combo[] = [
   {
     name: 'Combo 5',
     price: 550,
-    image: '/images/combos/combo5.jpg',
+    image: '/food.png',
     veg: [
       { name: 'Rice', quantity: 2 },
       { name: 'Roti', quantity: 1 },

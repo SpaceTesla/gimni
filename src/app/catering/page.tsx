@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import {
   Table,
@@ -11,7 +10,7 @@ import {
 import { Button } from '@/components/ui/button';
 
 import combos from '@/data/combos';
-import RadioDemo from '@/components/options';
+import ComboCard from '@/components/combo-card';
 
 export default function FoodOrdering() {
   return (
@@ -21,42 +20,7 @@ export default function FoodOrdering() {
           {/* Menu Section */}
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:col-span-3 lg:w-[70%] lg:gap-x-8">
             {combos.map((combo) => (
-              <Card
-                key={combo.name}
-                className="rounded-3xl border-none bg-white p-0 shadow-none"
-              >
-                <CardHeader className={'p-2'}>
-                  <CardTitle className="text-center text-3xl font-black">
-                    {combo.name}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className={'p-0'}>
-                  <div className="flex flex-col justify-between">
-                    <Image
-                      src={combo.image}
-                      alt={combo.name}
-                      width={200}
-                      height={200}
-                      className="max-h-[240px] w-[100%] object-cover"
-                    />
-                    <div className="p-4">
-                      <div className="flex flex-col">
-                        <div className={'flex gap-2 text-primary/70'}>
-                          <span className="text-lg">Price:</span>
-                          <span className="text-lg font-bold">
-                            {'₹ ' + combo.price}
-                          </span>
-                          <span className="text-lg">/ plate</span>
-                        </div>
-                      </div>
-                      <div className={'text-lg font-black'}>CUSTOMIZATION-</div>
-                      <div>
-                        <RadioDemo combo={combo} />
-                      </div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+              <ComboCard key={combo.name} combo={combo} />
             ))}
           </div>
           {/* Cart Section */}
