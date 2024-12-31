@@ -7,7 +7,6 @@ import { InfiniteMovingCards } from '@/components/ui/infinite-moving-cards';
 
 import dishes from '@/data/dishes';
 import DishCard from '@/components/dish-card';
-import BrandIcon from '@/components/brand-icon';
 
 export default function AboutPage() {
   return (
@@ -84,35 +83,15 @@ export default function AboutPage() {
           />
         </section>
 
-        {/* Trusted Clients Scroll */}
-        <section className="bg-gradient-to-r from-yellow-background via-white/50 to-yellow-background py-12">
-          <h2 className="mb-8 text-center text-3xl font-bold md:text-4xl">
-            Trusted By Leading Companies
-          </h2>
-          <InfiniteMovingCards
-            cards={[
-              <BrandIcon name="Accenture" />,
-              <BrandIcon name="Tesco" />,
-              <BrandIcon name="BNP" />,
-              <BrandIcon name="Wipro" />,
-              <BrandIcon name="RMZ" />,
-              <BrandIcon name="Target" />,
-              <BrandIcon name="TCS" />,
-            ]}
-            direction="right"
-            speed="fast"
-          />
-        </section>
-
         {/* Founders */}
         <section className="space-y-12 text-center">
           <h2 className="text-3xl font-bold md:text-4xl">Meet Our Founders</h2>
           <div className="grid gap-8 md:grid-cols-2">
-            <Card className="bg-white/50">
+            <Card className="border-none bg-white/50 shadow-none">
               <CardContent className="space-y-4 p-6">
-                <div className="relative mx-auto h-24 w-24 overflow-hidden rounded-full">
+                <div className="relative mx-auto h-32 w-32 overflow-hidden rounded-full">
                   <Image
-                    src="/person.jpg"
+                    src="/arko.jpg"
                     alt="Arko Banerjee"
                     fill
                     className="object-cover"
@@ -120,18 +99,19 @@ export default function AboutPage() {
                 </div>
                 <h3 className="text-xl font-bold">Arko Banerjee</h3>
                 <p className="text-gray-700">
-                  With two decades of corporate experience in people,
-                  operations, revenue, and strategy, Arko brings his passion for
-                  food and exploring new cuisines to Gimni's Kitchen.
+                  With over 20 years of experience in operations, revenue, and
+                  growth strategies at organizations like First Advantage and
+                  Mphasis, he has spent the last 4 years running his own cloud
+                  kitchen, Gimnis Kitchen.
                 </p>
               </CardContent>
             </Card>
 
-            <Card className="bg-white/50">
+            <Card className="border-none bg-white/50 shadow-none">
               <CardContent className="space-y-4 p-6">
-                <div className="relative mx-auto h-24 w-24 overflow-hidden rounded-full">
+                <div className="relative mx-auto h-32 w-32 overflow-hidden rounded-full">
                   <Image
-                    src="/person.jpg"
+                    src="/lipi.jpg"
                     alt="Lipi Banerjee"
                     fill
                     className="object-cover"
@@ -139,9 +119,10 @@ export default function AboutPage() {
                 </div>
                 <h3 className="text-xl font-bold">Lipi Banerjee</h3>
                 <p className="text-gray-700">
-                  With five years in corporate leadership roles, Lipi's passion
-                  for preserving authentic cuisines was ignited during the 2020
-                  lockdown, leading to the creation of Gimni's Kitchen.
+                  Lipi is an exceptional home chef who has curated over 100
+                  recipes for Gimnis Kitchen. She is also responsible for recipe
+                  development at Satis Friez and oversees dish curation for our
+                  brand.
                 </p>
               </CardContent>
             </Card>
@@ -155,8 +136,8 @@ export default function AboutPage() {
               Ready to Experience Bengali Cuisine?
             </h2>
             <p className="text-gray-700">
-              Join us for an authentic Bengali dining experience or let us cater
-              your next event.
+              Join us for an authentic Bengali culinary experience or let us
+              cater your next event.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Button className="bg-[#FF3B30] hover:bg-[#FF3B30]/90" asChild>
