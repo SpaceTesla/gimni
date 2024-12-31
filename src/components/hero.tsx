@@ -20,7 +20,7 @@ const Hero = () => {
     >
       <div className="h-[420px] max-w-[380px] overflow-hidden rounded-[80px] shadow-[4px_4px_8px_rgba(0,0,0,0.6)]">
         <Image
-          src="/food.png"
+          src="/food_ai.jpeg"
           alt="Delicious food"
           width={600}
           height={600}
