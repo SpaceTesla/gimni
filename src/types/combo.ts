@@ -1,15 +1,12 @@
-import type Option from '@/types/option';
+import { Dish, DishWithPrice } from './dish';
 
 interface Combo {
   name: string;
   price: number;
   image: string;
-  options: Option[];
-  // indian: Option;
-  // chinese: Option;
-  // birthdaySnackUp?: Option;
-  // highTea?: Option;
-  addOns?: Option;
+  veg: Dish[];
+  nonVeg: Dish[];
+  addOns?: DishWithPrice[];
 }
 
 export default Combo;
