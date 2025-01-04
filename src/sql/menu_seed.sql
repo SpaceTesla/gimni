@@ -60,7 +60,7 @@ INSERT INTO Menu (name, category, type, diet, price)
 VALUES
     ('Aloo', 'Bengali', 'Bhaja', 'Veg', 40.00),
     ('Begun', 'Bengali', 'Bhaja', 'Veg', 40.00),
-    ('Potal', 'Bengali', 'Bhaja', 'Veg', 40.00),
+    ('Potoler (Parwal)', 'Bengali', 'Bhaja', 'Veg', 40.00),
     ('Kumro', 'Bengali', 'Bhaja', 'Veg', 40.00),
     ('Bhindi Kurkure', 'Non-Bengali', 'Bhaja', 'Veg', 40.00);
 
@@ -92,7 +92,7 @@ VALUES
     ('Paneer Paratha', 'Non-Bengali', 'Bread', 'Veg', 20.00),
     ('Ghee Roti', 'Bengali', 'Bread', 'Veg', 20.00),
     ('Luchi', 'Bengali', 'Bread', 'Veg', 20.00),
-    ('Kadai Sutir Kachori', 'Bengali', 'Bread', 'Veg', 20.00),
+    ('Kadai Sutir Kachori (Green peas)', 'Bengali', 'Bread', 'Veg', 20.00),
     ('Hing Kachori', 'Bengali', 'Bread', 'Veg', 20.00),
     ('Mix Paratha', 'Non-Bengali', 'Bread', 'Veg', 20.00),
     ('Palak Paratha', 'Non-Bengali', 'Bread', 'Veg', 20.00),

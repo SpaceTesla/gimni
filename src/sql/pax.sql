@@ -5,3 +5,15 @@ CREATE TABLE IF NOT EXISTS ComboPax (
     price_per_pax DECIMAL(6, 2) NOT NULL,     -- Price per pax for this range
     FOREIGN KEY (combo_id) REFERENCES Combo(id) -- Foreign key constraint
 );
+
+DESC ComboPax;
+
+SELECT
+    ComboPax.id,
+    Combo.name AS combo_name,
+    ComboPax.pax_range,
+    ComboPax.price_per_pax
+FROM
+    ComboPax
+        JOIN
+    Combo ON ComboPax.combo_id = Combo.id;
