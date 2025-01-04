@@ -1,12 +1,16 @@
-import { Dish, DishWithPrice } from './dish';
-
-interface Combo {
+type Combo = {
+  id: number;
   name: string;
   price: number;
-  image: string;
-  veg: Dish[];
-  nonVeg: Dish[];
-  addOns?: DishWithPrice[];
-}
+  rice: number;
+  roti: number;
+  starter: number;
+  gravy: number;
+  dal: number;
+  salad: number;
+  sweet: number;
+  papad: number;
+  chutney: number;
+};
 
 export default Combo;

@@ -1,3 +1,6 @@
+'use client';
+
+import { useEffect, useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import {
   Table,
@@ -8,11 +11,27 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
-
-import combos from '@/data/combos';
 import ComboCard from '@/components/combo-card';
 
+import type Combo from '@/types/combo';
+
 export default function FoodOrdering() {
+  const [combos, setCombos] = useState<Combo[]>([]);
+
+  useEffect(() => {
+    async function fetchCombos() {
+      try {
+        const response = await fetch('/api/combos');
+        const data: Combo[] = await response.json();
+        setCombos(data);
+      } catch (error) {
+        console.error('Error fetching combos:', error);
+      }
+    }
+
+    fetchCombos();
+  }, []);
+
   return (
     <div className="min-h-screen">
       <div className="container mx-auto p-4 pt-12">
@@ -20,7 +39,7 @@ export default function FoodOrdering() {
           {/* Menu Section */}
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:col-span-3 lg:w-[70%] lg:gap-x-8">
             {combos.map((combo) => (
-              <ComboCard key={combo.name} combo={combo} />
+              <ComboCard key={combo.id} combo={combo} />
             ))}
           </div>
           {/* Cart Section */}

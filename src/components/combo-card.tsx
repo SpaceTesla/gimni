@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
+import { Fish, EggFried } from 'lucide-react';
 
 import type Combo from '@/types/combo';
 
@@ -15,6 +16,10 @@ interface ComboCardProps {
 
 const ComboCard: React.FC<ComboCardProps> = ({ combo }) => {
   const [open, setOpen] = useState(false);
+  const [foodDiet, setFoodDiet] = useState<'Veg' | 'Non-Veg'>('Veg');
+  const [foodCategory, setFoodCategory] = useState<'Bengali' | 'Non-Bengali'>(
+    'Bengali',
+  );
 
   return (
     <Card className="overflow-hidden rounded-3xl border-none bg-white p-0 shadow-none">
@@ -26,7 +31,7 @@ const ComboCard: React.FC<ComboCardProps> = ({ combo }) => {
       <CardContent className={'p-0'}>
         <div className="flex flex-col justify-between">
           <Image
-            src={combo.image}
+            src="/food.png"
             alt={combo.name}
             width={200}
             height={200}
@@ -40,6 +45,28 @@ const ComboCard: React.FC<ComboCardProps> = ({ combo }) => {
                 <span className="text-lg">/ plate</span>
               </div>
             </div>
+            <div className={'mx-4 flex gap-4'}>
+              <Button
+                variant={'default'}
+                className={
+                  'flex-1 bg-red-highlight p-2 font-bold text-white hover:bg-red-highlight/90'
+                }
+                onClick={() => setOpen(true)}
+              >
+                <Fish className="h-6 w-6 text-white" />
+                Bengali
+              </Button>
+              <Button
+                variant={'default'}
+                className={
+                  'flex-1 bg-yellow-highlight p-2 font-bold text-black hover:bg-yellow-highlight/90'
+                }
+                onClick={() => setOpen(true)}
+              >
+                <EggFried className="h-6 w-6 text-black" />
+                Non-Bengali
+              </Button>
+            </div>
             <div className="flex flex-col gap-2 py-1 text-center text-[0.75rem] text-zinc-500">
               customisable
             </div>
@@ -50,7 +77,7 @@ const ComboCard: React.FC<ComboCardProps> = ({ combo }) => {
             >
               Add to Cart
             </Button>
-            <FoodDialog menuData={combo} open={open} onOpenChange={setOpen} />
+            <FoodDialog combo={combo} open={open} onOpenChange={setOpen} />
           </div>
         </div>
       </CardContent>

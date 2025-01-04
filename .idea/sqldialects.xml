@@ -6,6 +6,8 @@
     <file url="file://$PROJECT_DIR$/src/sql/menu.sql" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/src/sql/menu_seed.sql" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/src/sql/menu_view.sql" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/src/sql/pax.sql" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/src/sql/pax_seed.sql" dialect="MySQL" />
     <file url="PROJECT" dialect="MySQL" />
   </component>
 </project>
