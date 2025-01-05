@@ -1,4 +1,4 @@
-INSERT INTO Combo (name, price, rice, gravy, dal, papad, salad, starter, sweet, roti, chutney)
+INSERT INTO Combo (name, price, rice, gravy, dal, papad, salad, starter, sweet, bread, chutney)
 VALUES
     ('Combo 1', 150, 1, 1, 1, 1, 1, 0, 0, 0, 0),
     ('Combo 2', 250, 2, 1, 1, 1, 1, 1, 0, 0, 0),

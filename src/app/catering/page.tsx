@@ -14,9 +14,11 @@ import { Button } from '@/components/ui/button';
 import ComboCard from '@/components/combo-card';
 
 import type Combo from '@/types/combo';
+import type MenuItem from '@/types/menu';
 
 export default function FoodOrdering() {
   const [combos, setCombos] = useState<Combo[]>([]);
+  const [menu, setMenu] = useState<Record<string, MenuItem[]>>({});
 
   useEffect(() => {
     async function fetchCombos() {
@@ -29,7 +31,18 @@ export default function FoodOrdering() {
       }
     }
 
-    fetchCombos();
+    async function fetchMenu() {
+      try {
+        const response = await fetch('/api/menu');
+        const data = await response.json();
+        setMenu(data);
+      } catch (error) {
+        console.error('Error fetching menu:', error);
+      }
+    }
+
+    fetchCombos().then(() => console.log('Combos fetched'));
+    fetchMenu().then(() => console.log('Menu fetched'));
   }, []);
 
   return (
@@ -39,7 +52,7 @@ export default function FoodOrdering() {
           {/* Menu Section */}
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:col-span-3 lg:w-[70%] lg:gap-x-8">
             {combos.map((combo) => (
-              <ComboCard key={combo.id} combo={combo} />
+              <ComboCard key={combo.id} combo={combo} menu={menu} />
             ))}
           </div>
           {/* Cart Section */}

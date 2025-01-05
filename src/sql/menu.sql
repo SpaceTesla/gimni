@@ -8,8 +8,8 @@ CREATE TABLE IF NOT EXISTS Menu (
         'Bhaja',
         'Rice',
         'Bread',
-        'Main Course Gravy',
-        'Main Course Dal',
+        'Gravy',
+        'Dal',
         'Chutney & Sides',
         'Dessert'
       ) NOT NULL,                                 -- Type of dish

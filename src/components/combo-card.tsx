@@ -5,21 +5,23 @@ import Image from 'next/image';
 import { Fish, EggFried } from 'lucide-react';
 
 import type Combo from '@/types/combo';
+import MenuItem from '@/types/menu';
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { FoodDialog } from './food-dialog';
+import * as React from 'react';
 
 interface ComboCardProps {
   combo: Combo;
+  menu: Record<string, MenuItem[]>; // This should be a record of arrays
 }
 
-const ComboCard: React.FC<ComboCardProps> = ({ combo }) => {
+const ComboCard: React.FC<ComboCardProps> = ({ combo, menu }) => {
   const [open, setOpen] = useState(false);
-  const [foodDiet, setFoodDiet] = useState<'Veg' | 'Non-Veg'>('Veg');
-  const [foodCategory, setFoodCategory] = useState<'Bengali' | 'Non-Bengali'>(
-    'Bengali',
-  );
+  const [category, setCategory] = React.useState<
+    'Bengali' | 'Non-Bengali' | 'Birthday Snack-Up' | 'Other'
+  >('Bengali');
 
   return (
     <Card className="overflow-hidden rounded-3xl border-none bg-white p-0 shadow-none">
@@ -51,7 +53,10 @@ const ComboCard: React.FC<ComboCardProps> = ({ combo }) => {
                 className={
                   'flex-1 bg-red-highlight p-2 font-bold text-white hover:bg-red-highlight/90'
                 }
-                onClick={() => setOpen(true)}
+                onClick={() => {
+                  setCategory('Bengali');
+                  setOpen(true);
+                }}
               >
                 <Fish className="h-6 w-6 text-white" />
                 Bengali
@@ -61,7 +66,10 @@ const ComboCard: React.FC<ComboCardProps> = ({ combo }) => {
                 className={
                   'flex-1 bg-yellow-highlight p-2 font-bold text-black hover:bg-yellow-highlight/90'
                 }
-                onClick={() => setOpen(true)}
+                onClick={() => {
+                  setCategory('Non-Bengali');
+                  setOpen(true);
+                }}
               >
                 <EggFried className="h-6 w-6 text-black" />
                 Non-Bengali
@@ -77,12 +85,17 @@ const ComboCard: React.FC<ComboCardProps> = ({ combo }) => {
             >
               Add to Cart
             </Button>
-            <FoodDialog combo={combo} open={open} onOpenChange={setOpen} />
+            <FoodDialog
+              combo={combo}
+              menu={menu} // Ensure this is an object with arrays
+              open={open}
+              onOpenChange={setOpen}
+              category={category} // Pass the category state here
+            />
           </div>
         </div>
       </CardContent>
     </Card>
   );
 };
-
 export default ComboCard;

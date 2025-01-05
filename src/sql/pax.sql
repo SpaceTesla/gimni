@@ -7,6 +7,7 @@ CREATE TABLE IF NOT EXISTS ComboPax (
 );
 
 DESC ComboPax;
+DROP TABLE IF EXISTS ComboPax;
 
 SELECT
     ComboPax.id,

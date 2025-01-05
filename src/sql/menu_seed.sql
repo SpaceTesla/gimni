@@ -101,72 +101,72 @@ VALUES
 -- Main Course Gravy - Veg @ 100 additional
 INSERT INTO Menu (name, category, type, diet, price)
 VALUES
-    ('Potoler (Parwal) Dorma', 'Bengali', 'Main Course Gravy', 'Veg', 100.00),
-    ('Aloo Potoler Dalna', 'Bengali', 'Main Course Gravy', 'Veg', 100.00),
-    ('Paneer Butter Masala', 'Non-Bengali', 'Main Course Gravy', 'Veg', 100.00),
-    ('Matar Paneer', 'Non-Bengali', 'Main Course Gravy', 'Veg', 100.00),
-    ('Palak Paneer', 'Non-Bengali', 'Main Course Gravy', 'Veg', 100.00),
-    ('Paneer Kofta', 'Non-Bengali', 'Main Course Gravy', 'Veg', 100.00),
-    ('Shahi Paneer', 'Non-Bengali', 'Main Course Gravy', 'Veg', 100.00),
-    ('Chole Masala', 'Bengali', 'Main Course Gravy', 'Veg', 100.00),
-    ('Mushroom Masala', 'Non-Bengali', 'Main Course Gravy', 'Veg', 100.00),
-    ('Rajma Masala', 'Non-Bengali', 'Main Course Gravy', 'Veg', 100.00);
+    ('Potoler (Parwal) Dorma', 'Bengali', 'Gravy', 'Veg', 100.00),
+    ('Aloo Potoler Dalna', 'Bengali', 'Gravy', 'Veg', 100.00),
+    ('Paneer Butter Masala', 'Non-Bengali', 'Gravy', 'Veg', 100.00),
+    ('Matar Paneer', 'Non-Bengali', 'Gravy', 'Veg', 100.00),
+    ('Palak Paneer', 'Non-Bengali', 'Gravy', 'Veg', 100.00),
+    ('Paneer Kofta', 'Non-Bengali', 'Gravy', 'Veg', 100.00),
+    ('Shahi Paneer', 'Non-Bengali', 'Gravy', 'Veg', 100.00),
+    ('Chole Masala', 'Bengali', 'Gravy', 'Veg', 100.00),
+    ('Mushroom Masala', 'Non-Bengali', 'Gravy', 'Veg', 100.00),
+    ('Rajma Masala', 'Non-Bengali', 'Gravy', 'Veg', 100.00);
 
 -- Main Course Gravy - Non Veg @ 125 additional
 INSERT INTO Menu (name, category, type, diet, price)
 VALUES
-    ('Chicken Kosha', 'Bengali', 'Main Course Gravy', 'Non-Veg', 125.00),
-    ('Rui Macher Kalia', 'Bengali', 'Main Course Gravy', 'Non-Veg', 125.00),
-    ('Katla Macher Kalia', 'Bengali', 'Main Course Gravy', 'Non-Veg', 125.00),
-    ('Doi (curd) Katla', 'Bengali', 'Main Course Gravy', 'Non-Veg', 125.00),
-    ('Doi (curd) Rui', 'Bengali', 'Main Course Gravy', 'Non-Veg', 125.00),
-    ('Katla Macher Jhal (Sorse)', 'Bengali', 'Main Course Gravy', 'Non-Veg', 125.00),
-    ('Rui Macher Jhal (Sorse)', 'Bengali', 'Main Course Gravy', 'Non-Veg', 125.00),
-    ('Mudi Ghonto', 'Bengali', 'Main Course Gravy', 'Non-Veg', 125.00),
-    ('Chicken Do Pyaza', 'Non-Bengali', 'Main Course Gravy', 'Non-Veg', 125.00),
-    ('Chicken Butter Masala', 'Non-Bengali', 'Main Course Gravy', 'Non-Veg', 125.00),
-    ('Chicken Kadhai', 'Non-Bengali', 'Main Course Gravy', 'Non-Veg', 125.00);
+    ('Chicken Kosha', 'Bengali', 'Gravy', 'Non-Veg', 125.00),
+    ('Rui Macher Kalia', 'Bengali', 'Gravy', 'Non-Veg', 125.00),
+    ('Katla Macher Kalia', 'Bengali', 'Gravy', 'Non-Veg', 125.00),
+    ('Doi (curd) Katla', 'Bengali', 'Gravy', 'Non-Veg', 125.00),
+    ('Doi (curd) Rui', 'Bengali', 'Gravy', 'Non-Veg', 125.00),
+    ('Katla Macher Jhal (Sorse)', 'Bengali', 'Gravy', 'Non-Veg', 125.00),
+    ('Rui Macher Jhal (Sorse)', 'Bengali', 'Gravy', 'Non-Veg', 125.00),
+    ('Mudi Ghonto', 'Bengali', 'Gravy', 'Non-Veg', 125.00),
+    ('Chicken Do Pyaza', 'Non-Bengali', 'Gravy', 'Non-Veg', 125.00),
+    ('Chicken Butter Masala', 'Non-Bengali', 'Gravy', 'Non-Veg', 125.00),
+    ('Chicken Kadhai', 'Non-Bengali', 'Gravy', 'Non-Veg', 125.00);
 
 -- Main Course Gravy - Veg @ 80 additional
 INSERT INTO Menu (name, category, type, diet, price)
 VALUES
-    ('Mix Veg', 'Bengali', 'Main Course Gravy', 'Veg', 80.00),
-    ('Aloo Soya Torkari (Dry)', 'Bengali', 'Main Course Gravy', 'Veg', 80.00),
-    ('Aloo Dum (Large)', 'Bengali', 'Main Course Gravy', 'Veg', 80.00),
-    ('Dhokar (Chana Dal) Dalna', 'Bengali', 'Main Course Gravy', 'Veg', 80.00),
-    ('Aloo Kofir Dalna', 'Bengali', 'Main Course Gravy', 'Veg', 80.00),
-    ('Aloo Bandha Kofir (Cabbage) Torkari', 'Bengali', 'Main Course Gravy', 'Veg', 80.00),
-    ('Shukto', 'Bengali', 'Main Course Gravy', 'Veg', 80.00),
-    ('Aloo Gobi', 'Bengali', 'Main Course Gravy', 'Veg', 80.00),
-    ('Corn Palak', 'Non-Bengali', 'Main Course Gravy', 'Veg', 80.00),
-    ('Aloo Palak', 'Non-Bengali', 'Main Course Gravy', 'Veg', 80.00),
-    ('Veg Kofta', 'Non-Bengali', 'Main Course Gravy', 'Veg', 80.00);
+    ('Mix Veg', 'Bengali', 'Gravy', 'Veg', 80.00),
+    ('Aloo Soya Torkari (Dry)', 'Bengali', 'Gravy', 'Veg', 80.00),
+    ('Aloo Dum (Large)', 'Bengali', 'Gravy', 'Veg', 80.00),
+    ('Dhokar (Chana Dal) Dalna', 'Bengali', 'Gravy', 'Veg', 80.00),
+    ('Aloo Kofir Dalna', 'Bengali', 'Gravy', 'Veg', 80.00),
+    ('Aloo Bandha Kofir (Cabbage) Torkari', 'Bengali', 'Gravy', 'Veg', 80.00),
+    ('Shukto', 'Bengali', 'Gravy', 'Veg', 80.00),
+    ('Aloo Gobi', 'Bengali', 'Gravy', 'Veg', 80.00),
+    ('Corn Palak', 'Non-Bengali', 'Gravy', 'Veg', 80.00),
+    ('Aloo Palak', 'Non-Bengali', 'Gravy', 'Veg', 80.00),
+    ('Veg Kofta', 'Non-Bengali', 'Gravy', 'Veg', 80.00);
 
 -- Main Course Gravy - Non Veg @ 150 additional
 INSERT INTO Menu (name, category, type, diet, price)
 VALUES
-    ('Aloo Potol Chingri (Prawns) Curry', 'Bengali', 'Main Course Gravy', 'Non-Veg', 150.00),
-    ('Prawns Malai Curry', 'Bengali', 'Main Course Gravy', 'Non-Veg', 150.00),
-    ('Mutton Kosha', 'Bengali', 'Main Course Gravy', 'Non-Veg', 150.00),
-    ('Chingri Sorse', 'Bengali', 'Main Course Gravy', 'Non-Veg', 150.00),
-    ('Pabda Jhal', 'Bengali', 'Main Course Gravy', 'Non-Veg', 150.00),
-    ('Bhetki Fry', 'Bengali', 'Main Course Gravy', 'Non-Veg', 150.00);
+    ('Aloo Potol Chingri (Prawns) Curry', 'Bengali', 'Gravy', 'Non-Veg', 150.00),
+    ('Prawns Malai Curry', 'Bengali', 'Gravy', 'Non-Veg', 150.00),
+    ('Mutton Kosha', 'Bengali', 'Gravy', 'Non-Veg', 150.00),
+    ('Chingri Sorse', 'Bengali', 'Gravy', 'Non-Veg', 150.00),
+    ('Pabda Jhal', 'Bengali', 'Gravy', 'Non-Veg', 150.00),
+    ('Bhetki Fry', 'Bengali', 'Gravy', 'Non-Veg', 150.00);
 
 -- Main Course Gravy - Non Veg @ 250 additional
 INSERT INTO Menu (name, category, type, diet, price)
 VALUES
-    ('Illish Macher Jhal (Sorse Diye)', 'Bengali', 'Main Course Gravy', 'Non-Veg', 250.00),
-    ('Doi (curd) Illish', 'Bengali', 'Main Course Gravy', 'Non-Veg', 250.00);
+    ('Illish Macher Jhal (Sorse Diye)', 'Bengali', 'Gravy', 'Non-Veg', 250.00),
+    ('Doi (curd) Illish', 'Bengali', 'Gravy', 'Non-Veg', 250.00);
 
 -- Main Course Dal - Veg @ 70 additional
 INSERT INTO Menu (name, category, type, diet, price)
 VALUES
-    ('Bhaja Moonger Dal', 'Bengali', 'Main Course Dal', 'Veg', 70.00),
-    ('Cholar Dal', 'Bengali', 'Main Course Dal', 'Veg', 70.00),
-    ('Dal Tadka', 'Bengali', 'Main Course Dal', 'Veg', 70.00),
-    ('Dal Fry', 'Bengali', 'Main Course Dal', 'Veg', 70.00),
-    ('Dal Palak', 'Bengali', 'Main Course Dal', 'Veg', 70.00),
-    ('Dal Makhani', 'Non-Bengali', 'Main Course Dal', 'Veg', 70.00);
+    ('Bhaja Moonger Dal', 'Bengali', 'Dal', 'Veg', 70.00),
+    ('Cholar Dal', 'Bengali', 'Dal', 'Veg', 70.00),
+    ('Dal Tadka', 'Bengali', 'Dal', 'Veg', 70.00),
+    ('Dal Fry', 'Bengali', 'Dal', 'Veg', 70.00),
+    ('Dal Palak', 'Bengali', 'Dal', 'Veg', 70.00),
+    ('Dal Makhani', 'Non-Bengali', 'Dal', 'Veg', 70.00);
 
 -- Chutney & Sides @ 50 additional
 INSERT INTO Menu (name, category, type, diet, price)
@@ -194,4 +194,3 @@ VALUES
     ('Gulab Jamoon', 'Bengali', 'Dessert', 'Veg', 30.00),
     ('Rasogolla', 'Bengali', 'Dessert', 'Veg', 30.00),
     ('Jilebi', 'Bengali', 'Dessert', 'Veg', 30.00);
-

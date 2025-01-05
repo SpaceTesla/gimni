@@ -3,7 +3,7 @@ CREATE TABLE IF NOT EXISTS Combo (
     name VARCHAR(255) NOT NULL,                 -- Name of the combo
     price DECIMAL(9, 2) NOT NULL CHECK (price >= 0), -- Price of the combo, ensures no negative values
     rice INT DEFAULT 0,                         -- Quantity of rice items in the combo
-    roti INT DEFAULT 0,                         -- Quantity of roti items in the combo
+    bread INT DEFAULT 0,                         -- Quantity of roti items in the combo
     starter INT DEFAULT 0,                      -- Quantity of starter items in the combo
     gravy INT DEFAULT 0,                        -- Quantity of gravy items in the combo
     dal INT DEFAULT 0,                          -- Quantity of dal items in the combo
