@@ -1,5 +1,3 @@
-'use client';
-
 import { useState } from 'react';
 import Image from 'next/image';
 import { Fish, EggFried } from 'lucide-react';
@@ -10,6 +8,7 @@ import MenuItem from '@/types/menu';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { FoodDialog } from './food-dialog';
+import QuantityButton from '@/components/quantity-button';
 import * as React from 'react';
 
 interface ComboCardProps {
@@ -22,6 +21,11 @@ const ComboCard: React.FC<ComboCardProps> = ({ combo, menu }) => {
   const [category, setCategory] = React.useState<
     'Bengali' | 'Non-Bengali' | 'Birthday Snack-Up' | 'Other'
   >('Bengali');
+  const [quantity, setQuantity] = useState(0);
+
+  const handleQuantityChange = (newQuantity: number) => {
+    setQuantity(newQuantity);
+  };
 
   return (
     <Card className="overflow-hidden rounded-3xl border-none bg-white/70 p-0 shadow-none">
@@ -40,11 +44,11 @@ const ComboCard: React.FC<ComboCardProps> = ({ combo, menu }) => {
             className="max-h-[280px] w-[100%] object-cover"
           />
           <div className="">
-            <div className="flex flex-col">
-              <div className={'flex gap-2 p-4 text-primary/70'}>
+            <div className="flex items-center p-4">
+              <div className={'flex items-center text-primary/70'}>
                 <span className="text-lg">Price:</span>
-                <span className="text-lg font-bold">{'₹ ' + combo.price}</span>
-                <span className="text-lg">/ plate</span>
+                <span className="text-lg font-bold">{' ₹ ' + combo.price}</span>
+                <span className="text-lg">/plate</span>
               </div>
             </div>
 
@@ -81,12 +85,6 @@ const ComboCard: React.FC<ComboCardProps> = ({ combo, menu }) => {
               </Button>
             </div>
 
-            {/*<Button*/}
-            {/*  className="h-12 w-full rounded-none bg-red-highlight text-white hover:bg-red-highlight/90"*/}
-            {/*  onClick={() => setOpen(true)}*/}
-            {/*>*/}
-            {/*  Add to Cart*/}
-            {/*</Button>*/}
             <FoodDialog
               combo={combo}
               menu={menu}

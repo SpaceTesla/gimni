@@ -1,6 +1,6 @@
-import getCombos from '../../../services/comboService';
+import getCombos from '@/services/comboService';
 
-export async function GET(request) {
+export async function GET(request: Request) {
   try {
     const combos = await getCombos();
     return new Response(JSON.stringify(combos), {

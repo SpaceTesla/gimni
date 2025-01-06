@@ -1,6 +1,6 @@
-import getMenu from '../../../services/menuService';
+import getMenu from '@/services/menuService';
 
-export async function GET(request) {
+export async function GET(request: Request) {
   try {
     const menu = await getMenu();
     return new Response(JSON.stringify(menu), {

@@ -18,6 +18,8 @@ import combo from '@/types/combo';
 import { toTitleCase } from '@/utils/stringUtils';
 import MenuItem from '@/types/menu';
 import { Checkbox } from '@/components/ui/checkbox';
+import { useCart } from '@/context/cartContext';
+import QuantityButton from '@/components/quantity-button';
 
 interface FoodDialogProps {
   open: boolean;
@@ -34,15 +36,41 @@ export function FoodDialog({
   menu,
   category,
 }: FoodDialogProps) {
+  const { addToCart } = useCart(); // Use your cart context or function
+
   const [currentStep, setCurrentStep] = React.useState<
     'selectDiet' | 'selectMenu' | 'selectAddOns'
   >('selectDiet');
   const [menuType, setMenuType] = React.useState<'veg' | 'nonVeg'>('veg');
+  const [quantity, setQuantity] = React.useState(10);
 
   const handleNext = () => {
-    if (currentStep === 'selectDiet') setCurrentStep('selectMenu');
-    else if (currentStep === 'selectMenu') setCurrentStep('selectAddOns');
-    else if (currentStep === 'selectAddOns') handleAddToCart();
+    if (currentStep === 'selectDiet') {
+      setCurrentStep('selectMenu');
+    } else if (currentStep === 'selectMenu') {
+      const allSelectionsMade = Object.keys(combo).every((key) => {
+        if (
+          key === 'id' ||
+          key === 'name' ||
+          key === 'price' ||
+          key === 'papad' ||
+          key === 'salad' ||
+          key === 'chutney' ||
+          combo[key as keyof typeof combo] === 0
+        ) {
+          return true;
+        }
+        return selections[key]?.length === combo[key as keyof typeof combo];
+      });
+
+      if (allSelectionsMade) {
+        setCurrentStep('selectAddOns');
+      } else {
+        alert('Please select all required menu items before proceeding.');
+      }
+    } else if (currentStep === 'selectAddOns') {
+      handleAddToCart();
+    }
   };
 
   const handleBack = () => {
@@ -97,6 +125,18 @@ export function FoodDialog({
     }, 0);
 
     const totalPrice = Number(combo.price) + addOnsPrice;
+
+    const cartItem = {
+      comboName: combo.name,
+      category,
+      dietType: menuType === 'veg' ? 'Veg' : 'Non-Veg',
+      selections,
+      addOns,
+      quantity,
+      totalPrice: Number(totalPrice.toFixed(2)), // Convert to number
+    };
+
+    addToCart(cartItem); // Add the item to the cart
 
     console.log('Combo Name:', combo.name);
     console.log('Category:', category);
@@ -444,12 +484,19 @@ export function FoodDialog({
                 Next
               </Button>
             ) : (
-              <Button
-                onClick={handleNext}
-                className="flex-grow bg-emerald-500 px-8 text-white hover:bg-emerald-600"
-              >
-                Add to Cart
-              </Button>
+              <div className="flex flex-grow items-center gap-4">
+                <QuantityButton
+                  initialValue={quantity}
+                  minValue={10}
+                  onChange={(value) => setQuantity(value)}
+                />
+                <Button
+                  onClick={handleNext}
+                  className="flex-grow bg-emerald-500 px-8 text-white hover:bg-emerald-600"
+                >
+                  Add to Cart
+                </Button>
+              </div>
             )}
           </div>
         </DialogFooter>
