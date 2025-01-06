@@ -1,4 +1,4 @@
-import { MenuSection as MenuSectionType } from '../types/menu';
+import { MenuSection as MenuSectionType } from '@/data/menu';
 import { MenuItem } from './menu-item';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 

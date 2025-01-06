@@ -16,7 +16,6 @@ import { ArrowLeft } from 'lucide-react';
 import combo from '@/types/combo';
 import { toTitleCase } from '@/utils/stringUtils';
 import MenuItem from '@/types/menu';
-import getMenu from '@/services/menuService';
 import { Checkbox } from '@/components/ui/checkbox';
 
 interface FoodDialogProps {
