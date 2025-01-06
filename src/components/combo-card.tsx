@@ -24,7 +24,7 @@ const ComboCard: React.FC<ComboCardProps> = ({ combo, menu }) => {
   >('Bengali');
 
   return (
-    <Card className="overflow-hidden rounded-3xl border-none bg-white p-0 shadow-none">
+    <Card className="overflow-hidden rounded-3xl border-none bg-white/70 p-0 shadow-none">
       <CardHeader className={'p-2'}>
         <CardTitle className="text-center text-3xl font-black">
           {combo.name}
@@ -47,7 +47,12 @@ const ComboCard: React.FC<ComboCardProps> = ({ combo, menu }) => {
                 <span className="text-lg">/ plate</span>
               </div>
             </div>
-            <div className={'mx-4 flex gap-4'}>
+
+            <div className="pb-2 text-center text-[0.75rem] text-zinc-500">
+              customisable
+            </div>
+
+            <div className={'mx-4 flex gap-4 pb-4'}>
               <Button
                 variant={'default'}
                 className={
@@ -75,22 +80,19 @@ const ComboCard: React.FC<ComboCardProps> = ({ combo, menu }) => {
                 Non-Bengali
               </Button>
             </div>
-            <div className="flex flex-col gap-2 py-1 text-center text-[0.75rem] text-zinc-500">
-              customisable
-            </div>
 
-            <Button
-              className="h-12 w-full rounded-none bg-red-highlight text-white hover:bg-red-highlight/90"
-              onClick={() => setOpen(true)}
-            >
-              Add to Cart
-            </Button>
+            {/*<Button*/}
+            {/*  className="h-12 w-full rounded-none bg-red-highlight text-white hover:bg-red-highlight/90"*/}
+            {/*  onClick={() => setOpen(true)}*/}
+            {/*>*/}
+            {/*  Add to Cart*/}
+            {/*</Button>*/}
             <FoodDialog
               combo={combo}
-              menu={menu} // Ensure this is an object with arrays
+              menu={menu}
               open={open}
               onOpenChange={setOpen}
-              category={category} // Pass the category state here
+              category={category}
             />
           </div>
         </div>
@@ -98,4 +100,5 @@ const ComboCard: React.FC<ComboCardProps> = ({ combo, menu }) => {
     </Card>
   );
 };
+
 export default ComboCard;

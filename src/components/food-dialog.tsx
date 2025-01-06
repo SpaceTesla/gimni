@@ -17,6 +17,7 @@ import combo from '@/types/combo';
 import { toTitleCase } from '@/utils/stringUtils';
 import MenuItem from '@/types/menu';
 import getMenu from '@/services/menuService';
+import { Checkbox } from '@/components/ui/checkbox';
 
 interface FoodDialogProps {
   open: boolean;
@@ -47,6 +48,35 @@ export function FoodDialog({
     else if (currentStep === 'selectAddOns') setCurrentStep('selectMenu');
   };
 
+  const [selections, setSelections] = React.useState<Record<string, string[]>>(
+    Object.fromEntries(Object.keys(combo).map((key) => [key, []])),
+  );
+
+  const handleSelection = (
+    groupTitle: string,
+    value: string,
+    maxSelections: number,
+  ) => {
+    setSelections((prev) => {
+      const currentSelections = prev[groupTitle] || [];
+      let newSelections: string[];
+
+      if (currentSelections.includes(value)) {
+        newSelections = currentSelections.filter((item) => item !== value);
+      } else {
+        newSelections = [...currentSelections, value];
+        if (newSelections.length > maxSelections) {
+          newSelections = newSelections.slice(-maxSelections);
+        }
+      }
+
+      return {
+        ...prev,
+        [groupTitle]: newSelections,
+      };
+    });
+  };
+
   function filterMenuItems(
     menu: Record<string, MenuItem[]>,
     selectedCategory: 'Bengali' | 'Non-Bengali' | 'Birthday Snack-Up' | 'Other',
@@ -55,12 +85,23 @@ export function FoodDialog({
     const filteredMenu: Record<string, MenuItem[]> = {};
 
     Object.keys(menu).forEach((key) => {
-      filteredMenu[key] = menu[key].filter(
-        (item) =>
-          item.category === selectedCategory && item.diet === selectedDiet,
-      );
+      filteredMenu[key] = menu[key].filter((item) => {
+        const isCategoryMatch = item.category === selectedCategory;
+        const isDietMatch =
+          selectedDiet === 'Non-Veg'
+            ? key.toLowerCase() === 'starter' || key.toLowerCase() === 'gravy'
+              ? item.diet === 'Non-Veg'
+              : true
+            : item.diet === selectedDiet;
+        const isNotExcludedItem =
+          item.name.toLowerCase() !== 'salad' &&
+          item.name.toLowerCase() !== 'papad';
+
+        return isCategoryMatch && isDietMatch && isNotExcludedItem;
+      });
     });
 
+    console.log(filteredMenu);
     return filteredMenu;
   }
 
@@ -184,12 +225,16 @@ export function FoodDialog({
                   key === 'id' ||
                   key === 'name' ||
                   key === 'price' ||
+                  key === 'papad' ||
+                  key === 'salad' ||
+                  key === 'chutney' ||
                   combo[key as keyof typeof combo] === 0 ? null : (
                     <div key={key}>
                       <div className="flex items-center justify-between">
                         <span>{toTitleCase(key)}</span>
                         <span>
-                          Select any ({combo[key as keyof typeof combo]})
+                          {selections[key]?.length || 0} out of{' '}
+                          {combo[key as keyof typeof combo]} selected
                         </span>
                       </div>
                       <div>
@@ -202,10 +247,35 @@ export function FoodDialog({
                             ].map((item) => (
                               <div
                                 key={item.id}
-                                className="flex items-center justify-between text-sm text-gray-600"
+                                className="flex cursor-pointer items-center justify-between p-1 text-sm text-gray-600"
                               >
-                                <span>{item.name}</span>
-                                <span>{item.price}</span>
+                                <Label
+                                  htmlFor={`${key}-${item.id}`}
+                                  className="w-full cursor-pointer text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                                >
+                                  {item.name}
+                                </Label>
+                                <Checkbox
+                                  id={`${key}-${item.id}`}
+                                  className="peer"
+                                  checked={selections[key]?.includes(item.name)}
+                                  onCheckedChange={() => {
+                                    const maxSelections =
+                                      combo[key as keyof typeof combo];
+                                    if (typeof maxSelections === 'number') {
+                                      handleSelection(
+                                        key,
+                                        item.name,
+                                        maxSelections,
+                                      );
+                                    }
+                                  }}
+                                  disabled={
+                                    selections[key]?.length ===
+                                      combo[key as keyof typeof combo] &&
+                                    !selections[key]?.includes(item.name)
+                                  }
+                                />
                               </div>
                             ))}
                         </ul>

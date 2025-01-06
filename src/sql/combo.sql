@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS Combo (
     gravy INT DEFAULT 0,                        -- Quantity of gravy items in the combo
     dal INT DEFAULT 0,                          -- Quantity of dal items in the combo
     salad INT DEFAULT 0,                        -- Quantity of salad items in the combo
-    sweet INT DEFAULT 0,                        -- Quantity of sweet items in the combo
+    dessert INT DEFAULT 0,                      -- Quantity of sweet items in the combo
     papad INT DEFAULT 0,                        -- Quantity of papad items in the combo
     chutney INT DEFAULT 0                       -- Quantity of chutney items in the combo
 );
