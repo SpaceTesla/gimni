@@ -2,21 +2,16 @@
 
 import { useEffect, useState } from 'react';
 
-import { Button } from '@/components/ui/button';
 import ComboCard from '@/components/combo-card';
 
 import type Combo from '@/types/combo';
 import type MenuItem from '@/types/menu';
-import QuantityButton from '@/components/quantity-button';
 import { CartProvider } from '@/context/cartContext';
 import Cart from '@/components/cart';
 
 export default function FoodOrdering() {
   const [combos, setCombos] = useState<Combo[]>([]);
   const [menu, setMenu] = useState<Record<string, MenuItem[]>>({});
-  const [cartItems, setCartItems] = useState<
-    { id: string; name: string; quantity: number; totalPrice: number }[]
-  >([]);
   const [pax, setPax] = useState<Record<string, number[]>>({});
 
   useEffect(() => {
@@ -54,20 +49,6 @@ export default function FoodOrdering() {
     fetchMenu().then(() => console.log('Menu fetched'));
     fetchPax().then(() => console.log('Pax fetched'));
   }, []);
-
-  const handleQuantityChange = (itemId: string, newQuantity: number) => {
-    setCartItems((prevItems) =>
-      prevItems.map((item) =>
-        item.id === itemId
-          ? {
-              ...item,
-              quantity: newQuantity,
-              totalPrice: item.totalPrice * newQuantity,
-            }
-          : item,
-      ),
-    );
-  };
 
   return (
     <CartProvider>

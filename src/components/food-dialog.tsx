@@ -176,6 +176,8 @@ export function FoodDialog({
     console.log('Menu Items Selected:', selections);
     console.log('Add-Ons Selected:', addOns);
     console.log('Total Price:', totalPrice.toFixed(2));
+
+    onOpenChange(false); // Close the dialog box
   };
 
   function filterMenuItems(
