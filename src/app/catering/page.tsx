@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 import { Button } from '@/components/ui/button';
 import ComboCard from '@/components/combo-card';
@@ -18,6 +17,7 @@ export default function FoodOrdering() {
   const [cartItems, setCartItems] = useState<
     { id: string; name: string; quantity: number; totalPrice: number }[]
   >([]);
+  const [pax, setPax] = useState<Record<string, number[]>>({});
 
   useEffect(() => {
     async function fetchCombos() {
@@ -40,8 +40,19 @@ export default function FoodOrdering() {
       }
     }
 
+    async function fetchPax() {
+      try {
+        const response = await fetch('/api/pax');
+        const data = await response.json();
+        setPax(data);
+      } catch (error) {
+        console.error('Error fetching pax:', error);
+      }
+    }
+
     fetchCombos().then(() => console.log('Combos fetched'));
     fetchMenu().then(() => console.log('Menu fetched'));
+    fetchPax().then(() => console.log('Pax fetched'));
   }, []);
 
   const handleQuantityChange = (itemId: string, newQuantity: number) => {
@@ -66,7 +77,7 @@ export default function FoodOrdering() {
             {/* Menu Section */}
             <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:col-span-3 lg:w-[65%] lg:gap-x-8">
               {combos.map((combo) => (
-                <ComboCard key={combo.id} combo={combo} menu={menu} />
+                <ComboCard key={combo.id} combo={combo} menu={menu} pax={pax} />
               ))}
             </div>
 

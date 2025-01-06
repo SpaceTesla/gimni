@@ -32,10 +32,10 @@ const Cart: React.FC = () => {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead>ITEM</TableHead>
+              <TableHead className="w-1/2">ITEM</TableHead>
               <TableHead className="text-red-500">QUANTITY</TableHead>
               <TableHead className="text-green-500">TOTAL</TableHead>
-              <TableHead></TableHead>
+              {/*<TableHead></TableHead>*/}
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -44,7 +44,7 @@ const Cart: React.FC = () => {
                 <TableCell className="font-medium">No items yet</TableCell>
                 <TableCell>-</TableCell>
                 <TableCell>-</TableCell>
-                <TableCell></TableCell>
+                {/*<TableCell></TableCell>*/}
               </TableRow>
             ) : (
               cartItems.map((item, index) => (
@@ -62,17 +62,17 @@ const Cart: React.FC = () => {
                     {item.category} - {item.comboName}
                   </TableCell>
                   <TableCell>{item.quantity}</TableCell>
-                  <TableCell>₹{item.totalPrice}</TableCell>
-                  <TableCell>
-                    <Button
-                      variant="link"
-                      size="icon"
-                      onClick={() => removeItem(item.id)}
-                      className="text-red-500 hover:text-red-600"
-                    >
-                      <X />
-                    </Button>
-                  </TableCell>
+                  <TableCell>₹{item.totalPrice * item.quantity}</TableCell>
+                  {/*<TableCell>*/}
+                  {/*  <Button*/}
+                  {/*    variant="link"*/}
+                  {/*    size="icon"*/}
+                  {/*    onClick={() => removeItem(item.id)}*/}
+                  {/*    className="text-red-500 hover:text-red-600"*/}
+                  {/*  >*/}
+                  {/*    <X />*/}
+                  {/*  </Button>*/}
+                  {/*</TableCell>*/}
                 </TableRow>
               ))
             )}

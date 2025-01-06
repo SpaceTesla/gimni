@@ -14,9 +14,10 @@ import * as React from 'react';
 interface ComboCardProps {
   combo: Combo;
   menu: Record<string, MenuItem[]>; // This should be a record of arrays
+  pax: Record<string, number[]>;
 }
 
-const ComboCard: React.FC<ComboCardProps> = ({ combo, menu }) => {
+const ComboCard: React.FC<ComboCardProps> = ({ combo, menu, pax }) => {
   const [open, setOpen] = useState(false);
   const [category, setCategory] = React.useState<
     'Bengali' | 'Non-Bengali' | 'Birthday Snack-Up' | 'Other'
@@ -91,6 +92,7 @@ const ComboCard: React.FC<ComboCardProps> = ({ combo, menu }) => {
               open={open}
               onOpenChange={setOpen}
               category={category}
+              pax={pax}
             />
           </div>
         </div>

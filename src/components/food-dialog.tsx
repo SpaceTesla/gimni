@@ -27,6 +27,7 @@ interface FoodDialogProps {
   combo: combo;
   menu: Record<string, MenuItem[]>;
   category: 'Bengali' | 'Non-Bengali' | 'Birthday Snack-Up' | 'Other';
+  pax: Record<string, number[]>;
 }
 
 export function FoodDialog({
@@ -35,7 +36,9 @@ export function FoodDialog({
   combo,
   menu,
   category,
+  pax,
 }: FoodDialogProps) {
+  console.log(pax);
   const { addToCart } = useCart(); // Use your cart context or function
 
   const [currentStep, setCurrentStep] = React.useState<
@@ -113,6 +116,32 @@ export function FoodDialog({
     });
   };
 
+  const getPriceBasedOnQuantity = (
+    quantity: number,
+    prices: number[],
+  ): number => {
+    switch (true) {
+      case quantity >= 10 && quantity <= 20:
+        return prices[0];
+      case quantity >= 21 && quantity <= 30:
+        return prices[1];
+      case quantity >= 31 && quantity <= 50:
+        return prices[2];
+      case quantity >= 51 && quantity <= 100:
+        return prices[3];
+      case quantity >= 101 && quantity <= 150:
+        return prices[4];
+      case quantity >= 151 && quantity <= 200:
+        return prices[5];
+      case quantity >= 201 && quantity <= 250:
+        return prices[6];
+      case quantity >= 251 && quantity <= 300:
+        return prices[7];
+      default:
+        return prices[0]; // Default to the first price if no range matches
+    }
+  };
+
   const handleAddToCart = () => {
     const addOnsPrice = Object.keys(addOns).reduce((total, key) => {
       return (
@@ -124,9 +153,12 @@ export function FoodDialog({
       );
     }, 0);
 
-    const totalPrice = Number(combo.price) + addOnsPrice;
+    const comboPrices = pax[combo.name]; // Assuming pax is a prop containing the prices for each combo
+    const comboPrice = getPriceBasedOnQuantity(quantity, comboPrices);
+    const totalPrice = comboPrice + addOnsPrice;
 
     const cartItem = {
+      id: combo.id.toString(), // Convert id to string
       comboName: combo.name,
       category,
       dietType: menuType === 'veg' ? 'Veg' : 'Non-Veg',
