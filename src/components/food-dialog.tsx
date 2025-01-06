@@ -1,6 +1,7 @@
 'use client';
 
 import * as React from 'react';
+import { useState } from 'react';
 import {
   Dialog,
   DialogContent,
@@ -46,6 +47,8 @@ export function FoodDialog({
     if (currentStep === 'selectMenu') setCurrentStep('selectDiet');
     else if (currentStep === 'selectAddOns') setCurrentStep('selectMenu');
   };
+
+  const [showMore, setShowMore] = useState<Record<string, boolean>>({});
 
   const [selections, setSelections] = React.useState<Record<string, string[]>>(
     Object.fromEntries(Object.keys(combo).map((key) => [key, []])),
@@ -287,6 +290,113 @@ export function FoodDialog({
           )}
 
           {/* Add-Ons Selection */}
+          {currentStep === 'selectAddOns' && (
+            <div className={'overflow-y-auto'}>
+              <div className="flex flex-col gap-4">
+                {Object.keys(menu).map((key) => (
+                  <div key={key}>
+                    <div className="flex items-center justify-between">
+                      <span>{toTitleCase(key)}</span>
+                    </div>
+                    <div>
+                      <ul className="space-y-2 rounded-2xl bg-white/50 p-4">
+                        {menu[key].slice(0, 5).map((item) => (
+                          <div
+                            key={item.id}
+                            className="flex cursor-pointer items-center justify-between p-1 text-sm text-gray-600"
+                          >
+                            <Label
+                              htmlFor={`addon-${key}-${item.id}`}
+                              className="flex w-full cursor-pointer items-center justify-between pr-4 pt-0.5 align-middle text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                            >
+                              <span className="flex items-center gap-1">
+                                {item.diet === 'Veg' ? (
+                                  <img
+                                    src="/veg.svg"
+                                    alt="Veg"
+                                    className="mr-2 h-4 w-4"
+                                  />
+                                ) : (
+                                  <img
+                                    src="/non-veg.svg"
+                                    alt="Non-Veg"
+                                    className="mr-2 h-4 w-4"
+                                  />
+                                )}
+                                {item.name}
+                              </span>
+                              <span>{item.price}</span>
+                            </Label>
+                            <Checkbox
+                              id={`addon-${key}-${item.id}`}
+                              className="peer"
+                              checked={selections[key]?.includes(item.name)}
+                              onCheckedChange={() => {
+                                handleSelection(key, item.name, Infinity);
+                              }}
+                            />
+                          </div>
+                        ))}
+                        {showMore[key] &&
+                          menu[key].slice(4).map((item) => (
+                            <div
+                              key={item.id}
+                              className="flex cursor-pointer items-center justify-between p-1 text-sm text-gray-600"
+                            >
+                              <Label
+                                htmlFor={`addon-${key}-${item.id}`}
+                                className="flex w-full cursor-pointer items-center justify-between pr-4 pt-0.5 align-middle text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                              >
+                                <span className="flex items-center gap-1">
+                                  {item.diet === 'Veg' ? (
+                                    <img
+                                      src="/veg.svg"
+                                      alt="Veg"
+                                      className="mr-2 h-4 w-4"
+                                    />
+                                  ) : (
+                                    <img
+                                      src="/non-veg.svg"
+                                      alt="Non-Veg"
+                                      className="mr-2 h-4 w-4"
+                                    />
+                                  )}
+                                  {item.name}
+                                </span>
+                                <span>{item.price}</span>
+                              </Label>
+                              <Checkbox
+                                id={`addon-${key}-${item.id}`}
+                                className="peer"
+                                checked={selections[key]?.includes(item.name)}
+                                onCheckedChange={() => {
+                                  handleSelection(key, item.name, Infinity);
+                                }}
+                              />
+                            </div>
+                          ))}
+                        {menu[key].length > 4 && (
+                          <button
+                            onClick={() =>
+                              setShowMore((prev) => ({
+                                ...prev,
+                                [key]: !prev[key],
+                              }))
+                            }
+                            className="ml-2 pt-2 text-sm font-semibold text-zinc-500"
+                          >
+                            {showMore[key]
+                              ? 'Show less'
+                              : `Show ${menu[key].length - 4} more`}
+                          </button>
+                        )}
+                      </ul>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Navigation Buttons */}
