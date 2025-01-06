@@ -42,7 +42,9 @@ export function FoodDialog({
   const handleNext = () => {
     if (currentStep === 'selectDiet') setCurrentStep('selectMenu');
     else if (currentStep === 'selectMenu') setCurrentStep('selectAddOns');
+    else if (currentStep === 'selectAddOns') handleAddToCart();
   };
+
   const handleBack = () => {
     if (currentStep === 'selectMenu') setCurrentStep('selectDiet');
     else if (currentStep === 'selectAddOns') setCurrentStep('selectMenu');
@@ -54,12 +56,16 @@ export function FoodDialog({
     Object.fromEntries(Object.keys(combo).map((key) => [key, []])),
   );
 
+  const [addOns, setAddOns] = React.useState<Record<string, string[]>>({});
+
   const handleSelection = (
     groupTitle: string,
     value: string,
     maxSelections: number,
+    isAddOn: boolean = false,
   ) => {
-    setSelections((prev) => {
+    const setState = isAddOn ? setAddOns : setSelections;
+    setState((prev) => {
       const currentSelections = prev[groupTitle] || [];
       let newSelections: string[];
 
@@ -77,6 +83,27 @@ export function FoodDialog({
         [groupTitle]: newSelections,
       };
     });
+  };
+
+  const handleAddToCart = () => {
+    const addOnsPrice = Object.keys(addOns).reduce((total, key) => {
+      return (
+        total +
+        addOns[key].reduce((sum, itemName) => {
+          const item = menu[key].find((item) => item.name === itemName);
+          return sum + (item ? Number(item.price) : 0);
+        }, 0)
+      );
+    }, 0);
+
+    const totalPrice = Number(combo.price) + addOnsPrice;
+
+    console.log('Combo Name:', combo.name);
+    console.log('Category:', category);
+    console.log('Diet Type:', menuType === 'veg' ? 'Veg' : 'Non-Veg');
+    console.log('Menu Items Selected:', selections);
+    console.log('Add-Ons Selected:', addOns);
+    console.log('Total Price:', totalPrice.toFixed(2));
   };
 
   function filterMenuItems(
@@ -332,7 +359,7 @@ export function FoodDialog({
                               className="peer"
                               checked={selections[key]?.includes(item.name)}
                               onCheckedChange={() => {
-                                handleSelection(key, item.name, Infinity);
+                                handleSelection(key, item.name, Infinity, true);
                               }}
                             />
                           </div>
@@ -417,7 +444,10 @@ export function FoodDialog({
                 Next
               </Button>
             ) : (
-              <Button className="flex-grow bg-emerald-500 px-8 text-white hover:bg-emerald-600">
+              <Button
+                onClick={handleNext}
+                className="flex-grow bg-emerald-500 px-8 text-white hover:bg-emerald-600"
+              >
                 Add to Cart
               </Button>
             )}
