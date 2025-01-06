@@ -11,10 +11,18 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
-import { X } from 'lucide-react';
+import { handleCheckout } from '@/utils/checkout';
 
-const Cart: React.FC = () => {
-  const { cartItems, removeItem } = useCart();
+interface CartProps {
+  userInfo: {
+    name: string;
+    phone: string;
+    address: string;
+  };
+}
+
+const Cart: React.FC<CartProps> = ({ userInfo }) => {
+  const { cartItems } = useCart();
 
   const totalAmount = cartItems.reduce(
     (total, item) => total + item.totalPrice * item.quantity,
@@ -35,7 +43,6 @@ const Cart: React.FC = () => {
               <TableHead className="w-1/2">ITEM</TableHead>
               <TableHead className="text-red-500">QUANTITY</TableHead>
               <TableHead className="text-green-500">TOTAL</TableHead>
-              {/*<TableHead></TableHead>*/}
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -44,7 +51,6 @@ const Cart: React.FC = () => {
                 <TableCell className="font-medium">No items yet</TableCell>
                 <TableCell>-</TableCell>
                 <TableCell>-</TableCell>
-                {/*<TableCell></TableCell>*/}
               </TableRow>
             ) : (
               cartItems.map((item, index) => (
@@ -63,16 +69,6 @@ const Cart: React.FC = () => {
                   </TableCell>
                   <TableCell>{item.quantity}</TableCell>
                   <TableCell>₹{item.totalPrice * item.quantity}</TableCell>
-                  {/*<TableCell>*/}
-                  {/*  <Button*/}
-                  {/*    variant="link"*/}
-                  {/*    size="icon"*/}
-                  {/*    onClick={() => removeItem(item.id)}*/}
-                  {/*    className="text-red-500 hover:text-red-600"*/}
-                  {/*  >*/}
-                  {/*    <X />*/}
-                  {/*  </Button>*/}
-                  {/*</TableCell>*/}
                 </TableRow>
               ))
             )}
@@ -83,7 +79,10 @@ const Cart: React.FC = () => {
             <span>Total:</span>
             <span>₹{totalAmount.toFixed(2)}</span>
           </div>
-          <Button className="h-12 w-full bg-red-500 text-white hover:bg-red-600">
+          <Button
+            onClick={() => handleCheckout(userInfo, cartItems)}
+            className="h-12 w-full bg-red-500 text-white hover:bg-red-600"
+          >
             Checkout
           </Button>
         </div>

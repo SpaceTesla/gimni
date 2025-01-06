@@ -1,18 +1,22 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-
 import ComboCard from '@/components/combo-card';
-
 import type Combo from '@/types/combo';
 import type MenuItem from '@/types/menu';
 import { CartProvider } from '@/context/cartContext';
 import Cart from '@/components/cart';
+import { UserInfoModal } from '@/components/user-info-modal';
 
 export default function FoodOrdering() {
   const [combos, setCombos] = useState<Combo[]>([]);
   const [menu, setMenu] = useState<Record<string, MenuItem[]>>({});
   const [pax, setPax] = useState<Record<string, number[]>>({});
+  const [userInfo, setUserInfo] = useState<{
+    name: string;
+    phone: string;
+    address: string;
+  } | null>(null);
 
   useEffect(() => {
     async function fetchCombos() {
@@ -50,6 +54,19 @@ export default function FoodOrdering() {
     fetchPax().then(() => console.log('Pax fetched'));
   }, []);
 
+  const handleUserInfoSubmit = (data: {
+    name: string;
+    phone: string;
+    address: string;
+  }) => {
+    setUserInfo(data);
+    console.log('Submitted:', data);
+  };
+
+  if (!userInfo) {
+    return <UserInfoModal onSubmit={handleUserInfoSubmit} />;
+  }
+
   return (
     <CartProvider>
       <div className="min-h-screen">
@@ -64,7 +81,7 @@ export default function FoodOrdering() {
 
             {/* Cart Section */}
             <div className="flex-grow">
-              <Cart />
+              <Cart userInfo={userInfo} />
             </div>
           </div>
         </div>
