@@ -42,22 +42,6 @@ export default function QuantityButton({
 
   return (
     <>
-      <style jsx global>{`
-        @layer base {
-          input[type='number']::-webkit-inner-spin-button,
-          input[type='number']::-webkit-outer-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-          }
-          input[type='number'] {
-            -moz-appearance: textfield;
-          }
-        }
-        .quantity-input {
-          font-size: 16px !important;
-          line-height: 1 !important;
-        }
-      `}</style>
       <div className="flex items-center">
         <Button
           variant="outline"
