@@ -1,16 +1,24 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import Link from 'next/link';
-import { Menu } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import Image from 'next/image';
+import { useClickOutside } from '@/hooks/useClickOutside';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navRef = useRef<HTMLDivElement>(null);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
+
+  useClickOutside(navRef, closeMenu);
 
   return (
     <>
@@ -25,14 +33,21 @@ const Navbar = () => {
         <Image src="/assets/dots_t.svg" alt="Dots" width={80} height={80} />
       </div>
 
-      <nav className="z-100 relative flex h-20 items-center justify-between bg-red-nav px-4 lg:ml-16">
+      <nav
+        ref={navRef}
+        className="z-100 relative flex h-20 items-center justify-between bg-red-nav px-4 lg:ml-16"
+      >
         {/* Hamburger menu for small screens */}
         <button
           className="w-12 p-0 sm:hidden"
           onClick={toggleMenu}
           aria-label="Toggle menu"
         >
-          <Menu height={32} width={32} />
+          {isMenuOpen ? (
+            <X height={32} width={32} />
+          ) : (
+            <Menu height={32} width={32} />
+          )}
         </button>
         {/* Navigation Menu */}
         <ul
@@ -42,7 +57,7 @@ const Navbar = () => {
               : 'hidden'
           } z-10 flex flex-1 gap-4 sm:static sm:flex sm:flex-row lg:ml-48`}
         >
-          <NavLinks />
+          <NavLinks closeMenu={closeMenu} />
         </ul>
 
         {/* Logo and extra dots */}
@@ -60,18 +75,30 @@ const Navbar = () => {
   );
 };
 
-const NavLinks = () => (
+const NavLinks = ({ closeMenu }: { closeMenu: () => void }) => (
   <li className="z-10 flex flex-col gap-4 font-extrabold sm:flex-row sm:gap-6 sm:font-black md:gap-8 md:text-lg">
-    <Link href="/" className="text-center hover:text-white">
+    <Link href="/" className="text-center hover:text-white" onClick={closeMenu}>
       HOME
     </Link>
-    <Link href="/about" className="text-center hover:text-white">
+    <Link
+      href="/about"
+      className="text-center hover:text-white"
+      onClick={closeMenu}
+    >
       ABOUT
     </Link>
-    <Link href="/alacarte" className="text-center hover:text-white">
+    <Link
+      href="/alacarte"
+      className="text-center hover:text-white"
+      onClick={closeMenu}
+    >
       À LA CARTE
     </Link>
-    <Link href="/catering" className="text-center hover:text-white">
+    <Link
+      href="/catering"
+      className="text-center hover:text-white"
+      onClick={closeMenu}
+    >
       CATERING
     </Link>
   </li>

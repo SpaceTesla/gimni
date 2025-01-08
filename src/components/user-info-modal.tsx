@@ -1,10 +1,10 @@
-'use client';
-
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
+import { X } from 'lucide-react';
 import {
   Dialog,
   DialogContent,
@@ -22,10 +22,15 @@ export function UserInfoModal({ onSubmit }: UserInfoModalProps) {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [address, setAddress] = useState('');
+  const router = useRouter();
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     onSubmit({ name, phone, address });
+  };
+
+  const handleClose = () => {
+    router.push('/');
   };
 
   return (
@@ -36,6 +41,13 @@ export function UserInfoModal({ onSubmit }: UserInfoModalProps) {
           <DialogDescription>
             Please provide your details to access the website.
           </DialogDescription>
+          <Button
+            onClick={handleClose}
+            variant={'ghost'}
+            className="absolute right-2 top-2"
+          >
+            <X />
+          </Button>
         </DialogHeader>
         <form onSubmit={handleSubmit}>
           <div className="grid gap-4 py-4">
