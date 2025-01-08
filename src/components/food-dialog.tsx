@@ -9,6 +9,7 @@ import {
   DialogTitle,
   DialogFooter,
 } from '@/components/ui/dialog';
+import { useToast } from '@/hooks/use-toast';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
@@ -39,7 +40,7 @@ export function FoodDialog({
   category,
   pax,
 }: FoodDialogProps) {
-  console.log(pax);
+  const { toast } = useToast();
   const { addToCart } = useCart(); // Use your cart context or function
 
   const [currentStep, setCurrentStep] = React.useState<
@@ -72,7 +73,12 @@ export function FoodDialog({
       if (allSelectionsMade) {
         setCurrentStep('selectAddOns');
       } else {
-        alert('Please select all required menu items before proceeding.');
+        toast({
+          variant: 'destructive',
+          title: 'Incomplete Selection',
+          description:
+            'Please select all required menu items before proceeding.',
+        });
       }
     } else if (currentStep === 'selectAddOns') {
       handleAddToCart();
