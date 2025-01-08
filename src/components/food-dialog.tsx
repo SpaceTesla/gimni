@@ -12,6 +12,7 @@ import {
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
+import Image from 'next/image';
 import { ArrowLeft, X } from 'lucide-react';
 
 import combo from '@/types/combo';
@@ -332,7 +333,6 @@ export function FoodDialog({
               </RadioGroup>
             </div>
           )}
-
           {/* Menu Items Selection */}
           {currentStep === 'selectMenu' && (
             <div className={'overflow-y-auto'}>
@@ -402,7 +402,6 @@ export function FoodDialog({
               </div>
             </div>
           )}
-
           {/* Add-Ons Selection */}
           {currentStep === 'selectAddOns' && (
             <div className={'overflow-y-auto'}>
@@ -425,16 +424,20 @@ export function FoodDialog({
                             >
                               <span className="flex items-center gap-1">
                                 {item.diet === 'Veg' ? (
-                                  <img
+                                  <Image
                                     src="/veg.svg"
                                     alt="Veg"
-                                    className="mr-2 h-4 w-4"
+                                    width={16}
+                                    height={16}
+                                    className="mr-2"
                                   />
                                 ) : (
-                                  <img
+                                  <Image
                                     src="/non-veg.svg"
                                     alt="Non-Veg"
-                                    className="mr-2 h-4 w-4"
+                                    width={16}
+                                    height={16}
+                                    className="mr-2"
                                   />
                                 )}
                                 {item.name}
@@ -463,16 +466,20 @@ export function FoodDialog({
                               >
                                 <span className="flex items-center gap-1">
                                   {item.diet === 'Veg' ? (
-                                    <img
+                                    <Image
                                       src="/veg.svg"
                                       alt="Veg"
-                                      className="mr-2 h-4 w-4"
+                                      width={16}
+                                      height={16}
+                                      className="mr-2"
                                     />
                                   ) : (
-                                    <img
+                                    <Image
                                       src="/non-veg.svg"
                                       alt="Non-Veg"
-                                      className="mr-2 h-4 w-4"
+                                      width={16}
+                                      height={16}
+                                      className="mr-2"
                                     />
                                   )}
                                   {item.name}
@@ -515,7 +522,7 @@ export function FoodDialog({
 
         {/* Navigation Buttons */}
         <DialogFooter>
-          <div className="flex w-full items-center justify-between gap-6">
+          <div className="flex w-full flex-wrap items-center justify-between gap-6">
             <Button
               onClick={handleBack}
               className="w-[10%] bg-emerald-500 px-8 text-white hover:bg-emerald-600"
@@ -523,6 +530,13 @@ export function FoodDialog({
             >
               <ArrowLeft className="h-6 w-6" />
             </Button>
+            {currentStep === 'selectAddOns' && (
+              <QuantityButton
+                initialValue={quantity}
+                minValue={10}
+                onChange={(value) => setQuantity(value)}
+              />
+            )}
             {currentStep !== 'selectAddOns' ? (
               <Button
                 onClick={handleNext}
@@ -532,14 +546,9 @@ export function FoodDialog({
               </Button>
             ) : (
               <div className="flex flex-grow items-center gap-4">
-                <QuantityButton
-                  initialValue={quantity}
-                  minValue={10}
-                  onChange={(value) => setQuantity(value)}
-                />
                 <Button
                   onClick={handleNext}
-                  className="flex-grow bg-emerald-500 px-8 text-white hover:bg-emerald-600"
+                  className="h-full flex-grow bg-emerald-500 text-white hover:bg-emerald-600"
                 >
                   Add to Cart
                 </Button>
