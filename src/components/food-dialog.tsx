@@ -12,7 +12,7 @@ import {
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, X } from 'lucide-react';
 
 import combo from '@/types/combo';
 import { toTitleCase } from '@/utils/stringUtils';
@@ -234,6 +234,15 @@ export function FoodDialog({
             {currentStep === 'selectAddOns' && (
               <div className="mb-2 text-2xl font-semibold">Choose Add-Ons</div>
             )}
+            <Button
+              onClick={() => {
+                onOpenChange(false);
+              }}
+              variant={'ghost'}
+              className="absolute right-4 top-4 p-2"
+            >
+              <X />
+            </Button>
           </DialogTitle>
         </DialogHeader>
         <div className="h-full overflow-auto">
