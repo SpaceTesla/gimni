@@ -3,7 +3,7 @@ type Combo = {
   name: string;
   price: number;
   rice: number;
-  roti: number;
+  bread: number;
   starter: number;
   gravy: number;
   dal: number;

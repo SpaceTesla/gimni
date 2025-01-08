@@ -17,5 +17,12 @@
       <jdbc-url>mongodb://localhost:27017/gimni</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="@gimni-remote" uuid="ae52db45-fd4d-4bc2-bdc3-cf9a1b533821">
+      <driver-ref>cockroach</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://gimni-trial-6854.j77.aws-ap-south-1.cockroachlabs.cloud:26257/defaultdb</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>

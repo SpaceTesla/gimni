@@ -168,16 +168,16 @@ VALUES
     ('Dal Palak', 'Bengali', 'Dal', 'Veg', 70.00),
     ('Dal Makhani', 'Non-Bengali', 'Dal', 'Veg', 70.00);
 
--- Chutney & Sides @ 50 additional
+-- Chutney @ 50 additional
 INSERT INTO Menu (name, category, type, diet, price)
 VALUES
-    ('Mango', 'Bengali', 'Chutney & Sides', 'Veg', 50.00),
-    ('Tomato', 'Bengali', 'Chutney & Sides', 'Veg', 50.00),
-    ('Khejur', 'Bengali', 'Chutney & Sides', 'Veg', 50.00),
-    ('Khejur Tomato', 'Bengali', 'Chutney & Sides', 'Veg', 50.00),
-    ('Green chutney', 'Bengali', 'Chutney & Sides', 'Veg', 50.00),
-    ('Grapes chutney', 'Bengali', 'Chutney & Sides', 'Veg', 50.00),
-    ('Pineapple', 'Bengali', 'Chutney & Sides', 'Veg', 50.00);
+    ('Mango', 'Bengali', 'Chutney', 'Veg', 50.00),
+    ('Tomato', 'Bengali', 'Chutney', 'Veg', 50.00),
+    ('Khejur', 'Bengali', 'Chutney', 'Veg', 50.00),
+    ('Khejur Tomato', 'Bengali', 'Chutney', 'Veg', 50.00),
+    ('Green chutney', 'Bengali', 'Chutney', 'Veg', 50.00),
+    ('Grapes chutney', 'Bengali', 'Chutney', 'Veg', 50.00),
+    ('Pineapple', 'Bengali', 'Chutney', 'Veg', 50.00);
 
 -- Dessert @ 50 additional
 INSERT INTO Menu (name, category, type, diet, price)

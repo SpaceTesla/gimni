@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS Menu (
         'Bread',
         'Gravy',
         'Dal',
-        'Chutney & Sides',
+        'Chutney',
         'Dessert'
       ) NOT NULL,                                 -- Type of dish
     diet ENUM('Veg', 'Non-Veg') NOT NULL, -- Dietary classification

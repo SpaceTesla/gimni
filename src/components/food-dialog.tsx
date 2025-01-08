@@ -59,11 +59,13 @@ export function FoodDialog({
           key === 'papad' ||
           key === 'salad' ||
           key === 'chutney' ||
-          combo[key as keyof typeof combo] === 0
+          Number(combo[key as keyof typeof combo]) === 0
         ) {
           return true;
         }
-        return selections[key]?.length === combo[key as keyof typeof combo];
+        return (
+          selections[key]?.length === Number(combo[key as keyof typeof combo])
+        );
       });
 
       if (allSelectionsMade) {
@@ -204,7 +206,7 @@ export function FoodDialog({
       });
     });
 
-    console.log(filteredMenu);
+    console.log('filteredMenu', filteredMenu);
     return filteredMenu;
   }
 
@@ -258,7 +260,8 @@ export function FoodDialog({
                           key === 'id' ||
                           key === 'name' ||
                           key === 'price' ||
-                          combo[key as keyof typeof combo] === 0 ? null : (
+                          Number(combo[key as keyof typeof combo]) ===
+                            0 ? null : (
                             <li
                               key={key}
                               className="flex items-center justify-between text-sm text-gray-600"
@@ -295,7 +298,8 @@ export function FoodDialog({
                           key === 'id' ||
                           key === 'name' ||
                           key === 'price' ||
-                          combo[key as keyof typeof combo] === 0 ? null : (
+                          Number(combo[key as keyof typeof combo]) ===
+                            0 ? null : (
                             <li
                               key={key}
                               className="flex items-center justify-between text-sm text-gray-600"
@@ -331,7 +335,7 @@ export function FoodDialog({
                   key === 'papad' ||
                   key === 'salad' ||
                   key === 'chutney' ||
-                  combo[key as keyof typeof combo] === 0 ? null : (
+                  Number(combo[key as keyof typeof combo]) === 0 ? null : (
                     <div key={key}>
                       <div className="flex items-center justify-between">
                         <span>{toTitleCase(key)}</span>
@@ -363,20 +367,20 @@ export function FoodDialog({
                                   className="peer"
                                   checked={selections[key]?.includes(item.name)}
                                   onCheckedChange={() => {
-                                    const maxSelections =
-                                      combo[key as keyof typeof combo];
-                                    if (typeof maxSelections === 'number') {
-                                      handleSelection(
-                                        key,
-                                        item.name,
-                                        maxSelections,
-                                      );
-                                    }
+                                    const maxSelections = Number(
+                                      combo[key as keyof typeof combo],
+                                    );
+                                    handleSelection(
+                                      key,
+                                      item.name,
+                                      maxSelections,
+                                    );
                                   }}
                                   disabled={
                                     selections[key]?.length ===
-                                      combo[key as keyof typeof combo] &&
-                                    !selections[key]?.includes(item.name)
+                                      Number(
+                                        combo[key as keyof typeof combo],
+                                      ) && !selections[key]?.includes(item.name)
                                   }
                                 />
                               </div>

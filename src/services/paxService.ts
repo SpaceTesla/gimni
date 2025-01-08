@@ -1,7 +1,6 @@
-import connection from '@/config/db';
-import { RowDataPacket } from 'mysql2';
+import pool from '@/config/db';
 
-interface ComboPax extends RowDataPacket {
+interface ComboPax {
   id: number;
   combo_id: number;
   pax_range: string;
@@ -11,11 +10,13 @@ interface ComboPax extends RowDataPacket {
 
 async function getPax() {
   try {
-    const [rows] = await connection.execute<ComboPax[]>(`
-        SELECT p.*, c.name as combo_name
-        FROM combopax p
-        JOIN combo c ON p.combo_id = c.id
+    const result = await pool.query<ComboPax>(`
+      SELECT p.*, c.name AS combo_name
+      FROM combopax p
+      JOIN combo c ON p.combo_id = c.id
     `);
+
+    const rows = result.rows; // Use `rows` from the query result
 
     const formattedData = rows.reduce<Record<string, number[]>>((acc, item) => {
       if (!acc[item.combo_name]) {

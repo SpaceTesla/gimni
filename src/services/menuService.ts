@@ -1,11 +1,14 @@
-import connection from '@/config/db';
+import pool from '@/config/db';
 import MenuItem from '@/types/menu';
 
 async function getMenu() {
   try {
-    const [rows] = (await connection.execute(
+    const result = await pool.query<MenuItem>(
       'SELECT * FROM menu ORDER BY type',
-    )) as [MenuItem[], any];
+    );
+    const rows = result.rows; // Use `rows` from the `pg` result object
+
+    // Categorize the menu items by type
     const categorizedMenu = rows.reduce<Record<string, MenuItem[]>>(
       (acc, item) => {
         if (!acc[item.type]) {
@@ -16,6 +19,7 @@ async function getMenu() {
       },
       {},
     );
+
     return categorizedMenu;
   } catch (error) {
     console.error('Error fetching menu data:', error);

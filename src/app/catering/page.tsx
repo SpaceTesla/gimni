@@ -54,6 +54,10 @@ export default function FoodOrdering() {
     fetchPax().then(() => console.log('Pax fetched'));
   }, []);
 
+  console.log('Combos:', combos);
+  console.log('Menu:', menu);
+  console.log('Pax:', pax);
+
   const handleUserInfoSubmit = (data: {
     name: string;
     phone: string;
