@@ -18,11 +18,56 @@ export default function FoodOrdering() {
     address: string;
   } | null>(null);
 
+  const cacheTTL = 1800; // Cache data for 600 seconds (10 minutes)
+
+  function setLocalStorageWithTTL(key: string, value: any, ttl: number) {
+    const now = new Date();
+    const item = {
+      value: value,
+      expiry: now.getTime() + ttl * 1000,
+    };
+    localStorage.setItem(key, JSON.stringify(item));
+  }
+
+  function getLocalStorageWithTTL(key: string) {
+    const itemStr = localStorage.getItem(key);
+    if (!itemStr) {
+      return null;
+    }
+    const item = JSON.parse(itemStr);
+    const now = new Date();
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key);
+      return null;
+    }
+    console.log(`Data for ${key} retrieved from local storage`);
+    return item.value;
+  }
+
+  async function fetchData(url: string, cacheKey: string) {
+    const cachedData = getLocalStorageWithTTL(cacheKey);
+    if (cachedData) {
+      return cachedData;
+    }
+
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const data = await response.json();
+      setLocalStorageWithTTL(cacheKey, data, cacheTTL);
+      return data;
+    } catch (error) {
+      console.error(`Error fetching data from ${url}:`, error);
+      throw error;
+    }
+  }
+
   useEffect(() => {
     async function fetchCombos() {
       try {
-        const response = await fetch('/api/combos');
-        const data: Combo[] = await response.json();
+        const data: Combo[] = await fetchData('/api/combos', 'combos');
         setCombos(data);
       } catch (error) {
         console.error('Error fetching combos:', error);
@@ -31,8 +76,7 @@ export default function FoodOrdering() {
 
     async function fetchMenu() {
       try {
-        const response = await fetch('/api/menu');
-        const data = await response.json();
+        const data = await fetchData('/api/menu', 'menu');
         setMenu(data);
       } catch (error) {
         console.error('Error fetching menu:', error);
@@ -41,8 +85,7 @@ export default function FoodOrdering() {
 
     async function fetchPax() {
       try {
-        const response = await fetch('/api/pax');
-        const data = await response.json();
+        const data = await fetchData('/api/pax', 'pax');
         setPax(data);
       } catch (error) {
         console.error('Error fetching pax:', error);
