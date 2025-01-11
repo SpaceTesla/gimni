@@ -7,6 +7,7 @@ import type MenuItem from '@/types/menu';
 import { CartProvider } from '@/context/cartContext';
 import Cart from '@/components/cart';
 import { UserInfoModal } from '@/components/user-info-modal';
+import DefaultLayout from '@/app/default-layout';
 
 export default function FoodOrdering() {
   const [combos, setCombos] = useState<Combo[]>([]);
@@ -110,10 +111,6 @@ export default function FoodOrdering() {
     console.log('Submitted:', data);
   };
 
-  if (!userInfo) {
-    return <UserInfoModal onSubmit={handleUserInfoSubmit} />;
-  }
-
   const combo7 = {
     id: 7,
     name: 'Custom Combo',
@@ -129,26 +126,37 @@ export default function FoodOrdering() {
     chutney: 0,
   };
 
-  return (
-    <CartProvider>
-      <div className="min-h-screen">
-        <div className="container mx-auto p-4 pt-12">
-          <div className="flex flex-col gap-8 lg:flex-row">
-            {/* Menu Section */}
-            <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:col-span-3 lg:w-[65%] lg:gap-x-8">
-              {combos.map((combo) => (
-                <ComboCard key={combo.id} combo={combo} menu={menu} pax={pax} />
-              ))}
-              <ComboCard key={'combo-7'} combo={combo7} menu={menu} />
-            </div>
+  if (!userInfo) {
+    return <UserInfoModal onSubmit={handleUserInfoSubmit} />;
+  }
 
-            {/* Cart Section */}
-            <div className="flex-grow">
-              <Cart userInfo={userInfo} />
+  return (
+    <DefaultLayout>
+      <CartProvider>
+        <div className="min-h-screen">
+          <div className="container mx-auto p-4 pt-12">
+            <div className="flex flex-col gap-8 lg:flex-row">
+              {/* Menu Section */}
+              <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:col-span-3 lg:w-[65%] lg:gap-x-8">
+                {combos.map((combo) => (
+                  <ComboCard
+                    key={combo.id}
+                    combo={combo}
+                    menu={menu}
+                    pax={pax}
+                  />
+                ))}
+                <ComboCard key={'combo-7'} combo={combo7} menu={menu} />
+              </div>
+
+              {/* Cart Section */}
+              <div className="flex-grow">
+                <Cart userInfo={userInfo} />
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </CartProvider>
+      </CartProvider>
+    </DefaultLayout>
   );
 }
