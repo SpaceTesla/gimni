@@ -1,0 +1,396 @@
+'use client';
+
+import * as React from 'react';
+import { useState } from 'react';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogFooter,
+} from '@/components/ui/dialog';
+import { useToast } from '@/hooks/use-toast';
+import { Label } from '@/components/ui/label';
+import { Button } from '@/components/ui/button';
+import Image from 'next/image';
+import { ArrowLeft, X } from 'lucide-react';
+
+import Combo from '@/types/combo';
+import { toTitleCase } from '@/utils/stringUtils';
+import MenuItem from '@/types/menu';
+import { Checkbox } from '@/components/ui/checkbox';
+import { useCart } from '@/context/cartContext';
+import QuantityButton from '@/components/quantity-button';
+
+interface FoodDialogProps {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+  combo?: Combo;
+  menu: Record<string, MenuItem[]>;
+  category: 'Bengali' | 'Non-Bengali' | 'Birthday Snack-Up' | 'Other';
+  pax?: Record<string, number[]>;
+}
+
+export function AddOnsOnlyFoodDialog({
+  open,
+  onOpenChange,
+  combo,
+  menu,
+  category,
+}: FoodDialogProps) {
+  const { toast } = useToast();
+  const { addToCart } = useCart(); // Use your cart context or function
+
+  const [currentStep, setCurrentStep] = React.useState<
+    'selectDiet' | 'selectMenu' | 'selectAddOns'
+  >('selectDiet');
+  const [menuType, setMenuType] = React.useState<'veg' | 'nonVeg'>('veg');
+  const [quantity, setQuantity] = React.useState(10);
+
+  const handleNext = () => {
+    if (currentStep === 'selectDiet') {
+      setCurrentStep('selectMenu');
+    } else if (currentStep === 'selectMenu') {
+      const allSelectionsMade = Object.keys(combo ?? {}).every((key) => {
+        if (
+          key === 'id' ||
+          key === 'name' ||
+          key === 'price' ||
+          key === 'papad' ||
+          key === 'salad' ||
+          key === 'chutney' ||
+          Number(combo?.[key as keyof typeof combo] ?? 0) === 0
+        ) {
+          return true;
+        }
+        return (
+          selections[key]?.length ===
+          Number(combo?.[key as keyof typeof combo] ?? 0)
+        );
+      });
+
+      if (allSelectionsMade) {
+        setCurrentStep('selectAddOns');
+      } else {
+        toast({
+          variant: 'destructive',
+          title: 'Incomplete Selection',
+          description:
+            'Please select all required menu items before proceeding.',
+        });
+      }
+    } else if (currentStep === 'selectAddOns') {
+      handleAddToCart();
+    }
+  };
+
+  const handleBack = () => {
+    if (currentStep === 'selectMenu') setCurrentStep('selectDiet');
+    else if (currentStep === 'selectAddOns') setCurrentStep('selectMenu');
+  };
+
+  const [showMore, setShowMore] = useState<Record<string, boolean>>({});
+
+  const [selections, setSelections] = React.useState<Record<string, string[]>>(
+    Object.fromEntries(Object.keys(combo ?? {}).map((key) => [key, []])),
+  );
+
+  const [addOns, setAddOns] = React.useState<Record<string, string[]>>({});
+
+  const handleSelection = (
+    groupTitle: string,
+    value: string,
+    maxSelections: number,
+    isAddOn: boolean = false,
+  ) => {
+    const setState = isAddOn ? setAddOns : setSelections;
+    setState((prev) => {
+      const currentSelections = prev[groupTitle] || [];
+      let newSelections: string[];
+
+      if (currentSelections.includes(value)) {
+        newSelections = currentSelections.filter((item) => item !== value);
+      } else {
+        newSelections = [...currentSelections, value];
+        if (newSelections.length > maxSelections) {
+          newSelections = newSelections.slice(-maxSelections);
+        }
+      }
+
+      return {
+        ...prev,
+        [groupTitle]: newSelections,
+      };
+    });
+  };
+
+  const getPriceBasedOnQuantity = (
+    quantity: number,
+    prices: number[],
+  ): number => {
+    switch (true) {
+      case quantity >= 10 && quantity <= 20:
+        return prices[0];
+      case quantity >= 21 && quantity <= 30:
+        return prices[1];
+      case quantity >= 31 && quantity <= 50:
+        return prices[2];
+      case quantity >= 51 && quantity <= 100:
+        return prices[3];
+      case quantity >= 101 && quantity <= 150:
+        return prices[4];
+      case quantity >= 151 && quantity <= 200:
+        return prices[5];
+      case quantity >= 201 && quantity <= 250:
+        return prices[6];
+      case quantity >= 251 && quantity <= 300:
+        return prices[7];
+      default:
+        return prices[0]; // Default to the first price if no range matches
+    }
+  };
+
+  const handleAddToCart = () => {
+    const addOnsPrice = Object.keys(addOns).reduce((total, key) => {
+      return (
+        total +
+        addOns[key].reduce((sum, itemName) => {
+          const item = menu[key].find((item) => item.name === itemName);
+          return sum + (item ? Number(item.price) : 0);
+        }, 0)
+      );
+    }, 0);
+
+    let totalPrice = addOnsPrice;
+
+    // if (combo && pax) {
+    //   const comboPrices = pax[combo.name] ?? [];
+    //   const comboPrice = getPriceBasedOnQuantity(quantity, comboPrices);
+    //   totalPrice += comboPrice;
+    // }
+
+    const cartItem = {
+      id: combo?.id.toString() ?? 'add-ons-only',
+      comboName: combo?.name ?? 'Add-Ons Only',
+      category,
+      dietType: menuType === 'veg' ? 'Veg' : 'Non-Veg',
+      selections,
+      addOns,
+      quantity,
+      totalPrice: Number(totalPrice.toFixed(2)),
+    };
+
+    addToCart(cartItem);
+
+    console.log('Combo Name:', combo?.name ?? 'Add-Ons Only');
+    console.log('Category:', category);
+    console.log('Diet Type:', menuType === 'veg' ? 'Veg' : 'Non-Veg');
+    console.log('Menu Items Selected:', selections);
+    console.log('Add-Ons Selected:', addOns);
+    console.log('Total Price:', totalPrice.toFixed(2));
+
+    onOpenChange(false);
+  };
+
+  function filterMenuItems(
+    menu: Record<string, MenuItem[]>,
+    selectedCategory: 'Bengali' | 'Non-Bengali' | 'Birthday Snack-Up' | 'Other',
+    selectedDiet: 'Veg' | 'Non-Veg',
+  ): Record<string, MenuItem[]> {
+    const filteredMenu: Record<string, MenuItem[]> = {};
+
+    Object.keys(menu).forEach((key) => {
+      filteredMenu[key] = menu[key].filter((item) => {
+        const isCategoryMatch = item.category === selectedCategory;
+        const isDietMatch =
+          selectedDiet === 'Non-Veg'
+            ? key.toLowerCase() === 'starter' || key.toLowerCase() === 'gravy'
+              ? item.diet === 'Non-Veg'
+              : true
+            : item.diet === selectedDiet;
+        const isNotExcludedItem =
+          item.name.toLowerCase() !== 'salad' &&
+          item.name.toLowerCase() !== 'papad';
+
+        return isCategoryMatch && isDietMatch && isNotExcludedItem;
+      });
+    });
+
+    console.log('filteredMenu', filteredMenu);
+    return filteredMenu;
+  }
+
+  const filteredMenu = filterMenuItems(
+    menu,
+    category,
+    menuType === 'veg' ? 'Veg' : 'Non-Veg',
+  );
+
+  return (
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogContent className="max-h-[600px] max-w-xl overflow-auto">
+        <DialogHeader>
+          <DialogTitle>
+            {currentStep === 'selectDiet' && (
+              <div className="mb-2 text-2xl font-semibold">
+                Choose Menu Type
+              </div>
+            )}
+            {currentStep === 'selectMenu' && (
+              <div className="mb-2 text-2xl font-semibold">
+                Choose Menu Items
+              </div>
+            )}
+            {currentStep === 'selectAddOns' && (
+              <div className="mb-2 text-2xl font-semibold">Choose Add-Ons</div>
+            )}
+            <Button
+              onClick={() => {
+                onOpenChange(false);
+              }}
+              variant={'ghost'}
+              className="absolute right-4 top-4 p-2"
+            >
+              <X />
+            </Button>
+          </DialogTitle>
+        </DialogHeader>
+        <div className="h-full overflow-auto">
+          {/* Add-Ons Selection */}
+          <div className={'overflow-y-auto'}>
+            <div className="flex flex-col gap-4">
+              {Object.keys(menu).map((key) => (
+                <div key={key}>
+                  <div className="flex items-center justify-between">
+                    <span>{toTitleCase(key)}</span>
+                  </div>
+                  <div>
+                    <ul className="space-y-2 rounded-2xl bg-white/50 p-4">
+                      {menu[key].slice(0, 5).map((item) => (
+                        <div
+                          key={item.id}
+                          className="flex cursor-pointer items-center justify-between p-1 text-sm text-gray-600"
+                        >
+                          <Label
+                            htmlFor={`addon-${key}-${item.id}`}
+                            className="flex w-full cursor-pointer items-center justify-between pr-4 pt-0.5 align-middle text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                          >
+                            <span className="flex items-center gap-1">
+                              {item.diet === 'Veg' ? (
+                                <Image
+                                  src="/veg.svg"
+                                  alt="Veg"
+                                  width={16}
+                                  height={16}
+                                  className="mr-2"
+                                />
+                              ) : (
+                                <Image
+                                  src="/non-veg.svg"
+                                  alt="Non-Veg"
+                                  width={16}
+                                  height={16}
+                                  className="mr-2"
+                                />
+                              )}
+                              {item.name}
+                            </span>
+                            <span>{item.price}</span>
+                          </Label>
+                          <Checkbox
+                            id={`addon-${key}-${item.id}`}
+                            className="peer"
+                            checked={selections[key]?.includes(item.name)}
+                            onCheckedChange={() => {
+                              handleSelection(key, item.name, Infinity, true);
+                            }}
+                          />
+                        </div>
+                      ))}
+                      {showMore[key] &&
+                        menu[key].slice(4).map((item) => (
+                          <div
+                            key={item.id}
+                            className="flex cursor-pointer items-center justify-between p-1 text-sm text-gray-600"
+                          >
+                            <Label
+                              htmlFor={`addon-${key}-${item.id}`}
+                              className="flex w-full cursor-pointer items-center justify-between pr-4 pt-0.5 align-middle text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                            >
+                              <span className="flex items-center gap-1">
+                                {item.diet === 'Veg' ? (
+                                  <Image
+                                    src="/veg.svg"
+                                    alt="Veg"
+                                    width={16}
+                                    height={16}
+                                    className="mr-2"
+                                  />
+                                ) : (
+                                  <Image
+                                    src="/non-veg.svg"
+                                    alt="Non-Veg"
+                                    width={16}
+                                    height={16}
+                                    className="mr-2"
+                                  />
+                                )}
+                                {item.name}
+                              </span>
+                              <span>{item.price}</span>
+                            </Label>
+                            <Checkbox
+                              id={`addon-${key}-${item.id}`}
+                              className="peer"
+                              checked={selections[key]?.includes(item.name)}
+                              onCheckedChange={() => {
+                                handleSelection(key, item.name, Infinity);
+                              }}
+                            />
+                          </div>
+                        ))}
+                      {menu[key].length > 4 && (
+                        <button
+                          onClick={() =>
+                            setShowMore((prev) => ({
+                              ...prev,
+                              [key]: !prev[key],
+                            }))
+                          }
+                          className="ml-2 pt-2 text-sm font-semibold text-zinc-500"
+                        >
+                          {showMore[key]
+                            ? 'Show less'
+                            : `Show ${menu[key].length - 4} more`}
+                        </button>
+                      )}
+                    </ul>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Navigation Buttons */}
+        <DialogFooter>
+          <div className="flex w-full flex-wrap items-center justify-between gap-6">
+            <QuantityButton
+              initialValue={quantity}
+              minValue={10}
+              onChange={(value) => setQuantity(value)}
+            />
+            <div className="flex flex-grow items-center gap-4">
+              <Button
+                onClick={handleNext}
+                className="h-full flex-grow bg-emerald-500 text-white hover:bg-emerald-600"
+              >
+                Add to Cart
+              </Button>
+            </div>
+          </div>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  );
+}

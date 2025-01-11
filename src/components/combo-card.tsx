@@ -1,3 +1,5 @@
+'use client';
+
 import { useState } from 'react';
 import Image from 'next/image';
 import { Fish, EggFried } from 'lucide-react';
@@ -8,13 +10,14 @@ import MenuItem from '@/types/menu';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { FoodDialog } from './food-dialog';
+import { AddOnsOnlyFoodDialog } from '@/components/addons-only-food-dialog';
 import QuantityButton from '@/components/quantity-button';
 import * as React from 'react';
 
 interface ComboCardProps {
-  combo: Combo;
+  combo?: Combo;
   menu: Record<string, MenuItem[]>; // This should be a record of arrays
-  pax: Record<string, number[]>;
+  pax?: Record<string, number[]>;
 }
 
 const ComboCard: React.FC<ComboCardProps> = ({ combo, menu, pax }) => {
@@ -32,24 +35,35 @@ const ComboCard: React.FC<ComboCardProps> = ({ combo, menu, pax }) => {
     <Card className="overflow-hidden rounded-3xl border-none bg-white/70 p-0 shadow-none">
       <CardHeader className={'p-2'}>
         <CardTitle className="text-center text-3xl font-black">
-          {combo.name}
+          {combo?.name ?? 'No Combo Selected'}
         </CardTitle>
       </CardHeader>
       <CardContent className={'p-0'}>
         <div className="flex flex-col justify-between">
           <Image
             src="/food.png"
-            alt={combo.name}
+            alt={combo?.name ?? 'No Combo Selected'}
             width={200}
             height={200}
             className="max-h-[280px] w-[100%] object-cover"
           />
           <div className="">
             <div className="flex items-center p-4">
-              <div className={'flex items-center text-primary/70'}>
+              <div className={'flex items-center gap-1 text-primary/70'}>
                 <span className="text-lg">Price:</span>
-                <span className="text-lg font-bold">{' ₹ ' + combo.price}</span>
-                <span className="text-lg">/plate</span>
+                {combo?.price &&
+                Number.isInteger(parseInt(combo.price.toString())) ? (
+                  <>
+                    <span className="text-lg font-bold">
+                      {' ₹ ' + parseInt(combo.price.toString())}
+                    </span>
+                    <span className="text-lg">/plate</span>
+                  </>
+                ) : (
+                  <span className="text-lg font-bold">
+                    {' ' + combo?.price}
+                  </span>
+                )}
               </div>
             </div>
 
@@ -86,14 +100,24 @@ const ComboCard: React.FC<ComboCardProps> = ({ combo, menu, pax }) => {
               </Button>
             </div>
 
-            <FoodDialog
-              combo={combo}
-              menu={menu}
-              open={open}
-              onOpenChange={setOpen}
-              category={category}
-              pax={pax}
-            />
+            {pax ? (
+              <FoodDialog
+                combo={combo}
+                menu={menu}
+                open={open}
+                onOpenChange={setOpen}
+                category={category}
+                pax={pax}
+              />
+            ) : (
+              <AddOnsOnlyFoodDialog
+                combo={combo}
+                menu={menu}
+                open={open}
+                onOpenChange={setOpen}
+                category={category}
+              />
+            )}
           </div>
         </div>
       </CardContent>

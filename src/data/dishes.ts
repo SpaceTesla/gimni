@@ -19,6 +19,8 @@ const dishes = [
     name: 'Ilish Fish',
     description: 'In traditional mustard sauce',
   },
+
+
 ];
 
 export default dishes;

@@ -16,7 +16,7 @@ import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import { ArrowLeft, X } from 'lucide-react';
 
-import combo from '@/types/combo';
+import Combo from '@/types/combo';
 import { toTitleCase } from '@/utils/stringUtils';
 import MenuItem from '@/types/menu';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -26,10 +26,10 @@ import QuantityButton from '@/components/quantity-button';
 interface FoodDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  combo: combo;
+  combo?: Combo;
   menu: Record<string, MenuItem[]>;
   category: 'Bengali' | 'Non-Bengali' | 'Birthday Snack-Up' | 'Other';
-  pax: Record<string, number[]>;
+  pax?: Record<string, number[]>;
 }
 
 export function FoodDialog({
@@ -53,7 +53,7 @@ export function FoodDialog({
     if (currentStep === 'selectDiet') {
       setCurrentStep('selectMenu');
     } else if (currentStep === 'selectMenu') {
-      const allSelectionsMade = Object.keys(combo).every((key) => {
+      const allSelectionsMade = Object.keys(combo ?? {}).every((key) => {
         if (
           key === 'id' ||
           key === 'name' ||
@@ -61,12 +61,13 @@ export function FoodDialog({
           key === 'papad' ||
           key === 'salad' ||
           key === 'chutney' ||
-          Number(combo[key as keyof typeof combo]) === 0
+          Number(combo?.[key as keyof typeof combo] ?? 0) === 0
         ) {
           return true;
         }
         return (
-          selections[key]?.length === Number(combo[key as keyof typeof combo])
+          selections[key]?.length ===
+          Number(combo?.[key as keyof typeof combo] ?? 0)
         );
       });
 
@@ -93,7 +94,7 @@ export function FoodDialog({
   const [showMore, setShowMore] = useState<Record<string, boolean>>({});
 
   const [selections, setSelections] = React.useState<Record<string, string[]>>(
-    Object.fromEntries(Object.keys(combo).map((key) => [key, []])),
+    Object.fromEntries(Object.keys(combo ?? {}).map((key) => [key, []])),
   );
 
   const [addOns, setAddOns] = React.useState<Record<string, string[]>>({});
@@ -162,31 +163,35 @@ export function FoodDialog({
       );
     }, 0);
 
-    const comboPrices = pax[combo.name]; // Assuming pax is a prop containing the prices for each combo
-    const comboPrice = getPriceBasedOnQuantity(quantity, comboPrices);
-    const totalPrice = comboPrice + addOnsPrice;
+    let totalPrice = addOnsPrice;
+
+    if (combo && pax) {
+      const comboPrices = pax[combo.name] ?? [];
+      const comboPrice = getPriceBasedOnQuantity(quantity, comboPrices);
+      totalPrice += comboPrice;
+    }
 
     const cartItem = {
-      id: combo.id.toString(), // Convert id to string
-      comboName: combo.name,
+      id: combo?.id.toString() ?? 'add-ons-only',
+      comboName: combo?.name ?? 'Add-Ons Only',
       category,
       dietType: menuType === 'veg' ? 'Veg' : 'Non-Veg',
       selections,
       addOns,
       quantity,
-      totalPrice: Number(totalPrice.toFixed(2)), // Convert to number
+      totalPrice: Number(totalPrice.toFixed(2)),
     };
 
-    addToCart(cartItem); // Add the item to the cart
+    addToCart(cartItem);
 
-    console.log('Combo Name:', combo.name);
+    console.log('Combo Name:', combo?.name ?? 'Add-Ons Only');
     console.log('Category:', category);
     console.log('Diet Type:', menuType === 'veg' ? 'Veg' : 'Non-Veg');
     console.log('Menu Items Selected:', selections);
     console.log('Add-Ons Selected:', addOns);
     console.log('Total Price:', totalPrice.toFixed(2));
 
-    onOpenChange(false); // Close the dialog box
+    onOpenChange(false);
   };
 
   function filterMenuItems(
@@ -254,7 +259,7 @@ export function FoodDialog({
         </DialogHeader>
         <div className="h-full overflow-auto">
           {/* Menu Type Selection */}
-          {currentStep === 'selectDiet' && (
+          {currentStep === 'selectDiet' && combo && pax && (
             <div>
               <RadioGroup
                 value={menuType}
@@ -340,7 +345,7 @@ export function FoodDialog({
             </div>
           )}
           {/* Menu Items Selection */}
-          {currentStep === 'selectMenu' && (
+          {currentStep === 'selectMenu' && combo && pax && (
             <div className={'overflow-y-auto'}>
               <div className="flex flex-col gap-4">
                 {Object.keys(combo).map((key) =>

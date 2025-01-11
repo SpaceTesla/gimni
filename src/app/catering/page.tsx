@@ -114,6 +114,21 @@ export default function FoodOrdering() {
     return <UserInfoModal onSubmit={handleUserInfoSubmit} />;
   }
 
+  const combo7 = {
+    id: 7,
+    name: 'Custom Combo',
+    price: 'Based on selection',
+    rice: 0,
+    bread: 0,
+    starter: 0,
+    gravy: 0,
+    dal: 0,
+    salad: 0,
+    sweet: 0,
+    papad: 0,
+    chutney: 0,
+  };
+
   return (
     <CartProvider>
       <div className="min-h-screen">
@@ -124,6 +139,7 @@ export default function FoodOrdering() {
               {combos.map((combo) => (
                 <ComboCard key={combo.id} combo={combo} menu={menu} pax={pax} />
               ))}
+              <ComboCard key={'combo-7'} combo={combo7} menu={menu} />
             </div>
 
             {/* Cart Section */}
