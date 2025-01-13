@@ -57,6 +57,7 @@ export function FoodDialog({
     } else if (currentStep === 'selectMenu') {
       const allSelectionsMade = Object.keys(combo ?? {}).every((key) => {
         if (
+          (combo?.name === 'Combo 1' && key === 'dal') ||
           key === 'id' ||
           key === 'name' ||
           key === 'price' ||
@@ -354,6 +355,9 @@ export function FoodDialog({
             <div className={'overflow-y-auto'}>
               <div className="flex flex-col gap-4">
                 {Object.keys(combo).map((key) =>
+                  (combo.name === 'Combo 1' &&
+                    menuType === 'nonVeg' &&
+                    key === 'dal') ||
                   key === 'id' ||
                   key === 'name' ||
                   key === 'price' ||
