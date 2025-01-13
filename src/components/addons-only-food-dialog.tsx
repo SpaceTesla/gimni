@@ -27,7 +27,7 @@ interface FoodDialogProps {
   onOpenChange: (open: boolean) => void;
   combo?: Combo;
   menu: Record<string, MenuItem[]>;
-  category: 'Bengali' | 'Non-Bengali' | 'Birthday Snack-Up' | 'Other';
+  category: 'Meal' | 'Birthday Snack-Up' | 'Other';
   pax?: Record<string, number[]>;
 }
 
@@ -194,7 +194,7 @@ export function AddOnsOnlyFoodDialog({
 
   function filterMenuItems(
     menu: Record<string, MenuItem[]>,
-    selectedCategory: 'Bengali' | 'Non-Bengali' | 'Birthday Snack-Up' | 'Other',
+    selectedCategory: 'Meal' | 'Birthday Snack-Up' | 'Other',
     selectedDiet: 'Veg' | 'Non-Veg',
   ): Record<string, MenuItem[]> {
     const filteredMenu: Record<string, MenuItem[]> = {};

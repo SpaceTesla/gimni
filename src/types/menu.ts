@@ -1,7 +1,7 @@
 interface MenuItem {
   id: string;
   name: string;
-  category: 'Bengali' | 'Non-Bengali' | 'Birthday Snack-Up' | 'Other' | '';
+  category: 'Meal' | 'Birthday Snack-Up' | 'Other' | '';
   type:
     | 'Welcome Drink'
     | 'Starter'

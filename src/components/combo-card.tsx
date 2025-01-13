@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import { Fish, EggFried } from 'lucide-react';
 
 import type Combo from '@/types/combo';
 import MenuItem from '@/types/menu';
@@ -23,8 +22,8 @@ interface ComboCardProps {
 const ComboCard: React.FC<ComboCardProps> = ({ combo, menu, pax }) => {
   const [open, setOpen] = useState(false);
   const [category, setCategory] = React.useState<
-    'Bengali' | 'Non-Bengali' | 'Birthday Snack-Up' | 'Other'
-  >('Bengali');
+    'Meal' | 'Birthday Snack-Up' | 'Other'
+  >('Meal');
   const [quantity, setQuantity] = useState(0);
 
   const handleQuantityChange = (newQuantity: number) => {
@@ -86,25 +85,19 @@ const ComboCard: React.FC<ComboCardProps> = ({ combo, menu, pax }) => {
                   'flex-1 bg-red-highlight p-2 font-bold text-white hover:bg-red-highlight/90'
                 }
                 onClick={() => {
-                  setCategory('Bengali');
+                  setCategory('Meal');
                   setOpen(true);
                 }}
               >
-                <Fish className="h-6 w-6 text-white" />
-                Bengali
+                Meal
               </Button>
               <Button
                 variant={'default'}
                 className={
                   'flex-1 bg-yellow-highlight p-2 font-bold text-black hover:bg-yellow-highlight/90'
                 }
-                onClick={() => {
-                  setCategory('Non-Bengali');
-                  setOpen(true);
-                }}
               >
-                <EggFried className="h-6 w-6 text-black" />
-                Non-Bengali
+                Birthday Snack-Up
               </Button>
             </div>
 
