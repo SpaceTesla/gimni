@@ -30,6 +30,7 @@ interface FoodDialogProps {
   menu: Record<string, MenuItem[]>;
   category: 'Meal' | 'Birthday Snack-Up' | 'Other';
   pax?: Record<string, number[]>;
+  numberOfPeople: number;
 }
 
 export function FoodDialog({
@@ -39,6 +40,7 @@ export function FoodDialog({
   menu,
   category,
   pax,
+  numberOfPeople,
 }: FoodDialogProps) {
   const { toast } = useToast();
   const { addToCart } = useCart(); // Use your cart context or function
@@ -47,7 +49,7 @@ export function FoodDialog({
     'selectDiet' | 'selectMenu' | 'selectAddOns'
   >('selectDiet');
   const [menuType, setMenuType] = React.useState<'veg' | 'nonVeg'>('veg');
-  const [quantity, setQuantity] = React.useState(10);
+  const [quantity, setQuantity] = React.useState(numberOfPeople);
 
   const handleNext = () => {
     if (currentStep === 'selectDiet') {
@@ -227,6 +229,8 @@ export function FoodDialog({
     category,
     menuType === 'veg' ? 'Veg' : 'Non-Veg',
   );
+
+  console.log('Number of People from food-dilog:', numberOfPeople);
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>

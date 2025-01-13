@@ -17,9 +17,15 @@ interface ComboCardProps {
   combo?: Combo;
   menu: Record<string, MenuItem[]>; // This should be a record of arrays
   pax?: Record<string, number[]>;
+  numberOfPeople: number;
 }
 
-const ComboCard: React.FC<ComboCardProps> = ({ combo, menu, pax }) => {
+const ComboCard: React.FC<ComboCardProps> = ({
+  combo,
+  menu,
+  pax,
+  numberOfPeople,
+}) => {
   const [open, setOpen] = useState(false);
   const [category, setCategory] = React.useState<
     'Meal' | 'Birthday Snack-Up' | 'Other'
@@ -109,6 +115,7 @@ const ComboCard: React.FC<ComboCardProps> = ({ combo, menu, pax }) => {
                 onOpenChange={setOpen}
                 category={category}
                 pax={pax}
+                numberOfPeople={numberOfPeople}
               />
             ) : (
               <AddOnsOnlyFoodDialog
@@ -117,6 +124,7 @@ const ComboCard: React.FC<ComboCardProps> = ({ combo, menu, pax }) => {
                 open={open}
                 onOpenChange={setOpen}
                 category={category}
+                numberOfPeople={numberOfPeople}
               />
             )}
           </div>

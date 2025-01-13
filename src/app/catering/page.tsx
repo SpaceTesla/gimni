@@ -156,9 +156,15 @@ export default function FoodOrdering() {
                     combo={combo}
                     menu={menu}
                     pax={pax}
+                    numberOfPeople={userInfo.numberOfPeople}
                   />
                 ))}
-                <ComboCard key={'combo-7'} combo={combo7} menu={menu} />
+                <ComboCard
+                  key={'combo-7'}
+                  combo={combo7}
+                  menu={menu}
+                  numberOfPeople={userInfo.numberOfPeople}
+                />
               </div>
 
               {/* Cart Section */}
