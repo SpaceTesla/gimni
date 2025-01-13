@@ -167,10 +167,11 @@ export function FoodDialog({
     }, 0);
 
     let totalPrice = addOnsPrice;
+    let comboPrice = 0;
 
     if (combo && pax) {
       const comboPrices = pax[combo.name] ?? [];
-      const comboPrice = getPriceBasedOnQuantity(quantity, comboPrices);
+      comboPrice = getPriceBasedOnQuantity(quantity, comboPrices);
       totalPrice += comboPrice;
     }
 
@@ -182,6 +183,7 @@ export function FoodDialog({
       selections,
       addOns,
       quantity,
+      comboPrice: Number(comboPrice.toFixed(2)),
       totalPrice: Number(totalPrice.toFixed(2)),
     };
 

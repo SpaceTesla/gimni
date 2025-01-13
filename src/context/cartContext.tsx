@@ -8,6 +8,7 @@ export interface CartItem {
   dietType: string;
   selections: Record<string, string[]>;
   addOns: Record<string, string[]>;
+  comboPrice: number;
   totalPrice: number;
 }
 

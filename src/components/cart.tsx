@@ -4,13 +4,16 @@ import Image from 'next/image';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { handleCheckout } from '@/utils/checkout';
-import { Edit, Trash } from 'lucide-react';
+import { Trash } from 'lucide-react';
 
 interface CartProps {
   userInfo: {
     name: string;
     phone: string;
     address: string;
+    numberOfPeople: number;
+    occasion: string;
+    date: Date;
   };
 }
 

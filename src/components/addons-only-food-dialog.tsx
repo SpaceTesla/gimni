@@ -179,6 +179,7 @@ export function AddOnsOnlyFoodDialog({
       selections,
       addOns,
       quantity,
+      comboPrice: 0,
       totalPrice: Number(totalPrice.toFixed(2)),
     };
 

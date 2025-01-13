@@ -6,6 +6,9 @@ interface UserInfo {
   name: string;
   phone: string;
   address: string;
+  numberOfPeople: number;
+  occasion: string;
+  date: Date;
 }
 
 export const handleCheckout = async (
@@ -18,9 +21,16 @@ export const handleCheckout = async (
   const workbook = new ExcelJS.Workbook();
   const worksheet = workbook.addWorksheet('Cart');
 
-  const userHeader = worksheet.addRow(['Name', 'Phone', 'Address']);
+  const userHeader = worksheet.addRow([
+    'Name',
+    'Phone',
+    'No. of People',
+    'Occasion',
+    'Event Date',
+    'Address',
+  ]);
 
-  worksheet.mergeCells(`C${userHeader.number}:G${userHeader.number}`);
+  // worksheet.mergeCells(`C${userHeader.number}:G${userHeader.number}`);
 
   userHeader.eachCell((cell) => {
     cell.font = { bold: true, color: { argb: 'FFFFFFFF' } };
@@ -33,13 +43,23 @@ export const handleCheckout = async (
     cell.border = { bottom: { style: 'thin' } };
   });
 
+  const eventDate = new Date(userInfo.date).toLocaleDateString('en-GB', {
+    timeZone: 'Asia/Kolkata',
+    hour12: true,
+  });
+
   const addressRow = worksheet.addRow([
     userInfo.name,
-    userInfo.phone,
+    Number(userInfo.phone),
+    Number(userInfo.numberOfPeople),
+    userInfo.occasion,
+    eventDate,
     userInfo.address,
   ]);
 
-  worksheet.mergeCells(`C${addressRow.number}:G${addressRow.number}`);
+  addressRow.getCell(5).numFmt = 'dd/mm/yyyy';
+
+  // worksheet.mergeCells(`C${addressRow.number}:G${addressRow.number}`);
   worksheet.addRow([]);
 
   // Add current date and time in IST
@@ -51,7 +71,7 @@ export const handleCheckout = async (
   const currentTime = date.toLocaleTimeString('en-GB', options);
 
   // Add date and time headers
-  const dateTimeHeaderRow = worksheet.addRow(['Date', '', 'Time']);
+  const dateTimeHeaderRow = worksheet.addRow(['Form Date', '', 'Time']);
   worksheet.mergeCells(
     `A${dateTimeHeaderRow.number}:B${dateTimeHeaderRow.number}`,
   );
@@ -83,6 +103,7 @@ export const handleCheckout = async (
 
   const headerRow = worksheet.addRow([
     'Item',
+    'Combo Price',
     'Quantity',
     'Total Price',
     'Category',
@@ -110,6 +131,7 @@ export const handleCheckout = async (
       worksheet
         .addRow([
           i === 0 ? item.comboName : '',
+          i === 0 ? item.comboPrice : '',
           i === 0 ? item.quantity : '',
           i === 0 ? item.totalPrice * item.quantity : '',
           i === 0 ? item.category : '',
@@ -140,6 +162,7 @@ export const handleCheckout = async (
     { width: 15 },
     { width: 20 },
     { width: 15 },
+    { width: 30 },
     { width: 30 },
     { width: 30 },
   ];
