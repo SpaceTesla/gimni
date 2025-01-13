@@ -17,6 +17,9 @@ export default function FoodOrdering() {
     name: string;
     phone: string;
     address: string;
+    date: Date;
+    numberOfPeople: number;
+    occasion: string;
   } | null>(null);
 
   const cacheTTL = 1800; // Cache data for 600 seconds (10 minutes)
@@ -96,6 +99,11 @@ export default function FoodOrdering() {
     fetchCombos().then(() => console.log('Combos fetched'));
     fetchMenu().then(() => console.log('Menu fetched'));
     fetchPax().then(() => console.log('Pax fetched'));
+
+    const savedUserInfo = getLocalStorageWithTTL('userInfo');
+    if (savedUserInfo) {
+      setUserInfo(savedUserInfo);
+    }
   }, []);
 
   console.log('Combos:', combos);
@@ -106,8 +114,12 @@ export default function FoodOrdering() {
     name: string;
     phone: string;
     address: string;
+    date: Date;
+    numberOfPeople: number;
+    occasion: string;
   }) => {
     setUserInfo(data);
+    setLocalStorageWithTTL('userInfo', data, cacheTTL);
     console.log('Submitted:', data);
   };
 

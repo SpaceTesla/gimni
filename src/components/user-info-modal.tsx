@@ -16,6 +16,7 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 import { DatePickerDemo } from '@/components/date-picker-demo';
+import { useToast } from '@/hooks/use-toast';
 
 interface UserInfoModalProps {
   onSubmit: (data: {
@@ -36,9 +37,18 @@ export function UserInfoModal({ onSubmit }: UserInfoModalProps) {
   const [numberOfPeople, setNumberOfPeople] = useState(10);
   const [occasion, setOccasion] = useState('');
   const router = useRouter();
+  const { toast } = useToast();
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
+    const phoneRegex = /^[6-9]\d{9}$/;
+    if (!phoneRegex.test(phone)) {
+      toast({
+        title: 'Invalid Phone Number',
+        description: 'Phone number must be a 10-digit number',
+      });
+      return;
+    }
     if (date) {
       onSubmit({ name, phone, address, date, numberOfPeople, occasion });
     }
@@ -93,7 +103,6 @@ export function UserInfoModal({ onSubmit }: UserInfoModalProps) {
                 required
               />
             </div>
-
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="date" className="text-right">
                 Date
