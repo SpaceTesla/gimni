@@ -231,6 +231,7 @@ export function FoodDialog({
   );
 
   console.log('Number of People from food-dilog:', numberOfPeople);
+  console.log('Pax from food-dialog:', pax);
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>

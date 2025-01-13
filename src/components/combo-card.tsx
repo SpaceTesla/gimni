@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 
 import type Combo from '@/types/combo';
@@ -10,7 +10,6 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { FoodDialog } from './food-dialog';
 import { AddOnsOnlyFoodDialog } from '@/components/addons-only-food-dialog';
-import QuantityButton from '@/components/quantity-button';
 import * as React from 'react';
 
 interface ComboCardProps {
@@ -30,11 +29,47 @@ const ComboCard: React.FC<ComboCardProps> = ({
   const [category, setCategory] = React.useState<
     'Meal' | 'Birthday Snack-Up' | 'Other'
   >('Meal');
-  const [quantity, setQuantity] = useState(0);
 
-  const handleQuantityChange = (newQuantity: number) => {
-    setQuantity(newQuantity);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (pax) {
+      setLoading(false);
+    }
+  }, [pax]);
+
+  const getPriceBasedOnQuantity = (
+    quantity: number,
+    prices: number[],
+  ): number => {
+    switch (true) {
+      case quantity >= 10 && quantity <= 20:
+        return prices[0];
+      case quantity >= 21 && quantity <= 30:
+        return prices[1];
+      case quantity >= 31 && quantity <= 50:
+        return prices[2];
+      case quantity >= 51 && quantity <= 100:
+        return prices[3];
+      case quantity >= 101 && quantity <= 150:
+        return prices[4];
+      case quantity >= 151 && quantity <= 200:
+        return prices[5];
+      case quantity >= 201 && quantity <= 250:
+        return prices[6];
+      case quantity >= 251 && quantity <= 300:
+        return prices[7];
+      default:
+        return prices[0]; // Default to the first price if no range matches
+    }
   };
+
+  const comboPrices = pax?.[combo?.name ?? ''] ?? [];
+  const comboPrice = getPriceBasedOnQuantity(numberOfPeople, comboPrices);
+  console.log('pax from combo-card', pax);
+  console.log('combo from combo-card', combo);
+  console.log('comboPrices', comboPrices);
+  console.log('comboPrice', comboPrice);
 
   return (
     <Card className="overflow-hidden rounded-3xl border-none bg-white/70 p-0 shadow-none">
@@ -62,19 +97,10 @@ const ComboCard: React.FC<ComboCardProps> = ({
                 ) : (
                   <>
                     <span className="text-lg">Price:</span>
-                    {combo?.price &&
-                    Number.isInteger(parseInt(combo.price.toString())) ? (
-                      <>
-                        <span className="text-lg font-bold">
-                          {' ₹ ' + parseInt(combo.price.toString())}
-                        </span>
-                        <span className="text-lg">/plate</span>
-                      </>
-                    ) : (
-                      <span className="text-lg font-bold">
-                        {' ' + combo?.price}
-                      </span>
-                    )}
+                    <span className="text-lg font-bold">
+                      {' ₹ ' + parseInt(comboPrice.toString())}
+                    </span>
+                    <span className="text-lg">/plate</span>
                   </>
                 )}
               </div>
