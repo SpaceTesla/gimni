@@ -8,7 +8,7 @@ interface ComboPax {
   combo_name: string;
 }
 
-async function getPax() {
+async function getPax(uncategorized = false) {
   try {
     const result = await pool.query<ComboPax>(`
       SELECT p.*, c.name AS combo_name
@@ -17,6 +17,10 @@ async function getPax() {
     `);
 
     const rows = result.rows; // Use `rows` from the query result
+
+    if (uncategorized) {
+      return rows;
+    }
 
     const formattedData = rows.reduce<Record<string, number[]>>((acc, item) => {
       if (!acc[item.combo_name]) {

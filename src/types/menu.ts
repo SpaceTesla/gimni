@@ -1,7 +1,7 @@
 interface MenuItem {
   id: string;
   name: string;
-  category: 'Bengali' | 'Non-Bengali' | 'Birthday Snack-Up' | 'Other';
+  category: 'Bengali' | 'Non-Bengali' | 'Birthday Snack-Up' | 'Other' | '';
   type:
     | 'Welcome Drink'
     | 'Starter'
@@ -11,8 +11,9 @@ interface MenuItem {
     | 'Main Course Gravy'
     | 'Main Course Dal'
     | 'Chutney & Sides'
-    | 'Dessert';
-  diet: 'Veg' | 'Non-Veg';
+    | 'Dessert'
+    | '';
+  diet: 'Veg' | 'Non-Veg' | '';
   price: number;
   quantity: number;
   selected?: string[];

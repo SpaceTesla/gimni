@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import axios, { AxiosResponse, AxiosError } from 'axios';
 import { Pencil, Trash2, Plus } from 'lucide-react';
 import {
   Table,
@@ -18,80 +19,25 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 
-interface MenuItem {
-  id: string;
-  name: string;
-  category: string;
-  type: string;
-  diet: string;
-  price: number;
-}
-
-const initialMenuItems: MenuItem[] = [
-  {
-    id: '1',
-    name: 'Jal Jeera',
-    category: 'Other',
-    type: 'Welcome Drink',
-    diet: 'Veg',
-    price: 50.0,
-  },
-  {
-    id: '2',
-    name: 'Fresh Lime Juice',
-    category: 'Other',
-    type: 'Welcome Drink',
-    diet: 'Veg',
-    price: 50.0,
-  },
-  {
-    id: '3',
-    name: 'Lemon Mint Cooler',
-    category: 'Other',
-    type: 'Welcome Drink',
-    diet: 'Veg',
-    price: 50.0,
-  },
-  {
-    id: '4',
-    name: 'Veg Cutlet',
-    category: 'Bengali',
-    type: 'Starter',
-    diet: 'Veg',
-    price: 40.0,
-  },
-  {
-    id: '5',
-    name: 'Gobi Manchurian',
-    category: 'Non-Bengali',
-    type: 'Starter',
-    diet: 'Veg',
-    price: 40.0,
-  },
-  {
-    id: '6',
-    name: 'Veg Manchurian',
-    category: 'Non-Bengali',
-    type: 'Starter',
-    diet: 'Veg',
-    price: 40.0,
-  },
-  {
-    id: '7',
-    name: 'Potato Chilli',
-    category: 'Non-Bengali',
-    type: 'Starter',
-    diet: 'Veg',
-    price: 40.0,
-  },
-];
+import MenuItem from '@/types/menu';
 
 export function MenuItems({ searchTerm }: { searchTerm: string }) {
-  const [menuItems, setMenuItems] = useState<MenuItem[]>(initialMenuItems);
+  const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
   const [editingItem, setEditingItem] = useState<MenuItem | null>(null);
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
   const [deletingItemId, setDeletingItemId] = useState<string | null>(null);
+
+  useEffect(() => {
+    axios
+      .get<MenuItem[]>('/api/menu/all')
+      .then((response: AxiosResponse<MenuItem[]>) => {
+        setMenuItems(response.data);
+      })
+      .catch((error: AxiosError) => {
+        console.error('Error fetching menu items:', error);
+      });
+  }, []);
 
   const filteredItems = menuItems.filter(
     (item) =>
@@ -150,7 +96,7 @@ export function MenuItems({ searchTerm }: { searchTerm: string }) {
               <TableCell>{item.category}</TableCell>
               <TableCell>{item.type}</TableCell>
               <TableCell>{item.diet}</TableCell>
-              <TableCell>{item.price.toFixed(2)}</TableCell>
+              <TableCell>{Number(item.price).toFixed(2)}</TableCell>
               <TableCell>
                 <Button
                   variant="ghost"
@@ -201,6 +147,8 @@ export function MenuItems({ searchTerm }: { searchTerm: string }) {
               type: '',
               diet: '',
               price: 0,
+              quantity: 0,
+              options: [],
             }}
             onSave={handleAdd}
             onClose={() => setIsAddDialogOpen(false)}

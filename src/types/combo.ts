@@ -1,14 +1,14 @@
 type Combo = {
-  id: number;
+  id: string;
   name: string;
-  price: number | string;
+  price: number;
   rice: number;
   bread: number;
   starter: number;
   gravy: number;
   dal: number;
   salad: number;
-  sweet: number;
+  dessert: number;
   papad: number;
   chutney: number;
 };

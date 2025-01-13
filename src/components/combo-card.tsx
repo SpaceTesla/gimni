@@ -50,19 +50,27 @@ const ComboCard: React.FC<ComboCardProps> = ({ combo, menu, pax }) => {
           <div className="">
             <div className="flex items-center p-4">
               <div className={'flex items-center gap-1 text-primary/70'}>
-                <span className="text-lg">Price:</span>
-                {combo?.price &&
-                Number.isInteger(parseInt(combo.price.toString())) ? (
-                  <>
-                    <span className="text-lg font-bold">
-                      {' ₹ ' + parseInt(combo.price.toString())}
-                    </span>
-                    <span className="text-lg">/plate</span>
-                  </>
-                ) : (
+                {combo?.price === 0 ? (
                   <span className="text-lg font-bold">
-                    {' ' + combo?.price}
+                    Price as per selection
                   </span>
+                ) : (
+                  <>
+                    <span className="text-lg">Price:</span>
+                    {combo?.price &&
+                    Number.isInteger(parseInt(combo.price.toString())) ? (
+                      <>
+                        <span className="text-lg font-bold">
+                          {' ₹ ' + parseInt(combo.price.toString())}
+                        </span>
+                        <span className="text-lg">/plate</span>
+                      </>
+                    ) : (
+                      <span className="text-lg font-bold">
+                        {' ' + combo?.price}
+                      </span>
+                    )}
+                  </>
                 )}
               </div>
             </div>

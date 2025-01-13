@@ -1,4 +1,6 @@
-import { useState } from 'react';
+// src/app/admin/components/combos.tsx
+import { useState, useEffect } from 'react';
+import axios, { AxiosResponse, AxiosError } from 'axios';
 import { Pencil, Trash2, Plus } from 'lucide-react';
 import {
   Table,
@@ -18,72 +20,25 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 
-interface Combo {
-  id: string;
-  name: string;
-  price: number;
-  rice: number;
-  bread: number;
-  starter: number;
-  gravy: number;
-  dal: number;
-  salad: number;
-  dessert: number;
-  papad: number;
-  chutney: number;
-}
-
-const initialCombos: Combo[] = [
-  {
-    id: '1',
-    name: 'Combo 1',
-    price: 150.0,
-    rice: 1,
-    bread: 0,
-    starter: 0,
-    gravy: 1,
-    dal: 1,
-    salad: 1,
-    dessert: 0,
-    papad: 1,
-    chutney: 0,
-  },
-  {
-    id: '2',
-    name: 'Combo 2',
-    price: 250.0,
-    rice: 2,
-    bread: 0,
-    starter: 1,
-    gravy: 1,
-    dal: 1,
-    salad: 1,
-    dessert: 0,
-    papad: 1,
-    chutney: 0,
-  },
-  {
-    id: '3',
-    name: 'Combo 3',
-    price: 350.0,
-    rice: 2,
-    bread: 1,
-    starter: 2,
-    gravy: 1,
-    dal: 1,
-    salad: 1,
-    dessert: 1,
-    papad: 1,
-    chutney: 0,
-  },
-];
+import Combo from '@/types/combo';
 
 export function Combos({ searchTerm }: { searchTerm: string }) {
-  const [combos, setCombos] = useState<Combo[]>(initialCombos);
+  const [combos, setCombos] = useState<Combo[]>([]);
   const [editingCombo, setEditingCombo] = useState<Combo | null>(null);
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
   const [deletingComboId, setDeletingComboId] = useState<string | null>(null);
+
+  useEffect(() => {
+    axios
+      .get<Combo[]>('/api/combos')
+      .then((response: AxiosResponse<Combo[]>) => {
+        setCombos(response.data);
+      })
+      .catch((error: AxiosError) => {
+        console.error('Error fetching combos:', error);
+      });
+  }, []);
 
   const filteredCombos = combos.filter((combo) =>
     combo.name.toLowerCase().includes(searchTerm.toLowerCase()),
@@ -141,7 +96,7 @@ export function Combos({ searchTerm }: { searchTerm: string }) {
           {filteredCombos.map((combo) => (
             <TableRow key={combo.id}>
               <TableCell>{combo.name}</TableCell>
-              <TableCell>{combo.price.toFixed(2)}</TableCell>
+              <TableCell>{Number(combo.price).toFixed(2)}</TableCell>
               <TableCell>{combo.rice}</TableCell>
               <TableCell>{combo.bread}</TableCell>
               <TableCell>{combo.starter}</TableCell>
@@ -163,7 +118,7 @@ export function Combos({ searchTerm }: { searchTerm: string }) {
                 </Button>
                 <Button
                   variant="ghost"
-                  onClick={() => setDeletingComboId(combo.id)}
+                  onClick={() => setDeletingComboId(String(combo.id))}
                 >
                   <Trash2 className="h-4 w-4" />
                 </Button>
@@ -218,7 +173,7 @@ export function Combos({ searchTerm }: { searchTerm: string }) {
         isOpen={!!deletingComboId}
         onClose={() => setDeletingComboId(null)}
         onConfirm={() => {
-          if (deletingComboId) {
+          if (deletingComboId !== null) {
             handleDelete(deletingComboId);
           }
         }}

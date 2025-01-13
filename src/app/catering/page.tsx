@@ -112,16 +112,16 @@ export default function FoodOrdering() {
   };
 
   const combo7 = {
-    id: 7,
+    id: '7',
     name: 'Custom Combo',
-    price: 'Based on selection',
+    price: 0,
     rice: 0,
     bread: 0,
     starter: 0,
     gravy: 0,
     dal: 0,
     salad: 0,
-    sweet: 0,
+    dessert: 0,
     papad: 0,
     chutney: 0,
   };

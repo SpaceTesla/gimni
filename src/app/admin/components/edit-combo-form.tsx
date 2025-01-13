@@ -3,20 +3,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 
-interface Combo {
-  id: string;
-  name: string;
-  price: number;
-  rice: number;
-  bread: number;
-  starter: number;
-  gravy: number;
-  dal: number;
-  salad: number;
-  dessert: number;
-  papad: number;
-  chutney: number;
-}
+import Combo from '@/types/combo';
 
 interface EditComboFormProps {
   combo: Combo;

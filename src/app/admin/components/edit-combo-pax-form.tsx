@@ -6,6 +6,7 @@ import { Label } from '@/components/ui/label';
 interface ComboPax {
   id: string;
   combo_id: string;
+  combo_name: string;
   pax_range: string;
   price_per_pax: number;
 }

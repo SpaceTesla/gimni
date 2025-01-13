@@ -2,15 +2,7 @@ import { useState } from 'react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
-
-interface MenuItem {
-  id: string;
-  name: string;
-  category: string;
-  type: string;
-  diet: string;
-  price: number;
-}
+import MenuItem from '@/types/menu';
 
 interface EditMenuItemFormProps {
   item: MenuItem;

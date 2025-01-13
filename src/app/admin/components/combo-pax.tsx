@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import axios, { AxiosResponse, AxiosError } from 'axios';
 import { Pencil, Trash2, Plus } from 'lucide-react';
 import {
   Table,
@@ -21,34 +22,13 @@ import {
 interface ComboPax {
   id: string;
   combo_id: string;
+  combo_name: string;
   pax_range: string;
   price_per_pax: number;
 }
 
-const initialComboPax: ComboPax[] = [
-  {
-    id: '1',
-    combo_id: '1036028941438255105',
-    pax_range: '10-20',
-    price_per_pax: 173.0,
-  },
-  {
-    id: '2',
-    combo_id: '1036028941438255105',
-    pax_range: '20-30',
-    price_per_pax: 150.0,
-  },
-  {
-    id: '3',
-    combo_id: '1036028941438255105',
-    pax_range: '30-50',
-    price_per_pax: 143.0,
-  },
-];
-
 export function ComboPax({ searchTerm }: { searchTerm: string }) {
-  const [comboPaxItems, setComboPaxItems] =
-    useState<ComboPax[]>(initialComboPax);
+  const [comboPaxItems, setComboPaxItems] = useState<ComboPax[]>([]);
   const [editingComboPax, setEditingComboPax] = useState<ComboPax | null>(null);
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
@@ -56,9 +36,21 @@ export function ComboPax({ searchTerm }: { searchTerm: string }) {
     null,
   );
 
+  useEffect(() => {
+    axios
+      .get<ComboPax[]>('/api/pax/all')
+      .then((response: AxiosResponse<ComboPax[]>) => {
+        setComboPaxItems(response.data);
+      })
+      .catch((error: AxiosError) => {
+        console.error('Error fetching combo pax items:', error);
+      });
+  }, []);
+
   const filteredComboPaxItems = comboPaxItems.filter(
     (item) =>
-      item.combo_id.includes(searchTerm) || item.pax_range.includes(searchTerm),
+      item.combo_name.includes(searchTerm) ||
+      item.pax_range.includes(searchTerm),
   );
 
   const handleUpdate = (updatedComboPax: ComboPax) => {
@@ -95,7 +87,7 @@ export function ComboPax({ searchTerm }: { searchTerm: string }) {
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead>Combo ID</TableHead>
+            <TableHead>Combo Name</TableHead>
             <TableHead>Pax Range</TableHead>
             <TableHead>Price per Pax</TableHead>
             <TableHead>Actions</TableHead>
@@ -104,9 +96,9 @@ export function ComboPax({ searchTerm }: { searchTerm: string }) {
         <TableBody>
           {filteredComboPaxItems.map((item) => (
             <TableRow key={item.id}>
-              <TableCell>{item.combo_id}</TableCell>
+              <TableCell>{item.combo_name}</TableCell>
               <TableCell>{item.pax_range}</TableCell>
-              <TableCell>{item.price_per_pax.toFixed(2)}</TableCell>
+              <TableCell>{Number(item.price_per_pax).toFixed(2)}</TableCell>
               <TableCell>
                 <Button
                   variant="ghost"
@@ -150,7 +142,13 @@ export function ComboPax({ searchTerm }: { searchTerm: string }) {
             <DialogTitle>Add Combo Pax</DialogTitle>
           </DialogHeader>
           <EditComboPaxForm
-            comboPax={{ id: '', combo_id: '', pax_range: '', price_per_pax: 0 }}
+            comboPax={{
+              id: '',
+              combo_id: '',
+              combo_name: '',
+              pax_range: '',
+              price_per_pax: 0,
+            }}
             onSave={handleAdd}
             onClose={() => setIsAddDialogOpen(false)}
           />
