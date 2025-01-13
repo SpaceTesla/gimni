@@ -22,10 +22,10 @@ const Cart: React.FC<CartProps> = ({ userInfo }) => {
     0,
   );
 
-  const handleEdit = (item: CartItem) => {
-    // Implement the edit functionality here
-    console.log('Edit item:', item);
-  };
+  // const handleEdit = (item: CartItem) => {
+  //   // Implement the edit functionality here
+  //   console.log('Edit item:', item);
+  // };
 
   const { removeItem } = useCart();
   const handleDelete = (item: CartItem) => {
@@ -61,13 +61,13 @@ const Cart: React.FC<CartProps> = ({ userInfo }) => {
                     {item.category} - {item.comboName}
                   </span>
                   <div className={'ml-auto'}>
-                    <Button
-                      variant={'ghost'}
-                      onClick={() => handleEdit(item)}
-                      className="rounded-full"
-                    >
-                      <Edit className="h-5 w-5 text-yellow-highlight" />
-                    </Button>
+                    {/*  <Button*/}
+                    {/*    variant={'ghost'}*/}
+                    {/*    onClick={() => handleEdit(item)}*/}
+                    {/*    className="rounded-full"*/}
+                    {/*  >*/}
+                    {/*    <Edit className="h-5 w-5 text-yellow-highlight" />*/}
+                    {/*  </Button>*/}
                     <Button
                       variant={'ghost'}
                       onClick={() => handleDelete(item)}
@@ -94,13 +94,19 @@ const Cart: React.FC<CartProps> = ({ userInfo }) => {
                 </div>
 
                 <div className={'mb-1 ml-2 mt-4'}>Add-Ons</div>
-                <div className="flex flex-col gap-0.5 rounded-lg bg-white px-4 py-2">
-                  {addOns.map((addOn, idx) => (
-                    <div key={idx} className="flex justify-between text-sm">
-                      <span>{addOn}</span>
-                    </div>
-                  ))}
-                </div>
+                {addOns.length > 0 ? (
+                  <div className="flex flex-col gap-0.5 rounded-lg bg-white px-4 py-2">
+                    {addOns.map((addOn, idx) => (
+                      <div key={idx} className="flex justify-between text-sm">
+                        <span>{addOn}</span>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="flex justify-between pl-4 text-sm">
+                    <span>No add-ons selected</span>
+                  </div>
+                )}
               </div>
             );
           })
