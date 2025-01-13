@@ -429,7 +429,7 @@ export function FoodDialog({
                     </div>
                     <div>
                       <ul className="space-y-2 rounded-2xl bg-white/50 p-4">
-                        {menu[key].slice(0, 5).map((item) => (
+                        {menu[key].slice(0, 4).map((item) => (
                           <div
                             key={item.id}
                             className="flex cursor-pointer items-center justify-between p-1 text-sm text-gray-600"
