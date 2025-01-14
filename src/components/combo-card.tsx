@@ -81,7 +81,7 @@ const ComboCard: React.FC<ComboCardProps> = ({
       <CardContent className={'p-0'}>
         <div className="flex flex-col justify-between">
           <Image
-            src="/food.png"
+            src="/combo.jpg"
             alt={combo?.name ?? 'No Combo Selected'}
             width={200}
             height={200}

@@ -18,11 +18,11 @@ const Hero = () => {
         'mx-auto flex min-h-[88vh] max-w-screen-xl flex-col-reverse items-center gap-8 lg:flex-row'
       }
     >
-      <div className="h-[420px] max-w-[380px] overflow-hidden rounded-[80px] shadow-[4px_4px_8px_rgba(0,0,0,0.6)]">
+      <div className="m-4 h-[420px] max-w-[600px] overflow-hidden rounded-[80px] shadow-[4px_4px_8px_rgba(0,0,0,0.6)]">
         <Image
-          src="/food_ai.jpeg"
+          src="/home.jpg"
           alt="Delicious food"
-          width={600}
+          width={1000}
           height={600}
           quality={100}
           className={'h-[100%] object-cover'}

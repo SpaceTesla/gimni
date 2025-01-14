@@ -49,9 +49,9 @@ export default function AboutPage() {
                 <Link href={'/alacarte'}>Explore Our Menu</Link>
               </Button>
             </div>
-            <div className="relative aspect-square">
+            <div className="relative m-4 h-[420px] max-w-[600px] overflow-hidden">
               <Image
-                src="/food.png"
+                src="/about.jpg"
                 alt="Restaurant Interior"
                 fill
                 className="rounded-2xl object-cover"
