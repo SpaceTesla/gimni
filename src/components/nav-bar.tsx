@@ -24,19 +24,19 @@ const Navbar = () => {
     <>
       {/* Design elements */}
       {/* Top-left SVG (Desktop only) */}
-      <div className="absolute -left-6 -top-[84px] z-10 hidden w-[220px] lg:block">
-        <Image src="/assets/tl.svg" alt="Yellow" width={220} height={220} />
-      </div>
-
-      {/* Top-right SVG (Desktop only) */}
-      <div className="absolute -top-8 right-0.5 z-10 hidden w-[80px] lg:block">
-        <Image src="/assets/dots_t.svg" alt="Dots" width={80} height={80} />
-      </div>
 
       <nav
         ref={navRef}
-        className="z-100 relative flex h-20 items-center justify-between bg-red-nav px-4 lg:ml-16"
+        className="sticky top-0 z-50 flex h-20 items-center justify-between bg-red-nav px-4"
       >
+        <div className="absolute -left-8 -top-[84px] z-[51] hidden w-[220px] lg:block">
+          <Image src="/assets/tl.svg" alt="Yellow" width={220} height={220} />
+        </div>
+
+        {/* Top-right SVG (Desktop only) */}
+        <div className="absolute -top-8 right-0.5 z-10 hidden w-[80px] lg:block">
+          <Image src="/assets/dots_t.svg" alt="Dots" width={80} height={80} />
+        </div>
         {/* Hamburger menu for small screens */}
         <button
           className="w-12 p-0 sm:hidden"

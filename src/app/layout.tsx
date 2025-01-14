@@ -44,7 +44,7 @@ export default function RootLayout({
         <title>Gimni's Kitchen</title>
       </head>
       <body className={`${poppins.variable} antialiased`}>
-        <main>{children}</main>
+        {children}
         <Toaster />
       </body>
     </html>
