@@ -41,6 +41,7 @@ export default function RootLayout({
         />
         <meta property="og:image" content="/assets/logo.svg" />
         <meta property="og:url" content="https://www.gimnis.com" />
+        <link rel="icon" href="/favicon.ico" />
         <title>Gimni's Kitchen</title>
       </head>
       <body className={`${poppins.variable} antialiased`}>
