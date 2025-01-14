@@ -28,6 +28,7 @@
     "lucide-react": "^0.469.0",
     "mongoose": "^8.9.3",
     "next": "15.1.2",
+    "nodemailer": "^6.9.16",
     "pg": "^8.13.1",
     "react": "^19.0.0",
     "react-day-picker": "^8.10.1",
@@ -39,6 +40,7 @@
   },
   "devDependencies": {
     "@types/node": "^20",
+    "@types/nodemailer": "^6.4.17",
     "@types/pg": "^8.11.10",
     "@types/react": "^19",
     "@types/react-dom": "^19",
