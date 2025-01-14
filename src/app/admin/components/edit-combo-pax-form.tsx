@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import axios from 'axios';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
@@ -32,9 +33,14 @@ export function EditComboPaxForm({
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    onSave(formData);
+    try {
+      const response = await axios.put<ComboPax>('/api/pax', formData);
+      onSave(response.data);
+    } catch (error) {
+      console.error('Error updating combo pax:', error);
+    }
   };
 
   return (

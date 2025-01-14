@@ -1,4 +1,4 @@
-import getPax from '@/services/paxService';
+import { getPax } from '@/services/paxService';
 
 export async function GET(request: Request) {
   try {

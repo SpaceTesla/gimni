@@ -49,40 +49,54 @@ export function ComboPax({ searchTerm }: { searchTerm: string }) {
 
   const filteredComboPaxItems = comboPaxItems.filter(
     (item) =>
-      item.combo_name.includes(searchTerm) ||
-      item.pax_range.includes(searchTerm),
+      (item.combo_name && item.combo_name.includes(searchTerm)) ||
+      (item.pax_range && item.pax_range.includes(searchTerm)),
   );
 
-  const handleUpdate = (updatedComboPax: ComboPax) => {
-    setComboPaxItems((prevItems) =>
-      prevItems.map((item) =>
-        item.id === updatedComboPax.id ? updatedComboPax : item,
-      ),
-    );
-    setEditingComboPax(null);
-    setIsEditDialogOpen(false);
+  const handleUpdate = async (updatedComboPax: ComboPax) => {
+    try {
+      const response = await axios.put<ComboPax>('/api/pax', updatedComboPax);
+      setComboPaxItems((prevItems) =>
+        prevItems.map((item) =>
+          item.id === updatedComboPax.id ? response.data : item,
+        ),
+      );
+      setEditingComboPax(null);
+      setIsEditDialogOpen(false);
+    } catch (error) {
+      console.error('Error updating combo pax:', error);
+    }
   };
 
-  const handleAdd = (newComboPax: ComboPax) => {
-    setComboPaxItems((prevItems) => [
-      ...prevItems,
-      { ...newComboPax, id: String(prevItems.length + 1) },
-    ]);
-    setIsAddDialogOpen(false);
+  const handleAdd = async (newComboPax: ComboPax) => {
+    try {
+      const response = await axios.post<ComboPax>('/api/pax', newComboPax);
+      setComboPaxItems((prevItems) => [...prevItems, response.data]);
+      setIsAddDialogOpen(false);
+    } catch (error) {
+      console.error('Error adding combo pax:', error);
+    }
   };
 
-  const handleDelete = (id: string) => {
-    setComboPaxItems((prevItems) => prevItems.filter((item) => item.id !== id));
-    setDeletingComboPaxId(null);
+  const handleDelete = async (id: string) => {
+    try {
+      await axios.delete('/api/pax', { data: { id } });
+      setComboPaxItems((prevItems) =>
+        prevItems.filter((item) => item.id !== id),
+      );
+      setDeletingComboPaxId(null);
+    } catch (error) {
+      console.error('Error deleting combo pax:', error);
+    }
   };
 
   return (
     <div>
       <div className="mb-4 flex items-center justify-between">
         <h2 className="text-2xl font-bold">Combo Pax</h2>
-        <Button onClick={() => setIsAddDialogOpen(true)}>
-          <Plus className="mr-2 h-4 w-4" /> Add Combo Pax
-        </Button>
+        {/*<Button onClick={() => setIsAddDialogOpen(true)}>*/}
+        {/*  <Plus className="mr-2 h-4 w-4" /> Add Combo Pax*/}
+        {/*</Button>*/}
       </div>
       <Table>
         <TableHeader>
@@ -109,12 +123,12 @@ export function ComboPax({ searchTerm }: { searchTerm: string }) {
                 >
                   <Pencil className="h-4 w-4" />
                 </Button>
-                <Button
-                  variant="ghost"
-                  onClick={() => setDeletingComboPaxId(item.id)}
-                >
-                  <Trash2 className="h-4 w-4" />
-                </Button>
+                {/*<Button*/}
+                {/*  variant="ghost"*/}
+                {/*  onClick={() => setDeletingComboPaxId(item.id)}*/}
+                {/*>*/}
+                {/*  <Trash2 className="h-4 w-4" />*/}
+                {/*</Button>*/}
               </TableCell>
             </TableRow>
           ))}

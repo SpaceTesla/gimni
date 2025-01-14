@@ -37,4 +37,44 @@ async function getPax(uncategorized = false) {
   }
 }
 
-export default getPax;
+async function addPax(newPax: ComboPax): Promise<ComboPax> {
+  try {
+    const result = await pool.query<ComboPax>(
+      'INSERT INTO combopax (combo_id, pax_range, price_per_pax) VALUES ($1, $2, $3) RETURNING *',
+      [newPax.combo_id, newPax.pax_range, newPax.price_per_pax],
+    );
+    return result.rows[0];
+  } catch (error) {
+    console.error('Error adding pax:', error);
+    throw error;
+  }
+}
+
+async function updatePax(updatedPax: ComboPax): Promise<ComboPax> {
+  try {
+    const result = await pool.query<ComboPax>(
+      'UPDATE combopax SET combo_id = $1, pax_range = $2, price_per_pax = $3 WHERE id = $4 RETURNING *',
+      [
+        updatedPax.combo_id,
+        updatedPax.pax_range,
+        updatedPax.price_per_pax,
+        updatedPax.id,
+      ],
+    );
+    return result.rows[0];
+  } catch (error) {
+    console.error('Error updating pax:', error);
+    throw error;
+  }
+}
+
+async function deletePax(id: number): Promise<void> {
+  try {
+    await pool.query('DELETE FROM combopax WHERE id = $1', [id]);
+  } catch (error) {
+    console.error('Error deleting pax:', error);
+    throw error;
+  }
+}
+
+export { getPax, addPax, updatePax, deletePax };

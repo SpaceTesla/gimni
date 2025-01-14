@@ -44,36 +44,48 @@ export function Combos({ searchTerm }: { searchTerm: string }) {
     combo.name.toLowerCase().includes(searchTerm.toLowerCase()),
   );
 
-  const handleUpdate = (updatedCombo: Combo) => {
-    setCombos((prevCombos) =>
-      prevCombos.map((combo) =>
-        combo.id === updatedCombo.id ? updatedCombo : combo,
-      ),
-    );
-    setEditingCombo(null);
-    setIsEditDialogOpen(false);
+  const handleUpdate = async (updatedCombo: Combo) => {
+    try {
+      const response = await axios.put<Combo>('/api/combos', updatedCombo);
+      setCombos((prevCombos) =>
+        prevCombos.map((combo) =>
+          combo.id === updatedCombo.id ? response.data : combo,
+        ),
+      );
+      setEditingCombo(null);
+      setIsEditDialogOpen(false);
+    } catch (error) {
+      console.error('Error updating combo:', error);
+    }
   };
 
-  const handleAdd = (newCombo: Combo) => {
-    setCombos((prevCombos) => [
-      ...prevCombos,
-      { ...newCombo, id: String(prevCombos.length + 1) },
-    ]);
-    setIsAddDialogOpen(false);
+  const handleAdd = async (newCombo: Combo) => {
+    try {
+      const response = await axios.post<Combo>('/api/combos', newCombo);
+      setCombos((prevCombos) => [...prevCombos, response.data]);
+      setIsAddDialogOpen(false);
+    } catch (error) {
+      console.error('Error adding combo:', error);
+    }
   };
 
-  const handleDelete = (id: string) => {
-    setCombos((prevCombos) => prevCombos.filter((combo) => combo.id !== id));
-    setDeletingComboId(null);
+  const handleDelete = async (id: string) => {
+    try {
+      await axios.delete('/api/combos', { data: { id } });
+      setCombos((prevCombos) => prevCombos.filter((combo) => combo.id !== id));
+      setDeletingComboId(null);
+    } catch (error) {
+      console.error('Error deleting combo:', error);
+    }
   };
 
   return (
     <div>
       <div className="mb-4 flex items-center justify-between">
         <h2 className="text-2xl font-bold">Combos</h2>
-        <Button onClick={() => setIsAddDialogOpen(true)}>
-          <Plus className="mr-2 h-4 w-4" /> Add Combo
-        </Button>
+        {/*<Button onClick={() => setIsAddDialogOpen(true)}>*/}
+        {/*  <Plus className="mr-2 h-4 w-4" /> Add Combo*/}
+        {/*</Button>*/}
       </div>
       <Table>
         <TableHeader>
@@ -116,12 +128,12 @@ export function Combos({ searchTerm }: { searchTerm: string }) {
                 >
                   <Pencil className="h-4 w-4" />
                 </Button>
-                <Button
-                  variant="ghost"
-                  onClick={() => setDeletingComboId(String(combo.id))}
-                >
-                  <Trash2 className="h-4 w-4" />
-                </Button>
+                {/*<Button*/}
+                {/*  variant="ghost"*/}
+                {/*  onClick={() => setDeletingComboId(String(combo.id))}*/}
+                {/*>*/}
+                {/*  <Trash2 className="h-4 w-4" />*/}
+                {/*</Button>*/}
               </TableCell>
             </TableRow>
           ))}
@@ -129,7 +141,7 @@ export function Combos({ searchTerm }: { searchTerm: string }) {
       </Table>
 
       <Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
-        <DialogContent>
+        <DialogContent className={'max-h-[600px] overflow-auto'}>
           <DialogHeader>
             <DialogTitle>Edit Combo</DialogTitle>
           </DialogHeader>
