@@ -57,17 +57,24 @@ export function MenuItems({ searchTerm }: { searchTerm: string }) {
     setIsEditDialogOpen(false);
   };
 
-  const handleAdd = (newItem: MenuItem) => {
-    setMenuItems((prevItems) => [
-      ...prevItems,
-      { ...newItem, id: String(prevItems.length + 1) },
-    ]);
-    setIsAddDialogOpen(false);
+  const handleAdd = async (newItem: MenuItem) => {
+    try {
+      const response = await axios.post<MenuItem>('/api/menu', newItem);
+      setMenuItems((prevItems) => [...prevItems, response.data]);
+      setIsAddDialogOpen(false);
+    } catch (error) {
+      console.error('Error adding menu item:', error);
+    }
   };
 
-  const handleDelete = (id: string) => {
-    setMenuItems((prevItems) => prevItems.filter((item) => item.id !== id));
-    setDeletingItemId(null);
+  const handleDelete = async (id: string) => {
+    try {
+      await axios.delete('/api/menu', { data: { id } });
+      setMenuItems((prevItems) => prevItems.filter((item) => item.id !== id));
+      setDeletingItemId(null);
+    } catch (error) {
+      console.error('Error deleting menu item:', error);
+    }
   };
 
   return (

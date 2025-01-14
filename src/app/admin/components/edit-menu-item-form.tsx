@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import axios from 'axios';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
@@ -25,9 +26,14 @@ export function EditMenuItemForm({
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    onSave(formData);
+    try {
+      await axios.put('/api/menu', formData);
+      onSave(formData);
+    } catch (error) {
+      console.error('Error updating menu item:', error);
+    }
   };
 
   return (
