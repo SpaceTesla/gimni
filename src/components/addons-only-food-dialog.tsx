@@ -303,7 +303,7 @@ export function AddOnsOnlyFoodDialog({
                           <Checkbox
                             id={`addon-${key}-${item.id}`}
                             className="peer"
-                            checked={selections[key]?.includes(item.name)}
+                            checked={addOns[key]?.includes(item.name)}
                             onCheckedChange={() => {
                               handleSelection(key, item.name, Infinity, true);
                             }}
@@ -345,9 +345,9 @@ export function AddOnsOnlyFoodDialog({
                             <Checkbox
                               id={`addon-${key}-${item.id}`}
                               className="peer"
-                              checked={selections[key]?.includes(item.name)}
+                              checked={addOns[key]?.includes(item.name)}
                               onCheckedChange={() => {
-                                handleSelection(key, item.name, Infinity);
+                                handleSelection(key, item.name, Infinity, true);
                               }}
                             />
                           </div>
