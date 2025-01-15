@@ -136,6 +136,7 @@ export function MenuItems({ searchTerm }: { searchTerm: string }) {
               item={editingItem}
               onSave={handleUpdate}
               onClose={() => setIsEditDialogOpen(false)}
+              isEdit={true} // Pass isEdit prop as true for editing
             />
           )}
         </DialogContent>
@@ -159,10 +160,10 @@ export function MenuItems({ searchTerm }: { searchTerm: string }) {
             }}
             onSave={handleAdd}
             onClose={() => setIsAddDialogOpen(false)}
+            isEdit={false} // Pass isEdit prop as false for adding
           />
         </DialogContent>
       </Dialog>
-
       <DeleteConfirmDialog
         isOpen={!!deletingItemId}
         onClose={() => setDeletingItemId(null)}

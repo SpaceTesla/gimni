@@ -9,30 +9,44 @@ interface EditMenuItemFormProps {
   item: MenuItem;
   onSave: (item: MenuItem) => void;
   onClose: () => void;
+  isEdit: boolean; // Add isEdit prop
 }
 
 export function EditMenuItemForm({
   item,
   onSave,
   onClose,
+  isEdit,
 }: EditMenuItemFormProps) {
-  const [formData, setFormData] = useState(item);
+  const [formData, setFormData] = useState({
+    ...item,
+    price: item.price.toString(),
+  });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [name]: name === 'price' ? parseFloat(value) : value,
+      [name]:
+        name === 'price' ? (value === '' ? '' : parseFloat(value)) : value,
     }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await axios.put('/api/menu', formData);
-      onSave(formData);
+      const updatedItem = {
+        ...formData,
+        price: parseFloat(formData.price) || 0,
+      };
+      if (isEdit) {
+        await axios.put('/api/menu', updatedItem);
+      } else {
+        await axios.post('/api/menu', updatedItem);
+      }
+      onSave(updatedItem);
     } catch (error) {
-      console.error('Error updating menu item:', error);
+      console.error('Error saving menu item:', error);
     }
   };
 
