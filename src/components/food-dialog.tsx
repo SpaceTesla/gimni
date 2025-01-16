@@ -176,6 +176,18 @@ export function FoodDialog({
       totalPrice += comboPrice;
     }
 
+    // Add 90 for each 'mutton' dish in the selections
+    const muttonPrice = 90;
+    const muttonCount = Object.keys(selections).reduce((count, key) => {
+      return (
+        count +
+        selections[key].filter((itemName) =>
+          itemName.toLowerCase().includes('mutton'),
+        ).length
+      );
+    }, 0);
+    totalPrice += muttonCount * muttonPrice;
+
     const cartItem = {
       id: combo?.id.toString() ?? 'add-ons-only',
       comboName: combo?.name ?? 'Add-Ons Only',
