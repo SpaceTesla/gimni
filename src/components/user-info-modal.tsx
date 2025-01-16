@@ -17,6 +17,14 @@ import {
 } from '@/components/ui/dialog';
 import { DatePickerDemo } from '@/components/date-picker-demo';
 import { useToast } from '@/hooks/use-toast';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import * as React from 'react';
 
 interface UserInfoModalProps {
   onSubmit: (data: {
@@ -130,14 +138,28 @@ export function UserInfoModal({ onSubmit }: UserInfoModalProps) {
               <Label htmlFor="occasion" className="text-right">
                 Occasion
               </Label>
-              <Input
-                id="occasion"
-                value={occasion}
-                onChange={(e) => setOccasion(e.target.value)}
-                className="col-span-3"
-                placeholder={'Eg. Wedding, Birthday, etc.'}
-                required
-              />
+              <div className="col-span-3 bg-background">
+                <Select value={occasion} onValueChange={setOccasion}>
+                  <SelectTrigger id="occasion">
+                    <SelectValue placeholder="Select an occasion" />
+                  </SelectTrigger>
+                  <SelectContent className={'bg-background'}>
+                    <SelectItem value="Birthday">Birthday</SelectItem>
+                    <SelectItem value="House warming">House warming</SelectItem>
+                    <SelectItem value="Wedding Anniversary">
+                      Wedding Anniversary
+                    </SelectItem>
+                    <SelectItem value="Naming ceremony">
+                      Naming ceremony
+                    </SelectItem>
+                    <SelectItem value="House Party">House Party</SelectItem>
+                    <SelectItem value="Baby Shower">Baby Shower</SelectItem>
+                    <SelectItem value="Rice Ceremony">Rice Ceremony</SelectItem>
+                    <SelectItem value="Mourning">Mourning</SelectItem>
+                    <SelectItem value="Others">Others</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
             </div>
           </div>
           <div className="grid grid-cols-4 items-center gap-4">

@@ -110,27 +110,20 @@ const ComboCard: React.FC<ComboCardProps> = ({
               customisable
             </div>
 
-            <div className={'mx-4 flex gap-4 pb-4'}>
+            <div className={'flex gap-4'}>
               <Button
                 variant={'default'}
                 className={
-                  'flex-1 bg-red-highlight p-2 font-bold text-white hover:bg-red-highlight/90'
+                  'flex-1 rounded-none bg-red-highlight p-6 font-bold text-white hover:bg-red-highlight/90'
                 }
                 onClick={() => {
                   setCategory('Meal');
                   setOpen(true);
                 }}
               >
-                Meal
+                Add to Cart
               </Button>
-              <Button
-                variant={'default'}
-                className={
-                  'flex-1 bg-yellow-highlight p-2 font-bold text-black hover:bg-yellow-highlight/90'
-                }
-              >
-                Birthday Snack-Up
-              </Button>
+              {/*x*/}
             </div>
 
             {pax ? (
