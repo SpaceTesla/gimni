@@ -367,6 +367,7 @@ export function FoodDialog({
                   key === 'papad' ||
                   key === 'salad' ||
                   key === 'chutney' ||
+                  category === 'Other' ||
                   Number(combo[key as keyof typeof combo]) === 0 ? null : (
                     <div key={key}>
                       <div className="flex items-center justify-between">
