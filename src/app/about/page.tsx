@@ -6,7 +6,9 @@ import { Badge } from '@/components/ui/badge';
 import { InfiniteMovingCards } from '@/components/ui/infinite-moving-cards';
 
 import dishes from '@/data/dishes';
+import { testimonials } from '@/data/testimonials';
 import DishCard from '@/components/dish-card';
+import TestimonialCard from '@/components/testimonial-card';
 import DefaultLayout from '@/app/default-layout';
 
 export default function AboutPage() {
@@ -58,7 +60,6 @@ export default function AboutPage() {
               />
             </div>
           </section>
-
           {/* Our Story */}
           <section className="mx-auto max-w-4xl space-y-8 text-center">
             <h2 className="text-3xl font-bold md:text-4xl">Our Story</h2>
@@ -79,6 +80,20 @@ export default function AboutPage() {
             <InfiniteMovingCards
               cards={dishes.map((dish) => (
                 <DishCard key={dish.name} {...dish} />
+              ))}
+              direction="right"
+              speed={'fast'}
+            />
+          </section>
+
+          {/* Testimonials */}
+          <section className="bg-gradient-to-r from-yellow-background via-white/50 to-yellow-background py-12">
+            <h2 className="mb-8 text-center text-3xl font-bold md:text-4xl">
+              Our Reviews
+            </h2>
+            <InfiniteMovingCards
+              cards={testimonials.map((testimonial) => (
+                <TestimonialCard testimonial={testimonial} />
               ))}
               direction="left"
               speed={'fast'}
