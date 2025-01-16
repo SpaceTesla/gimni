@@ -16,6 +16,7 @@ import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import { ArrowLeft, X } from 'lucide-react';
 
+import { ComboIDs } from '@/data/comboIDs';
 import Combo from '@/types/combo';
 import { toTitleCase } from '@/utils/stringUtils';
 import MenuItem from '@/types/menu';
@@ -57,7 +58,7 @@ export function FoodDialog({
     } else if (currentStep === 'selectMenu') {
       const allSelectionsMade = Object.keys(combo ?? {}).every((key) => {
         if (
-          (combo?.name === 'Combo 1' && key === 'dal') ||
+          (combo?.id === ComboIDs.combo1 && key === 'dal') ||
           key === 'id' ||
           key === 'name' ||
           key === 'price' ||
@@ -323,7 +324,7 @@ export function FoodDialog({
                       </div>
                       <ul className="space-y-2 rounded-2xl bg-white/50 p-4">
                         {Object.keys(combo).map((key) =>
-                          (combo.name === 'Combo 1' && key === 'dal') ||
+                          (combo.id === ComboIDs.combo1 && key === 'dal') ||
                           key === 'id' ||
                           key === 'name' ||
                           key === 'price' ||
@@ -357,7 +358,7 @@ export function FoodDialog({
             <div className={'overflow-y-auto'}>
               <div className="flex flex-col gap-4">
                 {Object.keys(combo).map((key) =>
-                  (combo.name === 'Combo 1' &&
+                  (combo.id === ComboIDs.combo1 &&
                     menuType === 'nonVeg' &&
                     key === 'dal') ||
                   key === 'id' ||
