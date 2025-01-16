@@ -8,7 +8,8 @@ import { CartProvider } from '@/context/cartContext';
 import Cart from '@/components/cart';
 import { UserInfoModal } from '@/components/user-info-modal';
 import DefaultLayout from '@/app/default-layout';
-import combo from '@/types/combo';
+import { ShoppingCartIcon } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 export default function FoodOrdering() {
   const [combos, setCombos] = useState<Combo[]>([]);
@@ -22,6 +23,8 @@ export default function FoodOrdering() {
     numberOfPeople: number;
     occasion: string;
   } | null>(null);
+
+  const [isAtBottom, setIsAtBottom] = useState(false);
 
   const cacheTTL = 1800; // Cache data for 600 seconds (10 minutes)
 
@@ -124,6 +127,23 @@ export default function FoodOrdering() {
     console.log('Submitted:', data);
   };
 
+  const scrollToEnd = () => {
+    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+  };
+
+  const handleScroll = () => {
+    const isBottom =
+      window.innerHeight + window.scrollY >= document.body.offsetHeight - 100;
+    setIsAtBottom(isBottom);
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   const combo7 = {
     id: 'custom-combo',
     name: 'Create Your Own',
@@ -181,6 +201,15 @@ export default function FoodOrdering() {
                 />
               </div>
             </div>
+            {!isAtBottom && (
+              <Button
+                onClick={scrollToEnd}
+                className="fixed bottom-4 left-1/2 -translate-x-1/2 transform rounded bg-red-highlight p-3 hover:bg-red-highlight lg:hidden"
+              >
+                <ShoppingCartIcon width={'20'} height={'20'} />
+                Go to Cart
+              </Button>
+            )}
           </div>
         </div>
       </CartProvider>
