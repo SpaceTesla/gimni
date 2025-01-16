@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 import ExcelJS from 'exceljs';
+import { PDFDocument, rgb } from 'pdf-lib';
 import { Buffer } from 'buffer';
 import dotenv from 'dotenv';
 
@@ -113,8 +114,61 @@ export async function POST(request: Request) {
       worksheet.addRow([]);
     });
 
-    const buffer = await workbook.xlsx.writeBuffer();
+    const excelBuffer = await workbook.xlsx.writeBuffer();
 
+    // Create PDF file
+    const pdfDoc = await PDFDocument.create();
+    const page = pdfDoc.addPage([600, 400]);
+    const { width, height } = page.getSize();
+    page.drawText('Cart Details', {
+      x: 50,
+      y: height - 50,
+      size: 20,
+      color: rgb(0, 0.53, 0.71),
+    });
+
+    let yPosition = height - 80;
+    page.drawText(`Name: ${userInfo.name}`, { x: 50, y: yPosition, size: 12 });
+    yPosition -= 20;
+    page.drawText(`No. of People: ${userInfo.numberOfPeople}`, {
+      x: 50,
+      y: yPosition,
+      size: 12,
+    });
+    yPosition -= 20;
+    page.drawText(`Occasion: ${userInfo.occasion}`, {
+      x: 50,
+      y: yPosition,
+      size: 12,
+    });
+    yPosition -= 20;
+    page.drawText(`Event Date: ${eventDate}`, {
+      x: 50,
+      y: yPosition,
+      size: 12,
+    });
+
+    yPosition -= 40;
+    cartItems.forEach((item) => {
+      page.drawText(`Diet Type: ${item.dietType}`, {
+        x: 50,
+        y: yPosition,
+        size: 12,
+      });
+      yPosition -= 20;
+      page.drawText(
+        `Selected Items: ${Object.values(item.selections).flat().join(', ')}`,
+        { x: 50, y: yPosition, size: 12 },
+      );
+      yPosition -= 20;
+      page.drawText(
+        `Add-Ons: ${Object.values(item.addOns).flat().join(', ')}`,
+        { x: 50, y: yPosition, size: 12 },
+      );
+      yPosition -= 40;
+    });
+
+    const pdfBytes = await pdfDoc.save();
     // Nodemailer setup
     const transporter = nodemailer.createTransport({
       service: 'gmail',
@@ -132,9 +186,14 @@ export async function POST(request: Request) {
       attachments: [
         {
           filename: 'cart.xlsx',
-          content: Buffer.from(buffer),
+          content: Buffer.from(excelBuffer),
           contentType:
             'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        },
+        {
+          filename: 'cart.pdf',
+          content: Buffer.from(pdfBytes),
+          contentType: 'application/pdf',
         },
       ],
     };

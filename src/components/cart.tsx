@@ -11,6 +11,7 @@ import { AddOnsOnlyFoodDialog } from '@/components/addons-only-food-dialog';
 import Combo from '@/types/combo';
 import type MenuItem from '@/types/menu';
 import combo from '@/types/combo';
+import { useCheckout } from '@/hooks/useCheckout';
 
 interface CartProps {
   userInfo: {
@@ -49,6 +50,8 @@ const Cart: React.FC<CartProps> = ({ userInfo, dialogInfo }) => {
     removeItem(item.id);
     console.log('Deleted item:', item);
   };
+
+  const { handleCheckout } = useCheckout();
 
   console.log('Cart Items:', cartItems);
   console.log('Dialog Info:', dialogInfo);
