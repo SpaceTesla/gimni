@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useCart, CartItem } from '@/context/cartContext';
 import Image from 'next/image';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { handleCheckout } from '@/utils/checkout';
-import { Trash } from 'lucide-react';
+import { Edit, Trash } from 'lucide-react';
+import { FoodDialog } from '@/components/food-dialog';
+
+import Combo from '@/types/combo';
+import type MenuItem from '@/types/menu';
+import combo from '@/types/combo';
 
 interface CartProps {
   userInfo: {
@@ -15,26 +20,38 @@ interface CartProps {
     occasion: string;
     date: Date;
   };
+  dialogInfo: {
+    combos: Combo[];
+    menu: Record<string, MenuItem[]>;
+    pax: Record<string, number[]>;
+    numberOfPeople: number;
+  };
 }
 
-const Cart: React.FC<CartProps> = ({ userInfo }) => {
+const Cart: React.FC<CartProps> = ({ userInfo, dialogInfo }) => {
   const { cartItems } = useCart();
+  const [open, setOpen] = useState(false);
+  const [currentItem, setCurrentItem] = useState<CartItem | null>(null);
 
   const totalAmount = cartItems.reduce(
     (total, item) => total + item.totalPrice * item.quantity,
     0,
   );
 
-  // const handleEdit = (item: CartItem) => {
-  //   // Implement the edit functionality here
-  //   console.log('Edit item:', item);
-  // };
+  const handleEdit = (item: CartItem) => {
+    setCurrentItem(item);
+    setOpen(true);
+  };
 
   const { removeItem } = useCart();
   const handleDelete = (item: CartItem) => {
     removeItem(item.id);
     console.log('Deleted item:', item);
   };
+
+  console.log('Cart Items:', cartItems);
+  console.log('Dialog Info:', dialogInfo);
+  console.log('User Info:', userInfo);
 
   return (
     <Card className="sticky top-4 rounded-3xl border-none bg-white/70 shadow-none">
@@ -64,13 +81,13 @@ const Cart: React.FC<CartProps> = ({ userInfo }) => {
                     {item.category} - {item.comboName}
                   </span>
                   <div className={'ml-auto'}>
-                    {/*  <Button*/}
-                    {/*    variant={'ghost'}*/}
-                    {/*    onClick={() => handleEdit(item)}*/}
-                    {/*    className="rounded-full"*/}
-                    {/*  >*/}
-                    {/*    <Edit className="h-5 w-5 text-yellow-highlight" />*/}
-                    {/*  </Button>*/}
+                    <Button
+                      variant={'ghost'}
+                      onClick={() => handleEdit(item)}
+                      className="rounded-full"
+                    >
+                      <Edit className="h-5 w-5 text-yellow-highlight" />
+                    </Button>
                     <Button
                       variant={'ghost'}
                       onClick={() => handleDelete(item)}
@@ -127,6 +144,21 @@ const Cart: React.FC<CartProps> = ({ userInfo }) => {
           </Button>
         </div>
       </CardContent>
+      {currentItem && (
+        <FoodDialog
+          combo={dialogInfo.combos.find(
+            (combo) => combo.name === currentItem.comboName,
+          )}
+          menu={dialogInfo.menu}
+          open={open}
+          onOpenChange={setOpen}
+          category={
+            currentItem.category as 'Meal' | 'Birthday Snack-Up' | 'Other'
+          }
+          pax={dialogInfo.pax}
+          numberOfPeople={dialogInfo.numberOfPeople}
+        />
+      )}
     </Card>
   );
 };

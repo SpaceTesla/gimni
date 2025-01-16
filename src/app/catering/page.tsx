@@ -2,12 +2,13 @@
 
 import { useEffect, useState } from 'react';
 import ComboCard from '@/components/combo-card';
-import type Combo from '@/types/combo';
+import Combo from '@/types/combo';
 import type MenuItem from '@/types/menu';
 import { CartProvider } from '@/context/cartContext';
 import Cart from '@/components/cart';
 import { UserInfoModal } from '@/components/user-info-modal';
 import DefaultLayout from '@/app/default-layout';
+import combo from '@/types/combo';
 
 export default function FoodOrdering() {
   const [combos, setCombos] = useState<Combo[]>([]);
@@ -169,7 +170,15 @@ export default function FoodOrdering() {
 
               {/* Cart Section */}
               <div className="flex-grow">
-                <Cart userInfo={userInfo} />
+                <Cart
+                  userInfo={userInfo}
+                  dialogInfo={{
+                    combos: combos,
+                    menu: menu,
+                    pax: pax,
+                    numberOfPeople: userInfo.numberOfPeople,
+                  }}
+                />
               </div>
             </div>
           </div>
