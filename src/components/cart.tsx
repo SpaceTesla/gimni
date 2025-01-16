@@ -152,7 +152,7 @@ const Cart: React.FC<CartProps> = ({ userInfo, dialogInfo }) => {
         </div>
       </CardContent>
       {currentItem &&
-        (currentItem.comboName === 'Custom Combo' ? (
+        (currentItem.id === 'custom-combo' ? (
           <AddOnsOnlyFoodDialog
             combo={dialogInfo.combos.find(
               (combo) => combo.name === currentItem.comboName,

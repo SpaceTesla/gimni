@@ -125,8 +125,8 @@ export default function FoodOrdering() {
   };
 
   const combo7 = {
-    id: '7',
-    name: 'Custom Combo',
+    id: 'custom-combo',
+    name: 'Create Your Own',
     price: 0,
     rice: 0,
     bread: 0,
@@ -161,7 +161,7 @@ export default function FoodOrdering() {
                   />
                 ))}
                 <ComboCard
-                  key={'combo-7'}
+                  key={'custom-combo'}
                   combo={combo7}
                   menu={menu}
                   numberOfPeople={userInfo.numberOfPeople}
