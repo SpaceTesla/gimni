@@ -9,7 +9,7 @@ interface EditMenuItemFormProps {
   item: MenuItem;
   onSave: (item: MenuItem) => void;
   onClose: () => void;
-  isEdit: boolean; // Add isEdit prop
+  isEdit: boolean;
 }
 
 export function EditMenuItemForm({
@@ -27,8 +27,7 @@ export function EditMenuItemForm({
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [name]:
-        name === 'price' ? (value === '' ? '' : parseFloat(value)) : value,
+      [name]: value,
     }));
   };
 

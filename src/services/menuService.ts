@@ -57,8 +57,14 @@ export async function addMenuItem(newItem: MenuItem): Promise<MenuItem> {
 export async function updateMenuItem(updatedItem: MenuItem): Promise<MenuItem> {
   try {
     const result = await pool.query<MenuItem>(
-      'UPDATE menu SET name = $1, type = $2, price = $3 WHERE id = $4 RETURNING *',
-      [updatedItem.name, updatedItem.type, updatedItem.price, updatedItem.id],
+      'UPDATE menu SET name = $1, category = $2, type = $3, price = $4 WHERE id = $5 RETURNING *',
+      [
+        updatedItem.name,
+        updatedItem.category,
+        updatedItem.type,
+        updatedItem.price,
+        updatedItem.id,
+      ],
     );
     return result.rows[0];
   } catch (error) {
