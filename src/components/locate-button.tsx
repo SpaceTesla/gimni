@@ -23,7 +23,7 @@ export default function LocateButton() {
             className={'h-6 w-6'}
           />
         </div>
-        <span>LOCATE</span>
+        <span>LOCATE US</span>
       </button>
 
       <MapModal isOpen={isOpen} onClose={() => setIsOpen(false)}>

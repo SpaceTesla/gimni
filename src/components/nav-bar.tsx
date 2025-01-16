@@ -88,11 +88,11 @@ const NavLinks = ({ closeMenu }: { closeMenu: () => void }) => (
       ABOUT
     </Link>
     <Link
-      href="/alacarte"
+      href="/takeaway"
       className="text-center hover:text-white"
       onClick={closeMenu}
     >
-      À LA CARTE
+      TAKEAWAY
     </Link>
     <Link
       href="/catering"

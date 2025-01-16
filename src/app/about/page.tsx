@@ -48,7 +48,7 @@ export default function AboutPage() {
                 our culinary journey.{' '}
               </p>
               <Button className="bg-red-nav hover:bg-red-nav/90" asChild>
-                <Link href={'/alacarte'}>Explore Our Menu</Link>
+                <Link href={'/takeaway'}>Explore Our Menu</Link>
               </Button>
             </div>
             <div className="relative m-4 h-[420px] max-w-[600px] overflow-hidden">
@@ -160,7 +160,7 @@ export default function AboutPage() {
               </p>
               <div className="flex flex-wrap justify-center gap-4">
                 <Button className="bg-[#FF3B30] hover:bg-[#FF3B30]/90" asChild>
-                  <Link href={'/alacarte'}>View Our Menu</Link>
+                  <Link href={'/takeaway'}>View Our Menu</Link>
                 </Button>
                 <Button
                   variant="outline"

@@ -32,7 +32,7 @@ export default function RootLayout({
         />
         <meta
           name="keywords"
-          content="Gimni's Kitchen, food, catering, à la carte"
+          content="Gimni's Kitchen, food, catering, takwaway, bengali, authentic"
         />
         <meta property="og:title" content="Gimni's Kitchen" />
         <meta

@@ -8,7 +8,7 @@ interface MenuSectionProps {
 
 export function MenuSection({ section }: MenuSectionProps) {
   return (
-    <Card className="mx-auto mb-4 max-w-lg break-inside-avoid overflow-hidden rounded-2xl bg-brown-leaf">
+    <Card className="mx-auto mb-4 max-w-xl break-inside-avoid overflow-hidden rounded-2xl bg-brown-leaf">
       <CardHeader>
         <CardTitle className="-mx-6 -mt-6 bg-red-highlight p-2 text-center text-xl font-bold text-white">
           {section.title}

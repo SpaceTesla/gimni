@@ -69,7 +69,7 @@ const Hero = () => {
             variant={'link'}
             className="mt-4 inline-flex min-w-[168px] items-center gap-6 rounded-xl bg-background px-6 py-1.5 text-[12px] font-semibold shadow-[0px_0px_4px_rgba(0,0,0,0.5)] hover:no-underline"
           >
-            <Link href={'/alacarte'}>
+            <Link href={'/takeaway'}>
               <div className={'h-6 w-6'}>
                 <Image
                   src="/assets/menu.svg"
@@ -79,7 +79,7 @@ const Hero = () => {
                   className={'h-6 w-6'}
                 />
               </div>
-              <span>À LA CARTE</span>
+              <span>TAKE AWAY</span>
             </Link>
           </Button>
         </div>

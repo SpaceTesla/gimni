@@ -1,0 +1,211 @@
+{
+  "sections": [
+    {
+      "title": "BENGALI SPECIALITY",
+      "items": [
+        { "name": "Illish Macher Jhal (Sorse Diye)", "price": 315 },
+        { "name": "Chingri Sorse", "price": 288 },
+        { "name": "Prawns Malai Curry", "price": 270 },
+        { "name": "Doi (Curd) Illish", "price": 270 },
+        { "name": "Mutton Kosha", "price": 250 },
+        { "name": "Illish Mach Bhaja", "price": 225 },
+        { "name": "Doi (Curd) Katla", "price": 210 },
+        { "name": "Katla Macher Kalia", "price": 210 },
+        { "name": "Chicken Kosha", "price": 210 },
+        { "name": "Aloo Potol Chingri (Prawns) Curry", "price": 220 },
+        { "name": "Pabda Jhal", "price": 210 },
+        { "name": "Doi (Curd) Rui", "price": 210 },
+        { "name": "Rui Macher Kalia", "price": 210 },
+        { "name": "Katla Macher Jhal (Sorse)", "price": 210 },
+        { "name": "Macher Jhol", "price": 150 },
+        { "name": "Rui Macher Jhal (Sorse)", "price": 180 },
+        { "name": "Mudi Ghonto", "price": 150 },
+        { "name": "Mocha Chingri", "price": 150 },
+        { "name": "Fish Fry (Katla)", "price": 150 },
+        { "name": "Fish Fry (Rui)", "price": 135 },
+        { "name": "Aloo Soya Torkari (Dry)", "price": 100 },
+        { "name": "Macher Dimer Boda", "price": 90 },
+        { "name": "Egg Masala", "price": 100 },
+        { "name": "Ghugni (Large)", "price": 100 },
+        { "name": "Tomatoer Chutney", "price": 50 },
+        { "name": "Aamer Chutney", "price": 75 },
+        { "name": "Dimer Omletter Jhol", "price": 75 },
+        { "name": "Dimer Jhol", "price": 75 },
+        { "name": "Aloo Bhaja (Gol Gol)", "price": 65 },
+        { "name": "Karela (Bitter Gourd) Chips", "price": 55 },
+        { "name": "Ghugni (Small)", "price": 55 },
+        { "name": "Potol Bhaja", "price": 55 },
+        { "name": "Aloo Bhaate", "price": 40 },
+        { "name": "Kumro Bhaja", "price": 40 },
+        { "name": "Begun Bhaja", "price": 40 }
+      ]
+    },
+    {
+      "title": "SNACK UP",
+      "items": [
+        { "name": "Egg Ghugni", "price": 80 },
+        { "name": "Keema Matar (Ghugni)", "price": 120 },
+        { "name": "Peanut Masala", "price": 70 },
+        { "name": "Green Peas Garlic Fry", "price": 70 },
+        { "name": "Fish Cutlet", "price": 55 },
+        { "name": "Chicken Cutlet", "price": 55 },
+        { "name": "Mochar (Banana Flower) Cutlet", "price": 60 },
+        { "name": "Prawns Cutlet", "price": 50 },
+        { "name": "Beguni (Brinjal) Pakoda", "price": 40 },
+        { "name": "Vegetable Cutlet", "price": 30 },
+        { "name": "Diimer (Egg) Devil", "price": 30 },
+        { "name": "Paneer Cutlet", "price": 45 },
+        { "name": "Mutton Cutlet", "price": 70 },
+        { "name": "Aloo Chop (Bonda)", "price": 15 },
+        { "name": "Pyaji (Onion) Pakoda", "price": 20 }
+      ]
+    },
+    {
+      "title": "ROLL-E-ROLL",
+      "items": [
+        { "name": "Double Egg Chicken Roll", "price": 90 },
+        { "name": "Double Egg Chicken Roll (Wheat)", "price": 100 },
+        { "name": "Chicken Roll (Wheat)", "price": 80 },
+        { "name": "Paneer Egg Roll", "price": 80 },
+        { "name": "Double Egg Roll (Wheat)", "price": 70 },
+        { "name": "Paneer Egg Roll (Wheat)", "price": 85 },
+        { "name": "Chicken Roll", "price": 75 },
+        { "name": "Double Egg Roll", "price": 75 },
+        { "name": "Paneer Roll", "price": 70 },
+        { "name": "Paneer Roll (Wheat)", "price": 75 }
+      ]
+    },
+    {
+      "title": "NORTH STYLE",
+      "items": [
+        { "name": "Paneer Masala", "price": 110 },
+        { "name": "Paneer Bhurji", "price": 115 },
+        { "name": "Dal Tadka", "price": 85 },
+        { "name": "Dal Fry", "price": 65 },
+        { "name": "Egg Bhurji", "price": 65 },
+        { "name": "Jeera Aloo", "price": 65 },
+        { "name": "Dhaniya Aloo", "price": 65 }
+      ]
+    },
+    {
+      "title": "NIRAMISH-BENGALI SPECIALITY",
+      "items": [
+        { "name": "Niramish Aloo Jhinge Daanta Posto - Large", "price": 225 },
+        { "name": "Niramish - Aloo Posto (Khus Khus) Large", "price": 215 },
+        { "name": "Niramish Jhinge Posto Large", "price": 180 },
+        { "name": "Niramish - Dhokar (Chana Dal) Dalna", "price": 135 },
+        { "name": "Niramish - Bhaja Moonger Dal (Large)", "price": 145 },
+        { "name": "Niramish - Aloo Potoler Dalna", "price": 135 },
+        { "name": "Niramish Bengali Khichudi", "price": 110 },
+        { "name": "Niramish - Aloo Jhinge Daanta Posto Small", "price": 125 },
+        { "name": "Niramish - Aloo Kofir Dalna", "price": 100 },
+        { "name": "Niramish - Potoler (Parwal) Dorma", "price": 125 },
+        { "name": "Niramish - Aloo Posto (Khus Khus) Small", "price": 110 },
+        { "name": "Niramish - Jhinge Posto (Small)", "price": 110 },
+        { "name": "Niramish - Shukto", "price": 85 },
+        { "name": "Niramish - Bhaja Moonger Dal (Small)", "price": 85 },
+        { "name": "Niramish - Biurir Dal (Large)", "price": 80 },
+        { "name": "Niramish - Cholar Dal", "price": 80 },
+        {
+          "name": "Niramish - Aloo Bandha Kofir (Cabbage) Torkari",
+          "price": 70
+        },
+        { "name": "Niramish - Biurir Dal (Small)", "price": 55 },
+        { "name": "Niramish Aloo Dum (Large)", "price": 85 },
+        { "name": "Niramish Aloo Dum (Small)", "price": 50 }
+      ]
+    },
+    {
+      "title": "RICE & BREAD",
+      "items": [
+        { "name": "Jeera Rice", "price": 80 },
+        { "name": "Plain Rice", "price": 65 },
+        { "name": "Aloo Paratha", "price": 45 },
+        { "name": "Plain Paratha", "price": 30 },
+        { "name": "Kodaisutir Kochuri", "price": 18 },
+        { "name": "Roti", "price": 15 },
+        { "name": "Loochi", "price": 10 }
+      ]
+    },
+    {
+      "title": "MISTI",
+      "items": [
+        { "name": "Gajar Halwa", "price": 85 },
+        { "name": "Caramel Kheer", "price": 70 },
+        { "name": "Sooji Halwa", "price": 55 },
+        { "name": "Kheer or Pias", "price": 55 },
+        { "name": "Gulab Jamoon", "price": 20 },
+        { "name": "Rasogolla", "price": 20 }
+      ]
+    },
+    {
+      "title": "GIMNI'S SPECIAL BIRIYANI",
+      "items": [
+        { "name": "Gimni's Chicken Biriyani", "price": 160 },
+        { "name": "Gimni's Mutton Biriyani", "price": 250 },
+        { "name": "Gimni's Aloo Biriyani", "price": 90 },
+        { "name": "Gimni's Egg Biryani", "price": 115 }
+      ]
+    },
+    {
+      "title": "COMBOS",
+      "items": [
+        { "name": "Rice Dal & Fish- Katla Fry Combo", "price": 225 },
+        { "name": "Rice Macher Jhol Combo", "price": 225 },
+        { "name": "Rice Dal & Fish- Rohu Fry Combo", "price": 210 },
+        { "name": "Khichudi Mach Bhaja Combo", "price": 200 },
+        { "name": "Rice, Biurir Dal & Aloo Posto Combo", "price": 180 },
+        { "name": "Khichudi Subzi Combo", "price": 180 },
+        { "name": "Khichudi Omlette Combo", "price": 180 },
+        { "name": "Bhaat & Dimer Jhol (Egg Curry)", "price": 180 },
+        { "name": "Kodaisutir Kachori Aloo Dum", "price": 160 },
+        { "name": "Khichudi Aloo Bhaja Combo", "price": 160 },
+        { "name": "Loochi Cholar Dal", "price": 145 },
+        { "name": "Rice Daal Aloo Bhaate Combo", "price": 135 },
+        { "name": "Loochi Aloo Dum", "price": 110 },
+        { "name": "Loochi Ghugni", "price": 110 },
+        { "name": "Paratha Sabzi Combo (2 pcs)", "price": 100 }
+      ]
+    },
+    {
+      "title": "CHINESE",
+      "items": [
+        { "name": "Mixed Noodles", "price": 225 },
+        { "name": "Egg Chicken Noodles", "price": 180 },
+        { "name": "Egg Prawns Noodles", "price": 160 },
+        { "name": "Paneer Noodles", "price": 135 },
+        { "name": "Chicken Noodles", "price": 125 },
+        { "name": "Chilli Chicken", "price": 110 },
+        { "name": "Chilli Paneer", "price": 110 },
+        { "name": "Chilli Egg", "price": 99 },
+        { "name": "Veg Noodles", "price": 90 },
+        { "name": "Pepper Chicken", "price": 108 },
+        { "name": "Garlic Chicken", "price": 108 },
+        { "name": "Egg Noodles", "price": 100 }
+      ]
+    },
+    {
+      "title": "BENGALI THALI",
+      "items": [
+        { "name": "Bengali Illish Maach Thali", "price": 400 },
+        { "name": "Bengali Mutton Thali", "price": 300 },
+        { "name": "Bengali Prawns Thali", "price": 250 },
+        { "name": "Bengali Chicken Thali", "price": 250 },
+        { "name": "Bengali Fish Thali (Katla)", "price": 230 },
+        { "name": "Bengali Fish Thali (Rohu)", "price": 220 },
+        { "name": "Bengali Paneer Thali", "price": 220 },
+        { "name": "Bengali Egg Thali", "price": 200 },
+        { "name": "Bengali Veg Thali", "price": 185 }
+      ]
+    },
+    {
+      "title": "ACCOMPANIMENTS",
+      "items": [
+        { "name": "Green Salad", "price": 60 },
+        { "name": "Omlette (Double Egg)", "price": 55 },
+        { "name": "Boiled Eggs (2 Pcs)", "price": 30 },
+        { "name": "Pickle Sachet", "price": 5 }
+      ]
+    }
+  ]
+}
