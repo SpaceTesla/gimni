@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { handleCheckout } from '@/utils/checkout';
 import { Edit, Trash } from 'lucide-react';
 import { FoodDialog } from '@/components/food-dialog';
+import { AddOnsOnlyFoodDialog } from '@/components/addons-only-food-dialog';
 
 import Combo from '@/types/combo';
 import type MenuItem from '@/types/menu';
@@ -101,27 +102,33 @@ const Cart: React.FC<CartProps> = ({ userInfo, dialogInfo }) => {
                   <span className=""> Quantity: {item.quantity}</span>
                   <span className={'ml-auto'}>Price: ₹ {item.totalPrice}</span>
                 </div>
-                <div className={'mb-1 ml-2'}>Selections</div>
-                <div className="flex flex-col gap-0.5 rounded-lg bg-white px-4 py-2">
-                  {selections.map((selection, idx) => (
-                    <div
-                      key={idx}
-                      className="flex justify-between text-sm text-zinc-700"
-                    >
-                      <span>{selection}</span>
+                {selections.length > 0 && (
+                  <>
+                    <div className={'mb-1 ml-2'}>Selections</div>
+                    <div className="flex flex-col gap-0.5 rounded-lg bg-white px-4 py-2">
+                      {selections.map((selection, idx) => (
+                        <div
+                          key={idx}
+                          className="flex justify-between text-sm text-zinc-700"
+                        >
+                          <span>{selection}</span>
+                        </div>
+                      ))}
                     </div>
-                  ))}
-                </div>
+                  </>
+                )}
 
-                <div className={'mb-1 ml-2 mt-4'}>Add-Ons</div>
                 {addOns.length > 0 ? (
-                  <div className="flex flex-col gap-0.5 rounded-lg bg-white px-4 py-2">
-                    {addOns.map((addOn, idx) => (
-                      <div key={idx} className="flex justify-between text-sm">
-                        <span>{addOn}</span>
-                      </div>
-                    ))}
-                  </div>
+                  <>
+                    <div className={'mb-1 ml-2 mt-4'}>Add-Ons</div>
+                    <div className="flex flex-col gap-0.5 rounded-lg bg-white px-4 py-2">
+                      {addOns.map((addOn, idx) => (
+                        <div key={idx} className="flex justify-between text-sm">
+                          <span>{addOn}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </>
                 ) : (
                   <div className="flex justify-between pl-4 text-sm">
                     <span>No add-ons selected</span>
@@ -144,21 +151,35 @@ const Cart: React.FC<CartProps> = ({ userInfo, dialogInfo }) => {
           </Button>
         </div>
       </CardContent>
-      {currentItem && (
-        <FoodDialog
-          combo={dialogInfo.combos.find(
-            (combo) => combo.name === currentItem.comboName,
-          )}
-          menu={dialogInfo.menu}
-          open={open}
-          onOpenChange={setOpen}
-          category={
-            currentItem.category as 'Meal' | 'Birthday Snack-Up' | 'Other'
-          }
-          pax={dialogInfo.pax}
-          numberOfPeople={dialogInfo.numberOfPeople}
-        />
-      )}
+      {currentItem &&
+        (currentItem.comboName === 'Custom Combo' ? (
+          <AddOnsOnlyFoodDialog
+            combo={dialogInfo.combos.find(
+              (combo) => combo.name === currentItem.comboName,
+            )}
+            menu={dialogInfo.menu}
+            open={open}
+            onOpenChange={setOpen}
+            category={
+              currentItem.category as 'Meal' | 'Birthday Snack-Up' | 'Other'
+            }
+            numberOfPeople={dialogInfo.numberOfPeople}
+          />
+        ) : (
+          <FoodDialog
+            combo={dialogInfo.combos.find(
+              (combo) => combo.name === currentItem.comboName,
+            )}
+            menu={dialogInfo.menu}
+            open={open}
+            onOpenChange={setOpen}
+            category={
+              currentItem.category as 'Meal' | 'Birthday Snack-Up' | 'Other'
+            }
+            pax={dialogInfo.pax}
+            numberOfPeople={dialogInfo.numberOfPeople}
+          />
+        ))}
     </Card>
   );
 };

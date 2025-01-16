@@ -50,45 +50,7 @@ export function AddOnsOnlyFoodDialog({
   const [quantity, setQuantity] = React.useState(numberOfPeople);
 
   const handleNext = () => {
-    if (currentStep === 'selectDiet') {
-      setCurrentStep('selectMenu');
-    } else if (currentStep === 'selectMenu') {
-      const allSelectionsMade = Object.keys(combo ?? {}).every((key) => {
-        if (
-          key === 'id' ||
-          key === 'name' ||
-          key === 'price' ||
-          key === 'papad' ||
-          key === 'salad' ||
-          key === 'chutney' ||
-          Number(combo?.[key as keyof typeof combo] ?? 0) === 0
-        ) {
-          return true;
-        }
-        return (
-          selections[key]?.length ===
-          Number(combo?.[key as keyof typeof combo] ?? 0)
-        );
-      });
-
-      if (allSelectionsMade) {
-        setCurrentStep('selectAddOns');
-      } else {
-        toast({
-          variant: 'destructive',
-          title: 'Incomplete Selection',
-          description:
-            'Please select all required menu items before proceeding.',
-        });
-      }
-    } else if (currentStep === 'selectAddOns') {
-      handleAddToCart();
-    }
-  };
-
-  const handleBack = () => {
-    if (currentStep === 'selectMenu') setCurrentStep('selectDiet');
-    else if (currentStep === 'selectAddOns') setCurrentStep('selectMenu');
+    handleAddToCart();
   };
 
   const [showMore, setShowMore] = useState<Record<string, boolean>>({});
