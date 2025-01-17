@@ -88,9 +88,12 @@ export default function AboutPage() {
 
           {/* Testimonials */}
           <section className="bg-gradient-to-r from-yellow-background via-white/50 to-yellow-background py-12">
-            <h2 className="mb-8 text-center text-3xl font-bold md:text-4xl">
-              Our Reviews
-            </h2>
+            <div className="mb-8 flex justify-center text-3xl font-bold md:text-4xl">
+              <Image src={'/star.png'} alt="Star" width={240} height={60} />
+            </div>
+            <div className={'pb-4 text-center text-lg font-semibold italic'}>
+              Rated 4.5 stars across multiple platforms
+            </div>
             <InfiniteMovingCards
               cards={testimonials.map((testimonial) => (
                 <TestimonialCard testimonial={testimonial} />
