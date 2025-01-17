@@ -135,21 +135,21 @@ export function FoodDialog({
     prices: number[],
   ): number => {
     switch (true) {
-      case quantity >= 10 && quantity <= 20:
+      case quantity >= 10 && quantity <= 19:
         return prices[0];
-      case quantity >= 21 && quantity <= 30:
+      case quantity >= 20 && quantity <= 29:
         return prices[1];
-      case quantity >= 31 && quantity <= 50:
+      case quantity >= 30 && quantity <= 49:
         return prices[2];
-      case quantity >= 51 && quantity <= 100:
+      case quantity >= 50 && quantity <= 99:
         return prices[3];
-      case quantity >= 101 && quantity <= 150:
+      case quantity >= 100 && quantity <= 149:
         return prices[4];
-      case quantity >= 151 && quantity <= 200:
+      case quantity >= 150 && quantity <= 199:
         return prices[5];
-      case quantity >= 201 && quantity <= 250:
+      case quantity >= 200 && quantity <= 249:
         return prices[6];
-      case quantity >= 251 && quantity <= 300:
+      case quantity >= 250 && quantity <= 299:
         return prices[7];
       default:
         return prices[0]; // Default to the first price if no range matches
