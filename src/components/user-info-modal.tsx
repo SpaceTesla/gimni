@@ -122,7 +122,7 @@ export function UserInfoModal({ onSubmit }: UserInfoModalProps) {
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="date" className="text-right">
-                Date
+                Date of Event
               </Label>
               <div className="col-span-3">
                 <DatePickerDemo date={date} setDate={setDate} />
@@ -130,7 +130,7 @@ export function UserInfoModal({ onSubmit }: UserInfoModalProps) {
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="time" className="text-right">
-                Time
+                Time of Delivery
               </Label>
               <Input
                 id="time"
