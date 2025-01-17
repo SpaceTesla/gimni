@@ -5,9 +5,12 @@ import DefaultLayout from '@/app/default-layout';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { MenuData } from '@/data/menu';
+import { Button } from '@/components/ui/button';
+import { ArrowUpIcon } from 'lucide-react';
 
 export default function MenuPage() {
   const [menuData, setMenuData] = useState<MenuData | null>(null);
+  const [isAtBottom, setIsAtBottom] = useState(false);
 
   useEffect(() => {
     axios
@@ -18,6 +21,31 @@ export default function MenuPage() {
       .catch((error) => {
         console.error('Error fetching menu data:', error);
       });
+  }, []);
+
+  const [showButton, setShowButton] = useState(false);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleScroll = () => {
+    const isBottom =
+      window.innerHeight + window.scrollY >= document.body.offsetHeight - 100;
+    setIsAtBottom(isBottom);
+
+    if (window.scrollY > 800) {
+      setShowButton(true);
+    } else {
+      setShowButton(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   if (!menuData) {
@@ -43,6 +71,16 @@ export default function MenuPage() {
           ))}
         </div>
       </div>
+      {showButton && (
+        <Button
+          onClick={scrollToTop}
+          className="fixed bottom-8 left-1/2 aspect-square -translate-x-1/2 transform rounded-full bg-blue-500 bg-red-highlight p-4 shadow-md hover:bg-red-highlight lg:hidden"
+        >
+          <div>
+            <ArrowUpIcon width={'24'} height={'24'} />
+          </div>
+        </Button>
+      )}
     </DefaultLayout>
   );
 }
