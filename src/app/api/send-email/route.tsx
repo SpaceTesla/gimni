@@ -200,8 +200,8 @@ export async function POST(request: Request) {
     const mailOptions = {
       from: process.env.EMAIL_USER,
       to: 'shivansh.karan@gmail.com',
-      subject: 'Cart Details',
-      text: 'Please find the attached cart details.',
+      subject: `${userInfo.name} - ${eventDate} - ${userInfo.occasion}`,
+      text: `${userInfo.name} has placed on order on ${eventDate} for ${userInfo.occasion}`,
       attachments: [
         {
           filename: 'cart.xlsx',
