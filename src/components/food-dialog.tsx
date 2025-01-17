@@ -223,16 +223,22 @@ export function FoodDialog({
       filteredMenu[key] = menu[key].filter((item) => {
         const isCategoryMatch = item.category === selectedCategory;
         const isDietMatch =
-          selectedDiet === 'Non-Veg'
-            ? key.toLowerCase() === 'starter' || key.toLowerCase() === 'gravy'
-              ? item.diet === 'Non-Veg'
-              : true
-            : item.diet === selectedDiet;
+          selectedDiet === 'Non-Veg' ? true : item.diet === 'Veg';
         const isNotExcludedItem =
           item.name.toLowerCase() !== 'salad' &&
           item.name.toLowerCase() !== 'papad';
+        const isNotSpecificDish = ![
+          'bhetki fry',
+          'illish macher jhal (sorse diye)',
+          'doi (curd) illish',
+        ].includes(item.name.toLowerCase());
 
-        return isCategoryMatch && isDietMatch && isNotExcludedItem;
+        return (
+          isCategoryMatch &&
+          isDietMatch &&
+          isNotExcludedItem &&
+          isNotSpecificDish
+        );
       });
     });
 
