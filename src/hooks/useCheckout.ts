@@ -10,6 +10,7 @@ interface UserInfo {
   numberOfPeople: number;
   occasion: string;
   date: Date;
+  time: string;
 }
 
 export const useCheckout = () => {

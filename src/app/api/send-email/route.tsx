@@ -14,6 +14,7 @@ interface UserInfo {
   numberOfPeople: number;
   occasion: string;
   date: Date;
+  time: string;
 }
 
 interface CartItem {
@@ -37,6 +38,13 @@ export async function POST(request: Request) {
     console.log('User Info:', userInfo);
     console.log('Cart Items:', cartItems);
 
+    function convertTo12HourTime(timeString: string): string {
+      const [hours, minutes] = timeString.split(':').map(Number);
+      const period = hours >= 12 ? 'PM' : 'AM';
+      const adjustedHours = hours % 12 || 12; // Convert 0 to 12 for 12 AM
+      return `${adjustedHours}:${minutes.toString().padStart(2, '0')} ${period}`;
+    }
+
     // Create Excel file
     const workbook = new ExcelJS.Workbook();
     const worksheet = workbook.addWorksheet('Cart');
@@ -48,6 +56,7 @@ export async function POST(request: Request) {
       'No. of People',
       'Occasion',
       'Event Date',
+      'Event Time',
       'Address',
     ]);
     userHeader.eachCell((cell) => {
@@ -64,12 +73,16 @@ export async function POST(request: Request) {
     const eventDate = new Date(userInfo.date).toLocaleDateString('en-GB', {
       timeZone: 'Asia/Kolkata',
     });
+
+    const time24HR = convertTo12HourTime(userInfo.time);
+
     worksheet.addRow([
       userInfo.name,
       Number(userInfo.phone),
       Number(userInfo.numberOfPeople),
       userInfo.occasion,
       eventDate,
+      time24HR,
       userInfo.address,
     ]);
 
@@ -143,6 +156,12 @@ export async function POST(request: Request) {
     });
     yPosition -= 20;
     page.drawText(`Event Date: ${eventDate}`, {
+      x: 50,
+      y: yPosition,
+      size: 12,
+    });
+    yPosition -= 20;
+    page.drawText(`Event Time: ${time24HR}`, {
       x: 50,
       y: yPosition,
       size: 12,

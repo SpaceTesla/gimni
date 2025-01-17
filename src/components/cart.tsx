@@ -21,6 +21,7 @@ interface CartProps {
     numberOfPeople: number;
     occasion: string;
     date: Date;
+    time: string;
   };
   dialogInfo: {
     combos: Combo[];

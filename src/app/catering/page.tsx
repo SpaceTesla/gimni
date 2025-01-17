@@ -20,6 +20,7 @@ export default function FoodOrdering() {
     phone: string;
     address: string;
     date: Date;
+    time: string;
     numberOfPeople: number;
     occasion: string;
   } | null>(null);
@@ -119,6 +120,7 @@ export default function FoodOrdering() {
     phone: string;
     address: string;
     date: Date;
+    time: string;
     numberOfPeople: number;
     occasion: string;
   }) => {

@@ -32,6 +32,7 @@ interface UserInfoModalProps {
     phone: string;
     address: string;
     date: Date;
+    time: string;
     numberOfPeople: number;
     occasion: string;
   }) => void;
@@ -42,6 +43,7 @@ export function UserInfoModal({ onSubmit }: UserInfoModalProps) {
   const [phone, setPhone] = useState('');
   const [address, setAddress] = useState('');
   const [date, setDate] = useState<Date | undefined>(new Date());
+  const [time, setTime] = useState('');
   const [numberOfPeople, setNumberOfPeople] = useState(10);
   const [occasion, setOccasion] = useState('');
   const router = useRouter();
@@ -57,8 +59,15 @@ export function UserInfoModal({ onSubmit }: UserInfoModalProps) {
       });
       return;
     }
+    if (!occasion) {
+      toast({
+        title: 'Invalid Occasion',
+        description: 'Please select an occasion',
+      });
+      return;
+    }
     if (date) {
-      onSubmit({ name, phone, address, date, numberOfPeople, occasion });
+      onSubmit({ name, phone, address, date, time, numberOfPeople, occasion });
     }
   };
 
@@ -118,6 +127,19 @@ export function UserInfoModal({ onSubmit }: UserInfoModalProps) {
               <div className="col-span-3">
                 <DatePickerDemo date={date} setDate={setDate} />
               </div>
+            </div>
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="time" className="text-right">
+                Time
+              </Label>
+              <Input
+                id="time"
+                type="time"
+                value={time}
+                onChange={(e) => setTime(e.target.value)}
+                className="col-span-3 w-full"
+                required
+              />
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="numberOfPeople" className="text-right">
