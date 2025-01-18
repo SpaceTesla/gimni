@@ -154,7 +154,7 @@ const Cart: React.FC<CartProps> = ({ userInfo, dialogInfo }) => {
               await handleCheckout(userInfo, cartItems);
 
               // Ensure the phone number is in the correct format
-              const phoneNumber = '+917321896070';
+              const phoneNumber = '+917483139254';
               const whatsappLink = `https://wa.me/${phoneNumber}?text=Hi!%20I%20am%20interested%20to%20place%20an%20order.`;
 
               // Check if window is available

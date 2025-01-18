@@ -199,7 +199,7 @@ export async function POST(request: Request) {
 
     const mailOptions = {
       from: process.env.EMAIL_USER,
-      to: 'shivansh.karan@gmail.com',
+      to: 'kitchengimnis@gmail.com',
       subject: `${userInfo.name} - ${eventDate} - ${userInfo.occasion}`,
       text: `${userInfo.name} has placed on order on ${eventDate} for ${userInfo.occasion}`,
       attachments: [
