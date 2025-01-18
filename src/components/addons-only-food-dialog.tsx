@@ -60,32 +60,49 @@ export function AddOnsOnlyFoodDialog({
   );
 
   const [addOns, setAddOns] = React.useState<Record<string, string[]>>({});
+  const [additionals, setAdditionals] = useState<Record<string, boolean>>({
+    Water: false,
+    Plates: false,
+    Spoons: false,
+    Bowls: false,
+    'Delivery within city': false,
+    'Soft Drink': false,
+    'Fruit Juice': false,
+  });
 
   const handleSelection = (
     groupTitle: string,
     value: string,
     maxSelections: number,
     isAddOn: boolean = false,
+    isAdditional: boolean = false,
   ) => {
-    const setState = isAddOn ? setAddOns : setSelections;
-    setState((prev) => {
-      const currentSelections = prev[groupTitle] || [];
-      let newSelections: string[];
-
-      if (currentSelections.includes(value)) {
-        newSelections = currentSelections.filter((item) => item !== value);
-      } else {
-        newSelections = [...currentSelections, value];
-        if (newSelections.length > maxSelections) {
-          newSelections = newSelections.slice(-maxSelections);
-        }
-      }
-
-      return {
+    if (isAdditional) {
+      setAdditionals((prev) => ({
         ...prev,
-        [groupTitle]: newSelections,
-      };
-    });
+        [value]: !prev[value],
+      }));
+    } else {
+      const setState = isAddOn ? setAddOns : setSelections;
+      setState((prev) => {
+        const currentSelections = prev[groupTitle] || [];
+        let newSelections: string[];
+
+        if (currentSelections.includes(value)) {
+          newSelections = currentSelections.filter((item) => item !== value);
+        } else {
+          newSelections = [...currentSelections, value];
+          if (newSelections.length > maxSelections) {
+            newSelections = newSelections.slice(-maxSelections);
+          }
+        }
+
+        return {
+          ...prev,
+          [groupTitle]: newSelections,
+        };
+      });
+    }
   };
 
   const getPriceBasedOnQuantity = (
@@ -107,7 +124,7 @@ export function AddOnsOnlyFoodDialog({
         return prices[5];
       case quantity >= 200 && quantity <= 249:
         return prices[6];
-      case quantity >= 250 && quantity <= 299:
+      case quantity >= 250:
         return prices[7];
       default:
         return prices[0]; // Default to the first price if no range matches
@@ -125,13 +142,11 @@ export function AddOnsOnlyFoodDialog({
       );
     }, 0);
 
-    let totalPrice = addOnsPrice;
+    const additionalsPrice = Object.keys(additionals).reduce((total, key) => {
+      return total + (additionals[key] ? 10 : 0); // Assuming each additional item costs 10
+    }, 0);
 
-    // if (combo && pax) {
-    //   const comboPrices = pax[combo.name] ?? [];
-    //   const comboPrice = getPriceBasedOnQuantity(quantity, comboPrices);
-    //   totalPrice += comboPrice;
-    // }
+    let totalPrice = addOnsPrice + additionalsPrice;
 
     const cartItem = {
       id: combo?.id.toString() ?? 'add-ons-only',
@@ -139,7 +154,18 @@ export function AddOnsOnlyFoodDialog({
       category,
       dietType: menuType === 'veg' ? 'Veg' : 'Non-Veg',
       selections,
-      addOns,
+      addOns: {
+        ...addOns,
+        ...Object.keys(additionals).reduce(
+          (acc, key) => {
+            if (additionals[key]) {
+              acc[key] = [key];
+            }
+            return acc;
+          },
+          {} as Record<string, string[]>,
+        ),
+      },
       quantity,
       comboPrice: 0,
       totalPrice: Number(totalPrice.toFixed(2)),
@@ -152,6 +178,7 @@ export function AddOnsOnlyFoodDialog({
     console.log('Diet Type:', menuType === 'veg' ? 'Veg' : 'Non-Veg');
     console.log('Menu Items Selected:', selections);
     console.log('Add-Ons Selected:', addOns);
+    console.log('Additionals Selected:', additionals);
     console.log('Total Price:', totalPrice.toFixed(2));
 
     onOpenChange(false);
@@ -353,6 +380,38 @@ export function AddOnsOnlyFoodDialog({
                     </div>
                   );
                 })}
+                {/* Additional Items Selection */}
+                <div>
+                  <div className="flex items-center justify-between">
+                    <span>Additionals</span>
+                  </div>
+                  <div>
+                    <ul className="space-y-2 rounded-2xl bg-white/50 p-4">
+                      {Object.keys(additionals).map((item) => (
+                        <div
+                          key={item}
+                          className="flex cursor-pointer items-center justify-between p-1 text-sm text-gray-600"
+                        >
+                          <Label
+                            htmlFor={`additional-${item}`}
+                            className="flex w-full cursor-pointer justify-between pr-4 text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                          >
+                            <span>{item}</span>
+                            <span>MRP + SC</span>
+                          </Label>
+                          <Checkbox
+                            id={`additional-${item}`}
+                            className="peer"
+                            checked={additionals[item]}
+                            onCheckedChange={() => {
+                              handleSelection('', item, Infinity, false, true);
+                            }}
+                          />
+                        </div>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
               </div>
             </div>
           )}

@@ -57,7 +57,7 @@ const ComboCard: React.FC<ComboCardProps> = ({
         return prices[5];
       case quantity >= 200 && quantity <= 249:
         return prices[6];
-      case quantity >= 250 && quantity <= 299:
+      case quantity >= 250:
         return prices[7];
       default:
         return prices[0]; // Default to the first price if no range matches
