@@ -176,7 +176,7 @@ export default function AboutPage() {
             </div>
           </section>
           <section>
-            <p className="rounded-3xl bg-white/50 p-4 text-justify text-xs text-gray-600">
+            <div className="rounded-3xl bg-white/50 p-4 text-justify text-xs text-gray-600">
               The information contained in this website is for general
               information purposes only. The information is provided by Gimny
               Food & Catering Services (OPC) Pvt.Ltd and while we endeavour to
@@ -225,7 +225,7 @@ export default function AboutPage() {
                   all such disputes.
                 </li>
               </ul>
-            </p>
+            </div>
           </section>
         </div>
       </div>
