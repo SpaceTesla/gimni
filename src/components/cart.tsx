@@ -150,7 +150,20 @@ const Cart: React.FC<CartProps> = ({ userInfo, dialogInfo }) => {
             <span>₹{totalAmount.toFixed(2)}</span>
           </div>
           <Button
-            onClick={() => handleCheckout(userInfo, cartItems)}
+            onClick={async () => {
+              await handleCheckout(userInfo, cartItems);
+
+              // Ensure the phone number is in the correct format
+              const phoneNumber = '+917321896070';
+              const whatsappLink = `https://wa.me/${phoneNumber}?text=Hi!%20I%20am%20interested%20to%20place%20an%20order.`;
+
+              // Check if window is available
+              if (typeof window !== 'undefined') {
+                window.open(whatsappLink, '_blank');
+              } else {
+                console.error('Window object is not available.');
+              }
+            }}
             className="h-12 w-full bg-red-500 text-white hover:bg-red-600"
           >
             {userInfo.numberOfPeople >= 300 ? 'Get a Quote' : 'Checkout'}
