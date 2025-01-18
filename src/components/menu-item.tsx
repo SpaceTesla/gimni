@@ -4,11 +4,12 @@ interface MenuItemProps {
   item: MenuItemType;
   points?: boolean;
   index?: number;
+  className?: string;
 }
 
-export function MenuItem({ item, points, index }: MenuItemProps) {
+export function MenuItem({ item, points, index, className }: MenuItemProps) {
   return (
-    <div className="flex items-center justify-between">
+    <div className={`flex items-center justify-between ${className}`}>
       <span className="text-gray-200">
         {points ? (
           <div className={'flex gap-2'}>

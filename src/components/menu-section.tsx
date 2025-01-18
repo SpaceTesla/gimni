@@ -4,11 +4,19 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 interface MenuSectionProps {
   section: MenuSectionType;
+  itemClassName?: string;
+  sectionClassName?: string;
 }
 
-export function MenuSection({ section }: MenuSectionProps) {
+export function MenuSection({
+  section,
+  itemClassName,
+  sectionClassName,
+}: MenuSectionProps) {
   return (
-    <Card className="mx-auto mb-4 max-w-xl break-inside-avoid overflow-hidden rounded-2xl bg-brown-leaf">
+    <Card
+      className={`mx-auto mb-4 max-w-xl break-inside-avoid overflow-hidden rounded-2xl bg-brown-leaf ${sectionClassName}`}
+    >
       <CardHeader>
         <CardTitle className="-mx-6 -mt-6 bg-red-highlight p-2 text-center text-xl font-bold text-white">
           {section.title}
@@ -21,6 +29,7 @@ export function MenuSection({ section }: MenuSectionProps) {
             item={item}
             points={section.title === 'NOTE'}
             index={index}
+            className={itemClassName}
           />
         ))}
       </CardContent>

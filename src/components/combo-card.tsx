@@ -90,7 +90,12 @@ const ComboCard: React.FC<ComboCardProps> = ({
           <div className="">
             <div className="flex items-center p-4">
               <div className={'flex items-center gap-1 text-primary/70'}>
-                {combo?.price === 0 ? (
+                {numberOfPeople >= 300 ? (
+                  <>
+                    <span className="text-lg">Price:</span>
+                    <span className="text-lg font-bold">--</span>
+                  </>
+                ) : combo?.price === 0 ? (
                   <span className="text-lg font-bold">
                     Price as per selection
                   </span>
