@@ -25,6 +25,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import * as React from 'react';
+import { TimeInput } from '@/components/ui/time-input';
 
 interface UserInfoModalProps {
   onSubmit: (data: {
@@ -46,6 +47,7 @@ export function UserInfoModal({ onSubmit }: UserInfoModalProps) {
   const [time, setTime] = useState('');
   const [numberOfPeople, setNumberOfPeople] = useState(10);
   const [occasion, setOccasion] = useState('');
+  const [otherOccasion, setOtherOccasion] = useState('');
   const router = useRouter();
   const { toast } = useToast();
 
@@ -66,8 +68,24 @@ export function UserInfoModal({ onSubmit }: UserInfoModalProps) {
       });
       return;
     }
+    if (occasion === 'Others' && !otherOccasion) {
+      toast({
+        title: 'Invalid Occasion',
+        description: 'Please specify your occasion',
+      });
+      return;
+    }
+    const finalOccasion = occasion === 'Others' ? otherOccasion : occasion;
     if (date) {
-      onSubmit({ name, phone, address, date, time, numberOfPeople, occasion });
+      onSubmit({
+        name,
+        phone,
+        address,
+        date,
+        time,
+        numberOfPeople,
+        occasion: finalOccasion,
+      });
     }
   };
 
@@ -132,13 +150,10 @@ export function UserInfoModal({ onSubmit }: UserInfoModalProps) {
               <Label htmlFor="time" className="text-right">
                 Time of Delivery
               </Label>
-              <Input
-                id="time"
-                type="time"
+              <TimeInput
                 value={time}
-                onChange={(e) => setTime(e.target.value)}
-                className="col-span-3 w-full"
-                required
+                onChange={setTime}
+                className="col-span-3"
               />
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
@@ -181,8 +196,17 @@ export function UserInfoModal({ onSubmit }: UserInfoModalProps) {
                     <SelectItem value="Others">Others</SelectItem>
                   </SelectContent>
                 </Select>
+                {occasion === 'Others' && (
+                  <Input
+                    id="otherOccasion"
+                    value={otherOccasion}
+                    onChange={(e) => setOtherOccasion(e.target.value)}
+                    className="mt-2"
+                    placeholder="Please specify your occasion"
+                  />
+                )}
               </div>
-            </div>
+            </div>{' '}
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="address" className="text-right">
