@@ -175,6 +175,58 @@ export default function AboutPage() {
               </div>
             </div>
           </section>
+          <section>
+            <p className="rounded-3xl bg-white/50 p-4 text-justify text-xs text-gray-600">
+              The information contained in this website is for general
+              information purposes only. The information is provided by Gimny
+              Food & Catering Services (OPC) Pvt.Ltd and while we endeavour to
+              keep the information up to date and correct, we make no
+              representations or warranties of any kind, express or implied,
+              about the completeness, accuracy, reliability, suitability or
+              availability with respect to the website or the information,
+              products, services, or related graphics contained on the website
+              for any purpose. Any reliance you place on such information is
+              therefore strictly at your own risk.
+              <br />
+              <br />
+              You may not, except with our express written permission,
+              distribute or commercially exploit the content. Nor may you
+              transmit it or store it in any other website or other form of
+              electronic retrieval system.
+              <br />
+              <br />
+              Any redistribution or reproduction of part or all of the contents
+              in any form is prohibited other than the following:
+              <ul className="list-inside list-disc">
+                <li>
+                  you may print or download to a local hard disk extracts for
+                  your personal and non-commercial use only.
+                </li>
+                <li>
+                  Unauthorized use of this website may give rise to a claim for
+                  damages and/or be a criminal offence.
+                </li>
+                <li>
+                  From time to time this website may also include links to other
+                  websites. These links are provided for your convenience to
+                  provide further information. They do not signify that Gimni’s
+                  Kitchen endorse the website(s). Gimni’s Kitchen has no
+                  responsibility for the content of the linked website(s).
+                </li>
+                <li>
+                  Applicable Law and Jurisdiction of this WEBSITE are governed
+                  by and to be interpreted in accordance with laws of India,
+                  without regard to the choice or conflicts of law provisions of
+                  any jurisdiction. The user/site visitor agrees that in the
+                  event of any dispute arising in relation to this Disclaimer or
+                  any dispute arising in relation to the web site whether in
+                  contract or tort or otherwise, to submit to the jurisdiction
+                  of the courts located at Bengaluru only for the resolution of
+                  all such disputes.
+                </li>
+              </ul>
+            </p>
+          </section>
         </div>
       </div>
     </DefaultLayout>
