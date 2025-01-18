@@ -206,6 +206,25 @@
         { "name": "Boiled Eggs (2 Pcs)", "price": 30 },
         { "name": "Pickle Sachet", "price": 5 }
       ]
+    },
+    {
+      "title": "NOTE",
+      "items": [
+        { "name": "All Luchi combos - 4pcs" },
+        { "name": "All Kodaisutir Kachuri combos - 4pcs" },
+        { "name": "Roti Combos-3pcs" },
+        {
+          "name": "Please allow 15-20 mins for the orders to be prepared. They are freshly made."
+        },
+        { "name": "10% discount on bill value of ₹700 and above." },
+        { "name": "Packaging charge flat ₹10 per order for orders ₹700." },
+        {
+          "name": "Please use the Gimni's kitchen QR for payments only. Your bill is free if any other QR is offered."
+        },
+        {
+          "name": "Free home delivery within 2kms. Minimum order ₹300. Delivery charges will apply for more than 2kms or ₹300."
+        }
+      ]
     }
   ]
 }

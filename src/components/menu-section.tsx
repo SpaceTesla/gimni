@@ -16,7 +16,12 @@ export function MenuSection({ section }: MenuSectionProps) {
       </CardHeader>
       <CardContent className="grid gap-2">
         {section.items.map((item, index) => (
-          <MenuItem key={`${item.name}-${index}`} item={item} />
+          <MenuItem
+            key={`${item.name}-${index}`}
+            item={item}
+            points={section.title === 'NOTE'}
+            index={index}
+          />
         ))}
       </CardContent>
     </Card>
