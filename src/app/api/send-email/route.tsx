@@ -82,7 +82,7 @@ export async function POST(request: Request) {
       Number(userInfo.numberOfPeople),
       userInfo.occasion,
       eventDate,
-      time24HR,
+      userInfo.time,
       userInfo.address,
     ]);
 
@@ -161,7 +161,7 @@ export async function POST(request: Request) {
       size: 12,
     });
     yPosition -= 20;
-    page.drawText(`Event Time: ${time24HR}`, {
+    page.drawText(`Event Time: ${userInfo.time}`, {
       x: 50,
       y: yPosition,
       size: 12,
