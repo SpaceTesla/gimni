@@ -72,7 +72,7 @@ const Cart: React.FC<CartProps> = ({ userInfo, dialogInfo }) => {
         <CardTitle className="text-3xl font-black tracking-tight">
           CART
           <span className={'pl-2 text-sm font-normal'}>
-            (estimate. contact for actuals)
+            (estimate only contact for actuals)
           </span>
         </CardTitle>
       </CardHeader>
