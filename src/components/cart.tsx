@@ -171,6 +171,9 @@ const Cart: React.FC<CartProps> = ({ userInfo, dialogInfo }) => {
               // Check if window is available
               if (typeof window !== 'undefined') {
                 window.open(whatsappLink, '_blank');
+                setTimeout(() => {
+                  window.location.reload(); // Refresh the page after 2 seconds
+                }, 2000);
               } else {
                 console.error('Window object is not available.');
               }
