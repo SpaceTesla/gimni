@@ -106,7 +106,11 @@ const Cart: React.FC<CartProps> = ({ userInfo, dialogInfo }) => {
                 </div>
                 <div className={'flex p-2'}>
                   <span className=""> Quantity: {item.quantity}</span>
-                  <span className={'ml-auto'}>Price: ₹ {item.totalPrice}</span>
+                  {userInfo.numberOfPeople < 300 && (
+                    <span className={'ml-auto'}>
+                      Price: ₹ {item.totalPrice}
+                    </span>
+                  )}
                 </div>
                 {selections.length > 0 && (
                   <>
@@ -147,7 +151,11 @@ const Cart: React.FC<CartProps> = ({ userInfo, dialogInfo }) => {
         <div className="mt-6 space-y-4">
           <div className="flex justify-between text-lg font-bold">
             <span>Total:</span>
-            <span>₹{totalAmount.toFixed(2)}</span>
+            {userInfo.numberOfPeople < 300 ? (
+              <span>₹{totalAmount.toFixed(2)}</span>
+            ) : (
+              <span>Contact us for the price</span>
+            )}
           </div>
           <Button
             onClick={async () => {
