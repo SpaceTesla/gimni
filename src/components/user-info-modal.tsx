@@ -26,6 +26,7 @@ import {
 } from '@/components/ui/select';
 import * as React from 'react';
 import { TimeInput } from '@/components/ui/time-input';
+import { SimpleDatePicker } from '@/components/simple-date-picker';
 
 interface UserInfoModalProps {
   onSubmit: (data: {
@@ -43,7 +44,7 @@ export function UserInfoModal({ onSubmit }: UserInfoModalProps) {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [address, setAddress] = useState('');
-  const [date, setDate] = useState<Date | undefined>(new Date());
+  const [date, setDate] = useState<Date | null>(new Date());
   const [time, setTime] = useState('');
   const [numberOfPeople, setNumberOfPeople] = useState(10);
   const [occasion, setOccasion] = useState('');
@@ -143,7 +144,7 @@ export function UserInfoModal({ onSubmit }: UserInfoModalProps) {
                 Date of Event
               </Label>
               <div className="col-span-3">
-                <DatePickerDemo date={date} setDate={setDate} />
+                <SimpleDatePicker value={date} onChange={setDate} />
               </div>
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
