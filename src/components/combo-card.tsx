@@ -128,7 +128,6 @@ const ComboCard: React.FC<ComboCardProps> = ({
               >
                 Add to Cart
               </Button>
-              {/*x*/}
             </div>
 
             {pax ? (
