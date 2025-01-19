@@ -9,7 +9,7 @@ export const testimonials: Testimonial[] = [
   },
   {
     comment:
-      'If I say about Gimni\'s Kitchen first should be the service very professional and great hospitality.. Food is ultimate.. ordered their Chicken - it was just WOW 🤩 ,, cutlets are also good.. many more bengali dishes are which can give u the feel like "home away from home" Thank u so much Arpan for ur sweet hospitality ❤❤ love from Bhartiya City ❤',
+      'If I say about Gimni\'s Kitchen first should be the service very professional and great hospitality.. Food is ultimate.. ordered their Chicken - it was just WOW 🤩 ,, cutlets are also good.. many more bengali dishes are which can give u the feel like "home away from home" Thank u so much Arko for ur sweet hospitality ❤❤ love from Bhartiya City ❤',
   },
   {
     comment:

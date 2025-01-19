@@ -175,8 +175,11 @@ export default function AboutPage() {
               </div>
             </div>
           </section>
-          <section>
-            <div className="rounded-3xl bg-white/50 p-4 text-justify text-xs text-gray-600">
+          <section className="rounded-3xl bg-white/50 p-4 text-justify text-xs text-gray-600">
+            <h6 className={'pb-2 text-center text-xl font-semibold'}>
+              Disclaimer
+            </h6>
+            <div>
               The information contained in this website is for general
               information purposes only. The information is provided by Gimny
               Food & Catering Services (OPC) Pvt.Ltd and while we endeavour to
