@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useCart, CartItem } from '@/context/cartContext';
 import Image from 'next/image';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -48,6 +48,12 @@ const Cart: React.FC<CartProps> = ({ userInfo, dialogInfo }) => {
     setOpen(true);
   };
 
+  const resetDialogStates = () => {
+    console.log('Current Item:', currentItem);
+    setCurrentItem(null);
+    setOpen(false);
+  };
+
   const { removeItem } = useCart();
   const handleDelete = (item: CartItem) => {
     removeItem(item.id);
@@ -78,7 +84,7 @@ const Cart: React.FC<CartProps> = ({ userInfo, dialogInfo }) => {
             const addOns = Object.values(item.addOns).flat();
             const selections = Object.values(item.selections).flat();
             return (
-              <div key={index} className="mb-4 border-b p-4 pt-0">
+              <div key={index} className="mb-4 border-b p-4 pr-6 pt-0">
                 <div className="mb-2 flex items-center font-medium">
                   <Image
                     src={item.dietType === 'Veg' ? '/veg.svg' : '/non-veg.svg'}
@@ -90,7 +96,7 @@ const Cart: React.FC<CartProps> = ({ userInfo, dialogInfo }) => {
                   <span className={'text-xl font-semibold'}>
                     {item.category} - {item.comboName}
                   </span>
-                  <div className={'ml-auto'}>
+                  <div className={'ml-auto flex'}>
                     <Button
                       variant={'ghost'}
                       onClick={() => handleEdit(item)}
@@ -185,14 +191,17 @@ const Cart: React.FC<CartProps> = ({ userInfo, dialogInfo }) => {
         </div>
       </CardContent>
       {currentItem &&
-        (currentItem.id === 'custom-combo' ? (
+        (currentItem.id === 'add-ons-only' ? (
           <AddOnsOnlyFoodDialog
             combo={dialogInfo.combos.find(
               (combo) => combo.name === currentItem.comboName,
             )}
             menu={dialogInfo.menu}
             open={open}
-            onOpenChange={setOpen}
+            onOpenChange={(isOpen) => {
+              setOpen(isOpen);
+              if (!isOpen) resetDialogStates();
+            }}
             category={
               currentItem.category as 'Meal' | 'Birthday Snack-Up' | 'Other'
             }
@@ -205,7 +214,10 @@ const Cart: React.FC<CartProps> = ({ userInfo, dialogInfo }) => {
             )}
             menu={dialogInfo.menu}
             open={open}
-            onOpenChange={setOpen}
+            onOpenChange={(isOpen) => {
+              setOpen(isOpen);
+              if (!isOpen) resetDialogStates();
+            }}
             category={
               currentItem.category as 'Meal' | 'Birthday Snack-Up' | 'Other'
             }

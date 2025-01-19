@@ -43,9 +43,6 @@ export function AddOnsOnlyFoodDialog({
   const { toast } = useToast();
   const { addToCart } = useCart(); // Use your cart context or function
 
-  const [currentStep, setCurrentStep] = React.useState<
-    'selectDiet' | 'selectMenu' | 'selectAddOns'
-  >('selectAddOns');
   const [menuType, setMenuType] = React.useState<'veg' | 'nonVeg'>('veg');
   const [quantity, setQuantity] = React.useState(numberOfPeople);
 
@@ -223,19 +220,8 @@ export function AddOnsOnlyFoodDialog({
       <DialogContent className="max-h-[600px] max-w-xl overflow-auto">
         <DialogHeader>
           <DialogTitle>
-            {currentStep === 'selectDiet' && (
-              <div className="mb-2 text-2xl font-semibold">
-                Choose Menu Type
-              </div>
-            )}
-            {currentStep === 'selectMenu' && (
-              <div className="mb-2 text-2xl font-semibold">
-                Choose Menu Items
-              </div>
-            )}
-            {currentStep === 'selectAddOns' && (
-              <div className="mb-2 text-2xl font-semibold">Choose Add-Ons</div>
-            )}
+            <div className="mb-2 text-2xl font-semibold">Choose Add-Ons</div>
+
             <Button
               onClick={() => {
                 onOpenChange(false);
@@ -250,24 +236,65 @@ export function AddOnsOnlyFoodDialog({
 
         {/* Add-Ons Selection */}
         <div className="h-full overflow-auto">
-          {currentStep === 'selectAddOns' && (
-            <div className="overflow-y-auto">
-              <div className="flex flex-col gap-4">
-                {Object.keys(menu).map((key) => {
-                  const sortedItems = [...menu[key]].sort((a, b) => {
-                    if (a.diet === 'Non-Veg' && b.diet === 'Veg') return -1;
-                    if (a.diet === 'Veg' && b.diet === 'Non-Veg') return 1;
-                    return 0;
-                  });
+          <div className="overflow-y-auto">
+            <div className="flex flex-col gap-4">
+              {Object.keys(menu).map((key) => {
+                const sortedItems = [...menu[key]].sort((a, b) => {
+                  if (a.diet === 'Non-Veg' && b.diet === 'Veg') return -1;
+                  if (a.diet === 'Veg' && b.diet === 'Non-Veg') return 1;
+                  return 0;
+                });
 
-                  return (
-                    <div key={key}>
-                      <div className="flex items-center justify-between">
-                        <span>{toTitleCase(key)}</span>
-                      </div>
-                      <div>
-                        <ul className="space-y-2 rounded-2xl bg-white/50 p-4">
-                          {sortedItems.slice(0, 4).map((item) => (
+                return (
+                  <div key={key}>
+                    <div className="flex items-center justify-between">
+                      <span>{toTitleCase(key)}</span>
+                    </div>
+                    <div>
+                      <ul className="space-y-2 rounded-2xl bg-white/50 p-4">
+                        {sortedItems.slice(0, 4).map((item) => (
+                          <div
+                            key={item.id}
+                            className="flex cursor-pointer items-center justify-between p-1 text-sm text-gray-600"
+                          >
+                            <Label
+                              htmlFor={`addon-${key}-${item.id}`}
+                              className="flex w-full cursor-pointer items-center justify-between pr-4 pt-0.5 align-middle text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                            >
+                              <span className="flex items-center gap-1">
+                                {item.diet === 'Veg' ? (
+                                  <Image
+                                    src="/veg.svg"
+                                    alt="Veg"
+                                    width={16}
+                                    height={16}
+                                    className="mr-2"
+                                  />
+                                ) : (
+                                  <Image
+                                    src="/non-veg.svg"
+                                    alt="Non-Veg"
+                                    width={16}
+                                    height={16}
+                                    className="mr-2"
+                                  />
+                                )}
+                                {item.name}
+                              </span>
+                              <span>{item.price}</span>
+                            </Label>
+                            <Checkbox
+                              id={`addon-${key}-${item.id}`}
+                              className="peer"
+                              checked={addOns[key]?.includes(item.name)}
+                              onCheckedChange={() => {
+                                handleSelection(key, item.name, Infinity, true);
+                              }}
+                            />
+                          </div>
+                        ))}
+                        {showMore[key] &&
+                          sortedItems.slice(4).map((item) => (
                             <div
                               key={item.id}
                               className="flex cursor-pointer items-center justify-between p-1 text-sm text-gray-600"
@@ -313,108 +340,60 @@ export function AddOnsOnlyFoodDialog({
                               />
                             </div>
                           ))}
-                          {showMore[key] &&
-                            sortedItems.slice(4).map((item) => (
-                              <div
-                                key={item.id}
-                                className="flex cursor-pointer items-center justify-between p-1 text-sm text-gray-600"
-                              >
-                                <Label
-                                  htmlFor={`addon-${key}-${item.id}`}
-                                  className="flex w-full cursor-pointer items-center justify-between pr-4 pt-0.5 align-middle text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                                >
-                                  <span className="flex items-center gap-1">
-                                    {item.diet === 'Veg' ? (
-                                      <Image
-                                        src="/veg.svg"
-                                        alt="Veg"
-                                        width={16}
-                                        height={16}
-                                        className="mr-2"
-                                      />
-                                    ) : (
-                                      <Image
-                                        src="/non-veg.svg"
-                                        alt="Non-Veg"
-                                        width={16}
-                                        height={16}
-                                        className="mr-2"
-                                      />
-                                    )}
-                                    {item.name}
-                                  </span>
-                                  <span>{item.price}</span>
-                                </Label>
-                                <Checkbox
-                                  id={`addon-${key}-${item.id}`}
-                                  className="peer"
-                                  checked={addOns[key]?.includes(item.name)}
-                                  onCheckedChange={() => {
-                                    handleSelection(
-                                      key,
-                                      item.name,
-                                      Infinity,
-                                      true,
-                                    );
-                                  }}
-                                />
-                              </div>
-                            ))}
-                          {menu[key].length > 4 && (
-                            <button
-                              onClick={() =>
-                                setShowMore((prev) => ({
-                                  ...prev,
-                                  [key]: !prev[key],
-                                }))
-                              }
-                              className="ml-2 pt-2 text-sm font-semibold text-zinc-500"
-                            >
-                              {showMore[key]
-                                ? 'Show less'
-                                : `Show ${menu[key].length - 4} more`}
-                            </button>
-                          )}
-                        </ul>
-                      </div>
-                    </div>
-                  );
-                })}
-                {/* Additional Items Selection */}
-                <div>
-                  <div className="flex items-center justify-between">
-                    <span>Additionals</span>
-                  </div>
-                  <div>
-                    <ul className="space-y-2 rounded-2xl bg-white/50 p-4">
-                      {Object.keys(additionals).map((item) => (
-                        <div
-                          key={item}
-                          className="flex cursor-pointer items-center justify-between p-1 text-sm text-gray-600"
-                        >
-                          <Label
-                            htmlFor={`additional-${item}`}
-                            className="flex w-full cursor-pointer justify-between pr-4 text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                        {menu[key].length > 4 && (
+                          <button
+                            onClick={() =>
+                              setShowMore((prev) => ({
+                                ...prev,
+                                [key]: !prev[key],
+                              }))
+                            }
+                            className="ml-2 pt-2 text-sm font-semibold text-zinc-500"
                           >
-                            <span>{item}</span>
-                            <span>MRP + SC</span>
-                          </Label>
-                          <Checkbox
-                            id={`additional-${item}`}
-                            className="peer"
-                            checked={additionals[item]}
-                            onCheckedChange={() => {
-                              handleSelection('', item, Infinity, false, true);
-                            }}
-                          />
-                        </div>
-                      ))}
-                    </ul>
+                            {showMore[key]
+                              ? 'Show less'
+                              : `Show ${menu[key].length - 4} more`}
+                          </button>
+                        )}
+                      </ul>
+                    </div>
                   </div>
+                );
+              })}
+              {/* Additional Items Selection */}
+              <div>
+                <div className="flex items-center justify-between">
+                  <span>Additionals</span>
+                </div>
+                <div>
+                  <ul className="space-y-2 rounded-2xl bg-white/50 p-4">
+                    {Object.keys(additionals).map((item) => (
+                      <div
+                        key={item}
+                        className="flex cursor-pointer items-center justify-between p-1 text-sm text-gray-600"
+                      >
+                        <Label
+                          htmlFor={`additional-${item}`}
+                          className="flex w-full cursor-pointer justify-between pr-4 text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                        >
+                          <span>{item}</span>
+                          <span>MRP + SC</span>
+                        </Label>
+                        <Checkbox
+                          id={`additional-${item}`}
+                          className="peer"
+                          checked={additionals[item]}
+                          onCheckedChange={() => {
+                            handleSelection('', item, Infinity, false, true);
+                          }}
+                        />
+                      </div>
+                    ))}
+                  </ul>
                 </div>
               </div>
             </div>
-          )}
+          </div>
         </div>
 
         {/* Navigation Buttons */}
