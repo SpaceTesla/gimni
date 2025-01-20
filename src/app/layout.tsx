@@ -4,6 +4,7 @@ import './globals.css';
 import Navbar from '@/components/nav-bar';
 import React from 'react';
 import { Toaster } from '@/components/ui/toaster';
+import Signature from '@/components/signature';
 
 const poppins = Poppins({
   variable: '--font-poppins',
@@ -47,6 +48,7 @@ export default function RootLayout({
       <body className={`${poppins.variable} antialiased`}>
         {children}
         <Toaster />
+        <Signature />
       </body>
     </html>
   );
