@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 
 import LocateButton from '@/components/locate-button';
+import ContactButton from '@/components/contact-button';
 
 const caveat = Caveat({
   variable: '--font-caveat',
@@ -42,10 +43,13 @@ const Hero = () => {
         <div className="before:clip-trapezium relative px-4 text-[48px] font-extrabold before:absolute before:bottom-[10%] before:left-1/2 before:-z-[1] before:h-[80%] before:w-full before:-translate-x-1/2 before:bg-red-highlight before:content-[''] sm:text-[48px]">
           Cuisine
         </div>
-        <div className="text-md pt-4 font-semibold">TREATING TASTE BUDS</div>
+        <div className="text-md mb-4 pt-4 font-semibold">
+          TREATING TASTE BUDS
+        </div>
 
-        <div className={'flex flex-wrap justify-center gap-4 py-4'}>
+        <div className={'flex flex-wrap justify-center gap-4'}>
           <LocateButton />
+          <ContactButton />
           <Button
             asChild
             variant={'link'}
@@ -83,7 +87,7 @@ const Hero = () => {
             </Link>
           </Button>
         </div>
-        <div className={'max-w-md text-center'}>
+        <div className={'mt-4 max-w-md text-center'}>
           Experience the taste of Bengal with our authentic Bengali cuisine. We
           offer a wide range of dishes that will leave you craving for more.
         </div>
