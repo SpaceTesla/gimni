@@ -175,8 +175,8 @@ export default function AboutPage() {
               </div>
             </div>
           </section>
-          <section className="rounded-3xl bg-white/50 p-4 text-justify text-xs text-gray-600">
-            <h6 className={'pb-2 text-center text-lg font-semibold'}>
+          <section className="rounded-3xl p-4 text-justify text-[6px] text-gray-600">
+            <h6 className={'pb-2 text-center text-xs font-semibold'}>
               Disclaimer
             </h6>
             <div>
