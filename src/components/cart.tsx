@@ -13,6 +13,7 @@ import Combo from '@/types/combo';
 import type MenuItem from '@/types/menu';
 import combo from '@/types/combo';
 import { useCheckout } from '@/hooks/useCheckout';
+import { BsWhatsapp } from 'react-icons/bs';
 
 interface CartProps {
   userInfo: {
@@ -215,7 +216,8 @@ const Cart: React.FC<CartProps> = ({ userInfo, dialogInfo }) => {
               }
             }}
           >
-            Contact on Whatsapp
+            <BsWhatsapp className="mr-2 h-5 w-5" />
+            Leave us a message
           </Button>
         </div>
       </CardContent>
