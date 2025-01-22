@@ -62,7 +62,11 @@ const Cart: React.FC<CartProps> = ({ userInfo, dialogInfo }) => {
   };
 
   useEffect(() => {
-    if (cartItems[0] && cartItems[0].selections) {
+    if (
+      cartItems[0] &&
+      cartItems[0].selections &&
+      cartItems[0].comboName !== 'Create Your Own'
+    ) {
       if (!cartItems[0].selections.salad) {
         cartItems[0].selections.salad = [];
       }
