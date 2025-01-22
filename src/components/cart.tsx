@@ -5,7 +5,6 @@ import { useCart, CartItem } from '@/context/cartContext';
 import Image from 'next/image';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { handleCheckout } from '@/utils/checkout';
 import { Edit, Trash } from 'lucide-react';
 import { FoodDialog } from '@/components/food-dialog';
 import { AddOnsOnlyFoodDialog } from '@/components/addons-only-food-dialog';
@@ -37,6 +36,7 @@ const Cart: React.FC<CartProps> = ({ userInfo, dialogInfo }) => {
   const { cartItems } = useCart();
   const [open, setOpen] = useState(false);
   const [currentItem, setCurrentItem] = useState<CartItem | null>(null);
+  const [loading, setLoading] = useState(false);
 
   const totalAmount = cartItems.reduce(
     (total, item) => total + item.totalPrice * item.quantity,
@@ -90,7 +90,11 @@ const Cart: React.FC<CartProps> = ({ userInfo, dialogInfo }) => {
         </CardTitle>
       </CardHeader>
       <CardContent>
-        {cartItems.length === 0 ? (
+        {loading ? (
+          <div className="flex h-48 items-center justify-center">
+            <div className="loader">Loading...</div>
+          </div>
+        ) : cartItems.length === 0 ? (
           <div className="font-medium">No items yet</div>
         ) : (
           cartItems.map((item, index) => {
@@ -181,9 +185,22 @@ const Cart: React.FC<CartProps> = ({ userInfo, dialogInfo }) => {
           </div>
           <Button
             onClick={async () => {
+              setLoading(true);
               await handleCheckout(userInfo, cartItems);
-
-              // Ensure the phone number is in the correct format
+              setLoading(false);
+              setTimeout(() => {
+                window.location.reload(); // Refresh the page after 5 seconds
+              }, 3000);
+            }}
+            className="h-12 w-full bg-red-500 text-white hover:bg-red-600"
+            disabled={cartItems.length === 0}
+          >
+            {userInfo.numberOfPeople >= 300 ? 'Get a Quote' : 'Checkout'}
+          </Button>
+          <Button
+            className={'w-full bg-[#118c7e] hover:bg-[#045f54]'}
+            disabled={cartItems.length === 0}
+            onClick={() => {
               const phoneNumber = '+917483139254';
               const whatsappLink = `https://wa.me/${phoneNumber}?text=Hi!%20I%20am%20interested%20to%20place%20an%20order.`;
 
@@ -197,10 +214,8 @@ const Cart: React.FC<CartProps> = ({ userInfo, dialogInfo }) => {
                 console.error('Window object is not available.');
               }
             }}
-            className="h-12 w-full bg-red-500 text-white hover:bg-red-600"
-            disabled={cartItems.length === 0}
           >
-            {userInfo.numberOfPeople >= 300 ? 'Get a Quote' : 'Checkout'}
+            Contact on Whatsapp
           </Button>
         </div>
       </CardContent>
