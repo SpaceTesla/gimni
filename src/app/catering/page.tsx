@@ -202,7 +202,7 @@ export default function FoodOrdering() {
                     numberOfPeople: userInfo.numberOfPeople,
                   }}
                 />
-                <div className={'p-4 text-center text-sm'}>
+                <div className={'p-4 text-center text-sm italic'}>
                   Delivery, cutlery and plates charged separately
                 </div>
               </div>
