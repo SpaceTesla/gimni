@@ -81,7 +81,7 @@ const Cart: React.FC<CartProps> = ({ userInfo, dialogInfo }) => {
   console.log('User Info:', userInfo);
 
   return (
-    <Card className="sticky top-4 rounded-3xl border-none bg-white/70 shadow-none">
+    <Card className="rounded-3xl border-none bg-white/70 shadow-none">
       <CardHeader>
         <CardTitle className="text-3xl font-black tracking-tight">
           CART

@@ -105,10 +105,6 @@ export function FoodDialog({
 
   const [additionals, setAdditionals] = useState<Record<string, boolean>>({
     Water: false,
-    Plates: false,
-    Spoons: false,
-    Bowls: false,
-    'Delivery within city': false,
     'Soft Drink': false,
     'Fruit Juice': false,
   });
@@ -656,13 +652,13 @@ export function FoodDialog({
             >
               <ArrowLeft className="h-6 w-6" />
             </Button>
-            {currentStep === 'selectAddOns' && (
-              <QuantityButton
-                initialValue={quantity}
-                minValue={10}
-                onChange={(value) => setQuantity(value)}
-              />
-            )}
+            {/*{currentStep === 'selectAddOns' && (*/}
+            {/*  <QuantityButton*/}
+            {/*    initialValue={quantity}*/}
+            {/*    minValue={10}*/}
+            {/*    onChange={(value) => setQuantity(value)}*/}
+            {/*  />*/}
+            {/*)}*/}
             {currentStep !== 'selectAddOns' ? (
               <Button
                 onClick={handleNext}

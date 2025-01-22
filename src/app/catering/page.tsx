@@ -192,7 +192,7 @@ export default function FoodOrdering() {
               </div>
 
               {/* Cart Section */}
-              <div className="flex-grow">
+              <div className="sticky top-6 flex-grow">
                 <Cart
                   userInfo={userInfo}
                   dialogInfo={{
@@ -202,6 +202,9 @@ export default function FoodOrdering() {
                     numberOfPeople: userInfo.numberOfPeople,
                   }}
                 />
+                <div className={'p-4 text-center text-sm'}>
+                  Delivery, cutlery and plates charged separately
+                </div>
               </div>
             </div>
             {!isAtBottom && (

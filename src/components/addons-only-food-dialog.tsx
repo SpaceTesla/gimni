@@ -59,10 +59,6 @@ export function AddOnsOnlyFoodDialog({
   const [addOns, setAddOns] = React.useState<Record<string, string[]>>({});
   const [additionals, setAdditionals] = useState<Record<string, boolean>>({
     Water: false,
-    Plates: false,
-    Spoons: false,
-    Bowls: false,
-    'Delivery within city': false,
     'Soft Drink': false,
     'Fruit Juice': false,
   });
@@ -399,11 +395,11 @@ export function AddOnsOnlyFoodDialog({
         {/* Navigation Buttons */}
         <DialogFooter>
           <div className="flex w-full flex-wrap items-center justify-between gap-6">
-            <QuantityButton
-              initialValue={quantity}
-              minValue={10}
-              onChange={(value) => setQuantity(value)}
-            />
+            {/*<QuantityButton*/}
+            {/*  initialValue={quantity}*/}
+            {/*  minValue={10}*/}
+            {/*  onChange={(value) => setQuantity(value)}*/}
+            {/*/>*/}
             <div className="flex flex-grow items-center gap-4">
               <Button
                 onClick={handleNext}
