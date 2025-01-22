@@ -114,6 +114,7 @@ export default function FoodOrdering() {
   console.log('Combos:', combos);
   console.log('Menu:', menu);
   console.log('Pax:', pax);
+  console.log('UserInfo:', userInfo);
 
   const handleUserInfoSubmit = (data: {
     name: string;

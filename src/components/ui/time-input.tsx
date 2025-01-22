@@ -23,9 +23,9 @@ export function TimeInput({
   ...props
 }: TimeInputProps &
   Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange' | 'value'>) {
-  const [hours, setHours] = useState('12');
+  const [hours, setHours] = useState('04');
   const [minutes, setMinutes] = useState('00');
-  const [period, setPeriod] = useState('AM');
+  const [period, setPeriod] = useState('PM');
 
   useEffect(() => {
     if (value) {

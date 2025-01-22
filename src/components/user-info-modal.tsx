@@ -77,13 +77,16 @@ export function UserInfoModal({ onSubmit }: UserInfoModalProps) {
       return;
     }
     const finalOccasion = occasion === 'Others' ? otherOccasion : occasion;
+
+    const finalTime = time ? time : '04:00 PM';
+
     if (date) {
       onSubmit({
         name,
         phone,
         address,
         date,
-        time,
+        time: finalTime,
         numberOfPeople,
         occasion: finalOccasion,
       });
