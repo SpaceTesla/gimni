@@ -6,7 +6,7 @@ const Footer = () => {
   return (
     <footer className="bg-brown-leaf py-1.5 text-white">
       <div className="flex items-center justify-end gap-2 px-4">
-        <p className={'text-sm'}>
+        <p className={'text-[8px]'}>
           Made by{' '}
           <Link
             href={'https://anthrapi.com'}
@@ -15,7 +15,7 @@ const Footer = () => {
             Anthrapi
           </Link>
         </p>
-        <div className={'flex h-6 w-6 items-center justify-center'}>
+        <div className={'flex h-3 w-3 items-center justify-center'}>
           <Image
             src={'/anthrapi.svg'}
             alt={'anthrapi logo'}
