@@ -56,12 +56,16 @@ export default function MenuPage() {
     <DefaultLayout>
       <div className="mx-auto min-h-screen px-4 py-8 text-white">
         {/* Restaurant Logo/Header */}
-        <div className="mb-8 flex justify-center">
+        <div className="mb-2 flex justify-center">
           <div className="inline-flex -skew-x-12 transform bg-red-highlight px-8 py-3">
             <h1 className="skew-x-12 text-3xl font-bold text-white">
               Take Away Menu
             </h1>
           </div>
+        </div>
+
+        <div className={'mb-6 text-center text-lg text-sm italic text-black'}>
+          *Prices are subject to seasonality and availability
         </div>
 
         {/* Menu Grid */}

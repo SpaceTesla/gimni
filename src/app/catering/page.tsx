@@ -170,7 +170,10 @@ export default function FoodOrdering() {
     <DefaultLayout>
       <CartProvider>
         <div className="min-h-screen">
-          <div className="container mx-auto p-4 pt-12">
+          <div className="container mx-auto p-4 pt-8">
+            <div className={'mb-6 text-center text-lg italic'}>
+              *Prices are subject to seasonality and availability
+            </div>
             <div className="flex flex-col gap-8 lg:flex-row">
               {/* Menu Section */}
               <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:col-span-3 lg:w-[65%] lg:gap-x-8">
