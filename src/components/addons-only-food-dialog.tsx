@@ -404,6 +404,7 @@ export function AddOnsOnlyFoodDialog({
               <Button
                 onClick={handleNext}
                 className="h-full flex-grow bg-emerald-500 text-white hover:bg-emerald-600"
+                disabled={Object.keys(addOns).length === 0}
               >
                 Add to Cart
               </Button>
