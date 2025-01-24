@@ -61,22 +61,26 @@ const Cart: React.FC<CartProps> = ({ userInfo, dialogInfo }) => {
     console.log('Deleted item:', item);
   };
 
-  useEffect(() => {
-    if (
-      cartItems[0] &&
-      cartItems[0].selections &&
-      cartItems[0].comboName !== 'Create Your Own'
-    ) {
-      if (!cartItems[0].selections.salad) {
-        cartItems[0].selections.salad = [];
-      }
-      if (!cartItems[0].selections.papad) {
-        cartItems[0].selections.papad = [];
-      }
-      cartItems[0].selections.salad.push('Salad');
-      cartItems[0].selections.papad.push('Papad');
-    }
-  }, [cartItems]);
+  // useEffect(() => {
+  //   if (
+  //     cartItems.length > 0 &&
+  //     cartItems[0].selections &&
+  //     cartItems[0].comboName !== 'Create Your Own'
+  //   ) {
+  //     if (!cartItems[0].selections.salad) {
+  //       cartItems[0].selections.salad = [];
+  //     }
+  //     if (!cartItems[0].selections.papad) {
+  //       cartItems[0].selections.papad = [];
+  //     }
+  //     if (!cartItems[0].selections.salad.includes('Salad')) {
+  //       cartItems[0].selections.salad.push('Salad');
+  //     }
+  //     if (!cartItems[0].selections.papad.includes('Papad')) {
+  //       cartItems[0].selections.papad.push('Papad');
+  //     }
+  //   }
+  // }, [cartItems]);
 
   const { handleCheckout } = useCheckout();
 

@@ -182,6 +182,19 @@ export function FoodDialog({
       {} as Record<string, string[]>,
     );
 
+    if (!selections.salad) {
+      selections.salad = [];
+    }
+    if (!selections.papad) {
+      selections.papad = [];
+    }
+    if (!selections.salad.includes('Salad')) {
+      selections.salad.push('Salad');
+    }
+    if (!selections.papad.includes('Papad')) {
+      selections.papad.push('Papad');
+    }
+
     const cartItem = {
       id: combo?.id.toString() ?? 'add-ons-only',
       comboName: combo?.name ?? 'Add-Ons Only',
