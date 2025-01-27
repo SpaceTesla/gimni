@@ -1,6 +1,6 @@
 {
   "display": true,
   "image": "/food.png",
-  "title": "New Announcement",
-  "content": "This is a new announcement"
+  "title": "Updated announcement title",
+  "content": "Updated announcement content"
 }
