@@ -1,6 +1,6 @@
 {
   "display": false,
-  "image": "/food.png",
-  "title": "New Announcement",
-  "content": "This is a new announcement"
+  "image": "/republic-day.jpg",
+  "title": "Updated announcement title",
+  "content": "Updated announcement content"
 }

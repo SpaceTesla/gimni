@@ -21,8 +21,8 @@ The website allows users to explore the menu, catering services, and takeaway op
 1. Clone the repository:
 
    ```sh
-   git clone https://github.com/SpaceTesla/gimnis-kitchen-web-app.git
-   cd gimnis-kitchen-web-app
+   git clone https://github.com/SpaceTesla/gimni.git
+   cd gimni
    ```
 
 2. Install dependencies:
