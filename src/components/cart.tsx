@@ -59,6 +59,7 @@ const Cart: React.FC<CartProps> = ({ userInfo, dialogInfo }) => {
   const handleDelete = (item: CartItem) => {
     removeItem(item.id);
     console.log('Deleted item:', item);
+    window.location.reload();
   };
 
   // useEffect(() => {
